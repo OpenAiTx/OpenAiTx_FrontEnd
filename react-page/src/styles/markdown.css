@@ -1,0 +1,649 @@
+/* GitHub style markdown styles with dark mode support */
+.markdown-body {
+  box-sizing: border-box;
+  min-width: 200px;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 45px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  
+  /* Light mode colors */
+  --md-text-color: #24292e;
+  --md-text-muted: #6a737d;
+  --md-bg-color: #ffffff;
+  --md-border-color: #eaecef;
+  --md-border-muted: #dfe2e5;
+  --md-code-bg: rgba(27,31,35,0.05);
+  --md-pre-bg: #f6f8fa;
+  --md-table-bg: #f6f8fa;
+  --md-table-border: #c6cbd1;
+  --md-link-color: #0366d6;
+  --md-hr-bg: #e1e4e8;
+  --md-kbd-bg: #fafbfc;
+  --md-kbd-border: #c6cbd1;
+  --md-kbd-shadow: #959da5;
+  
+  color: var(--md-text-color);
+}
+
+/* Dark mode colors */
+.dark .markdown-body {
+  --md-text-color: #e6edf3;
+  --md-text-muted: #8b949e;
+  --md-bg-color: #0d1117;
+  --md-border-color: #30363d;
+  --md-border-muted: #21262d;
+  --md-code-bg: rgba(110,118,129,0.4);
+  --md-pre-bg: #161b22;
+  --md-table-bg: #161b22;
+  --md-table-border: #30363d;
+  --md-link-color: #58a6ff;
+  --md-hr-bg: #21262d;
+  --md-kbd-bg: #21262d;
+  --md-kbd-border: #30363d;
+  --md-kbd-shadow: #484f58;
+}
+
+@media (max-width: 767px) {
+  .markdown-body {
+    padding: 15px;
+  }
+}
+
+/* Headings */
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 24px;
+  margin-bottom: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--md-text-color);
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  border-bottom: 1px solid var(--md-border-color);
+  padding-bottom: 0.3em;
+}
+
+.markdown-body h2 {
+  font-size: 1.5em;
+  border-bottom: 1px solid var(--md-border-color);
+  padding-bottom: 0.3em;
+}
+
+.markdown-body h3 {
+  font-size: 1.25em;
+}
+
+.markdown-body h4 {
+  font-size: 1em;
+}
+
+.markdown-body h5 {
+  font-size: 0.875em;
+}
+
+.markdown-body h6 {
+  font-size: 0.85em;
+  color: var(--md-text-muted);
+}
+
+/* Paragraphs */
+.markdown-body p {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+/* Links */
+.markdown-body a {
+  color: var(--md-link-color);
+  text-decoration: none;
+}
+
+.markdown-body a:hover {
+  text-decoration: underline;
+}
+
+/* Lists */
+.markdown-body ul,
+.markdown-body ol {
+  margin-top: 0;
+  margin-bottom: 16px;
+  padding-left: 2em;
+}
+
+.markdown-body li {
+  margin-bottom: 0.25em;
+}
+
+.markdown-body li > p {
+  margin-top: 16px;
+}
+
+.markdown-body li + li {
+  margin-top: 0.25em;
+}
+
+/* Code */
+.markdown-body code {
+  padding: 0.2em 0.4em;
+  margin: 0;
+  font-size: 85%;
+  background-color: var(--md-code-bg);
+  border-radius: 3px;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  color: var(--md-text-color);
+}
+
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: var(--md-pre-bg);
+  border-radius: 3px;
+  margin-top: 0;
+  margin-bottom: 16px;
+  color: var(--md-text-color);
+}
+
+.markdown-body pre code {
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  border: 0;
+  word-break: normal;
+  white-space: pre;
+  font-size: 100%;
+  color: inherit;
+}
+
+/* Blockquotes */
+.markdown-body blockquote {
+  margin: 0;
+  padding: 0 1em;
+  color: var(--md-text-muted);
+  border-left: 0.25em solid var(--md-border-muted);
+  margin-bottom: 16px;
+}
+
+.markdown-body blockquote > :first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+/* Tables */
+.markdown-body table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin: 16px 0;
+  display: block;
+  width: 100%;
+  overflow: auto;
+  color: var(--md-text-color);
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid var(--md-border-muted);
+}
+
+.markdown-body table th {
+  font-weight: 600;
+  background-color: var(--md-table-bg);
+  color: var(--md-text-color);
+}
+
+.markdown-body table tr {
+  background-color: var(--md-bg-color);
+  border-top: 1px solid var(--md-table-border);
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: var(--md-table-bg);
+}
+
+/* Images */
+.markdown-body img {
+  max-width: 100%;
+  height: auto;
+  box-sizing: content-box;
+}
+
+/* Horizontal rules */
+.markdown-body hr {
+  height: 0.25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: var(--md-hr-bg);
+  border: 0;
+}
+
+/* Task lists */
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item input {
+  margin: 0 0.2em 0.25em -1.6em;
+  vertical-align: middle;
+}
+
+/* Strikethrough */
+.markdown-body del {
+  text-decoration: line-through;
+}
+
+/* Strong and emphasis */
+.markdown-body strong {
+  font-weight: 600;
+}
+
+.markdown-body em {
+  font-style: italic;
+}
+
+/* Details and summary */
+.markdown-body details {
+  margin-bottom: 16px;
+}
+
+.markdown-body summary {
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Keyboard keys */
+.markdown-body kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: var(--md-text-color);
+  vertical-align: middle;
+  background-color: var(--md-kbd-bg);
+  border: solid 1px var(--md-kbd-border);
+  border-bottom-color: var(--md-kbd-shadow);
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 var(--md-kbd-shadow);
+}
+
+/* Enhanced Syntax highlighting for GitHub-style code blocks */
+.markdown-body pre code.hljs,
+.markdown-body pre code {
+  background: transparent !important;
+  color: var(--md-text-color) !important;
+  font-family: ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+  display: block;
+  overflow-x: auto;
+  padding: 0;
+}
+
+/* 確保hljs類名被正確應用 */
+.markdown-body .hljs {
+  background: transparent !important;
+}
+
+/* 強制淺色模式語法高亮 - 當沒有.dark類時 */
+:not(.dark) .markdown-body .hljs-comment,
+:not(.dark) .markdown-body .hljs-quote,
+:not(.dark) .markdown-body pre code .hljs-comment,
+:not(.dark) .markdown-body pre code .hljs-quote {
+  color: #6a737d !important;
+  font-style: italic;
+}
+
+:not(.dark) .markdown-body .hljs-keyword,
+:not(.dark) .markdown-body .hljs-selector-tag,
+:not(.dark) .markdown-body .hljs-subst,
+:not(.dark) .markdown-body pre code .hljs-keyword,
+:not(.dark) .markdown-body pre code .hljs-selector-tag,
+:not(.dark) .markdown-body pre code .hljs-subst {
+  color: #d73a49 !important;
+  font-weight: 600;
+}
+
+:not(.dark) .markdown-body .hljs-string,
+:not(.dark) .markdown-body .hljs-doctag,
+:not(.dark) .markdown-body pre code .hljs-string,
+:not(.dark) .markdown-body pre code .hljs-doctag {
+  color: #032f62 !important;
+}
+
+:not(.dark) .markdown-body .hljs-title,
+:not(.dark) .markdown-body .hljs-section,
+:not(.dark) .markdown-body .hljs-selector-id,
+:not(.dark) .markdown-body pre code .hljs-title,
+:not(.dark) .markdown-body pre code .hljs-section,
+:not(.dark) .markdown-body pre code .hljs-selector-id {
+  color: #6f42c1 !important;
+  font-weight: 600;
+}
+
+:not(.dark) .markdown-body .hljs-type,
+:not(.dark) .markdown-body .hljs-class .hljs-title,
+:not(.dark) .markdown-body pre code .hljs-type,
+:not(.dark) .markdown-body pre code .hljs-class .hljs-title {
+  color: #005cc5 !important;
+}
+
+:not(.dark) .markdown-body .hljs-number,
+:not(.dark) .markdown-body .hljs-literal,
+:not(.dark) .markdown-body pre code .hljs-number,
+:not(.dark) .markdown-body pre code .hljs-literal {
+  color: #005cc5 !important;
+}
+
+:not(.dark) .markdown-body .hljs-function,
+:not(.dark) .markdown-body pre code .hljs-function {
+  color: #6f42c1 !important;
+}
+
+:not(.dark) .markdown-body .hljs-variable,
+:not(.dark) .markdown-body .hljs-template-variable,
+:not(.dark) .markdown-body pre code .hljs-variable,
+:not(.dark) .markdown-body pre code .hljs-template-variable {
+  color: #e36209 !important;
+}
+
+:not(.dark) .markdown-body .hljs-attribute,
+:not(.dark) .markdown-body pre code .hljs-attribute {
+  color: #005cc5 !important;
+}
+
+:not(.dark) .markdown-body .hljs-tag,
+:not(.dark) .markdown-body pre code .hljs-tag {
+  color: #22863a !important;
+}
+
+:not(.dark) .markdown-body .hljs-name,
+:not(.dark) .markdown-body pre code .hljs-name {
+  color: #22863a !important;
+}
+
+:not(.dark) .markdown-body .hljs-regexp,
+:not(.dark) .markdown-body pre code .hljs-regexp {
+  color: #032f62 !important;
+}
+
+:not(.dark) .markdown-body .hljs-link,
+:not(.dark) .markdown-body pre code .hljs-link {
+  color: #032f62 !important;
+}
+
+:not(.dark) .markdown-body .hljs-symbol,
+:not(.dark) .markdown-body .hljs-bullet,
+:not(.dark) .markdown-body pre code .hljs-symbol,
+:not(.dark) .markdown-body pre code .hljs-bullet {
+  color: #005cc5 !important;
+}
+
+:not(.dark) .markdown-body .hljs-built_in,
+:not(.dark) .markdown-body .hljs-builtin-name,
+:not(.dark) .markdown-body pre code .hljs-built_in,
+:not(.dark) .markdown-body pre code .hljs-builtin-name {
+  color: #005cc5 !important;
+}
+
+:not(.dark) .markdown-body .hljs-meta,
+:not(.dark) .markdown-body pre code .hljs-meta {
+  color: #6a737d !important;
+}
+
+/* 淺色模式的C#特定語法支援 */
+:not(.dark) .markdown-body .hljs-class,
+:not(.dark) .markdown-body pre code .hljs-class {
+  color: #005cc5 !important;
+}
+
+:not(.dark) .markdown-body .hljs-namespace,
+:not(.dark) .markdown-body pre code .hljs-namespace {
+  color: #6f42c1 !important;
+}
+
+:not(.dark) .markdown-body .hljs-property,
+:not(.dark) .markdown-body pre code .hljs-property {
+  color: #005cc5 !important;
+}
+
+:not(.dark) .markdown-body .hljs-operator,
+:not(.dark) .markdown-body pre code .hljs-operator {
+  color: #d73a49 !important;
+}
+
+:not(.dark) .markdown-body .hljs-punctuation,
+:not(.dark) .markdown-body pre code .hljs-punctuation {
+  color: #586069 !important;
+}
+
+
+
+
+/* Dark mode syntax highlighting */
+.dark .markdown-body pre code.hljs,
+.dark .markdown-body pre code {
+  color: #e6edf3;
+}
+
+.dark .markdown-body pre code .hljs-comment,
+.dark .markdown-body pre code .hljs-quote {
+  color: #8b949e !important;
+  font-style: italic;
+}
+
+.dark .markdown-body .hljs-keyword,
+.dark .markdown-body .hljs-selector-tag,
+.dark .markdown-body .hljs-subst,
+.dark .markdown-body pre code .hljs-keyword,
+.dark .markdown-body pre code .hljs-selector-tag,
+.dark .markdown-body pre code .hljs-subst {
+  color: #ff7b72 !important;
+  font-weight: 600;
+}
+
+.dark .markdown-body .hljs-string,
+.dark .markdown-body .hljs-doctag,
+.dark .markdown-body pre code .hljs-string,
+.dark .markdown-body pre code .hljs-doctag {
+  color: #a5d6ff !important;
+}
+
+.dark .markdown-body .hljs-title,
+.dark .markdown-body .hljs-section,
+.dark .markdown-body .hljs-selector-id,
+.dark .markdown-body pre code .hljs-title,
+.dark .markdown-body pre code .hljs-section,
+.dark .markdown-body pre code .hljs-selector-id {
+  color: #d2a8ff !important;
+  font-weight: 600;
+}
+
+.dark .markdown-body pre code .hljs-type,
+.dark .markdown-body pre code .hljs-class .hljs-title {
+  color: #ffa657 !important;
+}
+
+.dark .markdown-body pre code .hljs-number,
+.dark .markdown-body pre code .hljs-literal {
+  color: #79c0ff !important;
+}
+
+.dark .markdown-body pre code .hljs-function {
+  color: #d2a8ff !important;
+}
+
+.dark .markdown-body pre code .hljs-variable,
+.dark .markdown-body pre code .hljs-template-variable {
+  color: #ffa657 !important;
+}
+
+.dark .markdown-body pre code .hljs-attribute {
+  color: #79c0ff !important;
+}
+
+.dark .markdown-body pre code .hljs-tag {
+  color: #7ee787 !important;
+}
+
+.dark .markdown-body pre code .hljs-name {
+  color: #7ee787 !important;
+}
+
+.dark .markdown-body pre code .hljs-regexp {
+  color: #a5d6ff !important;
+}
+
+.dark .markdown-body pre code .hljs-link {
+  color: #a5d6ff !important;
+}
+
+.dark .markdown-body pre code .hljs-symbol,
+.dark .markdown-body pre code .hljs-bullet {
+  color: #79c0ff !important;
+}
+
+.dark .markdown-body pre code .hljs-built_in,
+.dark .markdown-body pre code .hljs-builtin-name {
+  color: #79c0ff !important;
+}
+
+.dark .markdown-body .hljs-meta,
+.dark .markdown-body pre code .hljs-meta {
+  color: #8b949e !important;
+}
+
+/* 暗模式的C#特定語法支援 */
+.dark .markdown-body .hljs-class,
+.dark .markdown-body pre code .hljs-class {
+  color: #79c0ff !important;
+}
+
+.dark .markdown-body .hljs-namespace,
+.dark .markdown-body pre code .hljs-namespace {
+  color: #d2a8ff !important;
+}
+
+.dark .markdown-body .hljs-property,
+.dark .markdown-body pre code .hljs-property {
+  color: #79c0ff !important;
+}
+
+.dark .markdown-body .hljs-operator,
+.dark .markdown-body pre code .hljs-operator {
+  color: #ff7b72 !important;
+}
+
+.dark .markdown-body .hljs-punctuation,
+.dark .markdown-body pre code .hljs-punctuation {
+  color: #8b949e !important;
+}
+
+/* Additional syntax highlighting for better code display */
+.markdown-body pre code .hljs-operator {
+  color: #d73a49 !important;
+}
+
+.markdown-body pre code .hljs-params {
+  color: #24292e !important;
+}
+
+.markdown-body pre code .hljs-property {
+  color: #005cc5 !important;
+}
+
+.markdown-body pre code .hljs-punctuation {
+  color: #586069 !important;
+}
+
+.markdown-body pre code .hljs-deletion {
+  background-color: #ffeef0;
+  color: #cb2431 !important;
+}
+
+.markdown-body pre code .hljs-addition {
+  background-color: #f0fff4;
+  color: #22863a !important;
+}
+
+/* Dark mode additional syntax highlighting */
+.dark .markdown-body pre code .hljs-operator {
+  color: #ff7b72 !important;
+}
+
+.dark .markdown-body pre code .hljs-params {
+  color: #e6edf3 !important;
+}
+
+.dark .markdown-body pre code .hljs-property {
+  color: #79c0ff !important;
+}
+
+.dark .markdown-body pre code .hljs-punctuation {
+  color: #8b949e !important;
+}
+
+.dark .markdown-body pre code .hljs-deletion {
+  background-color: #490202;
+  color: #ff7b72 !important;
+}
+
+.dark .markdown-body pre code .hljs-addition {
+  background-color: #0f5132;
+  color: #7ee787 !important;
+}
+
+/* Fix for nested lists */
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* Fix for first and last elements */
+.markdown-body > *:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Badge flex layout - for paragraphs containing multiple badge images */
+.markdown-body p:has(img[src*="shields.io"]) {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+}
+
+/* Alternative approach for browsers that don't support :has() */
+.markdown-body p img[src*="shields.io"] {
+  margin: 2px 4px;
+}
+
+/* General badge container styling */
+.markdown-body .badges,
+.markdown-body .badge-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  align-items: center;
+  margin: 16px 0;
+} 
