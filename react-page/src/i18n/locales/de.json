@@ -49,7 +49,14 @@
     "dialogSubmissionFailed": "Übermittlung fehlgeschlagen",
     "dialogSuccessContent": "Übersetzung läuft, bitte warten Sie etwa 2 Stunden und kommen Sie dann zurück, um den Link zu kopieren und in die Readme.md Ihres Projekts einzufügen",
     "dialogFailedContent": "Fehlercode: {{errorMessage}}, Fehlermeldung wurde gemeldet",
-    "dialogConfirm": "Bestätigen"
+    "dialogConfirm": "Bestätigen",
+    "stepSearch": "Projekt Suchen",
+    "stepSubmit": "Übersetzungsanfrage Einreichen",
+    "stepCopy": "In Projekt-README Kopieren",
+    "stepView": "Badge Klicken zum Anzeigen",
+    "search": "Suchen",
+    "translationCompleted": "Projekt-README-Übersetzung Abgeschlossen",
+    "copyLinksToReadme": "Bitte kopieren Sie die folgenden Links in Ihr Projekt-README"
   },
   "translate": {
     "title": "GitHub README Übersetzer",

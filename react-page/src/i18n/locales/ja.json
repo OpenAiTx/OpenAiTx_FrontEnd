@@ -49,7 +49,14 @@
     "dialogSubmissionFailed": "送信失敗",
     "dialogSuccessContent": "翻訳進行中、約2時間後に戻ってリンクをコピーしてプロジェクトのReadme.mdに貼り付けてください",
     "dialogFailedContent": "エラーコード：{{errorMessage}}、エラーメッセージが報告されました",
-    "dialogConfirm": "確認"
+    "dialogConfirm": "確認",
+    "stepSearch": "プロジェクト検索",
+    "stepSubmit": "翻訳リクエスト送信",
+    "stepCopy": "プロジェクトREADMEに貼り付け",
+    "stepView": "バッジをクリックして表示",
+    "search": "検索",
+    "translationCompleted": "プロジェクトREADME翻訳完了",
+    "copyLinksToReadme": "以下のリンクをプロジェクトREADMEにコピーしてください"
   },
   "translate": {
     "title": "GitHub README翻訳ツール",

@@ -49,7 +49,14 @@
     "dialogSubmissionFailed": "Wysłanie nieudane",
     "dialogSuccessContent": "Tłumaczenie w toku, poczekaj około 2 godzin, a następnie wróć, aby skopiować link i wkleić go do Readme.md swojego projektu",
     "dialogFailedContent": "Kod błędu: {{errorMessage}}, zgłoszono komunikat o błędzie",
-    "dialogConfirm": "Potwierdź"
+    "dialogConfirm": "Potwierdź",
+    "stepSearch": "Wyszukaj Projekt",
+    "stepSubmit": "Wyślij Żądanie Tłumaczenia",
+    "stepCopy": "Skopiuj do README Projektu",
+    "stepView": "Kliknij Odznakę aby Zobaczyć",
+    "search": "Szukaj",
+    "translationCompleted": "Tłumaczenie README Projektu Zakończone",
+    "copyLinksToReadme": "Proszę skopiować poniższe linki do README projektu"
   },
   "translate": {
     "title": "Tłumacz GitHub README",

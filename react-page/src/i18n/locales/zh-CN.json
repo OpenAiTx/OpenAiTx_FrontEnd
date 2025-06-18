@@ -49,7 +49,14 @@
     "dialogSubmissionFailed": "提交失败",
     "dialogSuccessContent": "翻译进行中，请等待约2小时后回来复制链接贴制专案Readme.md",
     "dialogFailedContent": "错误代码：{{errorMessage}}，已回报错误讯息",
-    "dialogConfirm": "确认"
+    "dialogConfirm": "确认",
+    "stepSearch": "查询项目",
+    "stepSubmit": "提交翻译请求",
+    "stepCopy": "复制到项目README贴上",
+    "stepView": "点击标签查看",
+    "search": "查询",
+    "translationCompleted": "项目README翻译已完成",
+    "copyLinksToReadme": "请复制下方链接贴至项目README"
   },
   "translate": {
     "title": "GitHub README 翻译工具",

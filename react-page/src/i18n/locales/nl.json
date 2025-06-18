@@ -49,7 +49,14 @@
     "dialogSubmissionFailed": "Verzending mislukt",
     "dialogSuccessContent": "Vertaling bezig, wacht ongeveer 2 uur en kom dan terug om de link te kopiëren en in de Readme.md van uw project te plakken",
     "dialogFailedContent": "Foutcode: {{errorMessage}}, foutmelding gerapporteerd",
-    "dialogConfirm": "Bevestigen"
+    "dialogConfirm": "Bevestigen",
+    "stepSearch": "Project Zoeken",
+    "stepSubmit": "Vertaalverzoek Indienen",
+    "stepCopy": "Kopiëren naar Project README",
+    "stepView": "Klik op Badge om te Bekijken",
+    "search": "Zoeken",
+    "translationCompleted": "Project README Vertaling Voltooid",
+    "copyLinksToReadme": "Kopieer de onderstaande links naar uw project README"
   },
   "translate": {
     "title": "GitHub README vertaler",

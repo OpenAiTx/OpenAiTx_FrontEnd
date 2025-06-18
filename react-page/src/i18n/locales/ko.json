@@ -49,7 +49,14 @@
     "dialogSubmissionFailed": "제출 실패",
     "dialogSuccessContent": "번역 진행 중, 약 2시간 후에 돌아와서 링크를 복사하여 프로젝트의 Readme.md에 붙여넣으세요",
     "dialogFailedContent": "오류 코드: {{errorMessage}}, 오류 메시지가 보고되었습니다",
-    "dialogConfirm": "확인"
+    "dialogConfirm": "확인",
+    "stepSearch": "프로젝트 검색",
+    "stepSubmit": "번역 요청 제출",
+    "stepCopy": "프로젝트 README에 복사",
+    "stepView": "배지 클릭으로 보기",
+    "search": "검색",
+    "translationCompleted": "프로젝트 README 번역 완료",
+    "copyLinksToReadme": "아래 링크를 프로젝트 README에 복사해주세요"
   },
   "translate": {
     "title": "GitHub README 번역기",

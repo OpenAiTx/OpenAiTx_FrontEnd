@@ -49,7 +49,14 @@
     "dialogSubmissionFailed": "提交失敗",
     "dialogSuccessContent": "翻譯進行中，請等待約2小時後回來複製連結貼製專案Readme.md",
     "dialogFailedContent": "錯誤代碼：{{errorMessage}}，已回報錯誤訊息",
-    "dialogConfirm": "確認"
+    "dialogConfirm": "確認",
+    "stepSearch": "查詢專案",
+    "stepSubmit": "提交翻譯請求",
+    "stepCopy": "複製到專案README貼上",
+    "stepView": "點擊標籤查看",
+    "search": "查詢",
+    "translationCompleted": "專案README翻譯已完成",
+    "copyLinksToReadme": "請複製下方連結貼至專案README"
   },
   "translate": {
     "title": "GitHub README 翻譯工具",

@@ -49,7 +49,14 @@
     "dialogSubmissionFailed": "Gửi thất bại",
     "dialogSuccessContent": "Dịch thuật đang tiến hành, vui lòng đợi khoảng 2 giờ sau đó quay lại để sao chép liên kết và dán vào Readme.md của dự án",
     "dialogFailedContent": "Mã lỗi: {{errorMessage}}, thông báo lỗi đã được báo cáo",
-    "dialogConfirm": "Xác nhận"
+    "dialogConfirm": "Xác nhận",
+    "stepSearch": "Tìm kiếm Dự án",
+    "stepSubmit": "Gửi Yêu cầu Dịch",
+    "stepCopy": "Sao chép vào README Dự án",
+    "stepView": "Nhấp vào Badge để Xem",
+    "search": "Tìm kiếm",
+    "translationCompleted": "Dịch README Dự án Hoàn thành",
+    "copyLinksToReadme": "Vui lòng sao chép các liên kết bên dưới vào README dự án của bạn"
   },
   "translate": {
     "title": "Trình dịch GitHub README",

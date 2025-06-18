@@ -49,7 +49,14 @@
     "dialogSubmissionFailed": "Fallo en el envío",
     "dialogSuccessContent": "Traducción en progreso, espere aproximadamente 2 horas y luego regrese para copiar el enlace y pegarlo en el Readme.md de su proyecto",
     "dialogFailedContent": "Código de error: {{errorMessage}}, mensaje de error reportado",
-    "dialogConfirm": "Confirmar"
+    "dialogConfirm": "Confirmar",
+    "stepSearch": "Buscar Proyecto",
+    "stepSubmit": "Enviar Solicitud de Traducción",
+    "stepCopy": "Copiar al README del Proyecto",
+    "stepView": "Hacer Clic en la Insignia para Ver",
+    "search": "Buscar",
+    "translationCompleted": "Traducción del README del Proyecto Completada",
+    "copyLinksToReadme": "Por favor copie los enlaces de abajo a su README del proyecto"
   },
   "translate": {
     "title": "Traductor GitHub README",

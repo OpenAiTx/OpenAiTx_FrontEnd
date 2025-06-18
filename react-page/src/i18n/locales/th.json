@@ -49,7 +49,14 @@
     "dialogSubmissionFailed": "ส่งไม่สำเร็จ",
     "dialogSuccessContent": "การแปลกำลังดำเนินการ กรุณารอประมาณ 2 ชั่วโมง แล้วกลับมาคัดลอกลิงค์และวางใน Readme.md ของโครงการของคุณ",
     "dialogFailedContent": "รหัสข้อผิดพลาด: {{errorMessage}} ได้รายงานข้อความข้อผิดพลาดแล้ว",
-    "dialogConfirm": "ยืนยัน"
+    "dialogConfirm": "ยืนยัน",
+    "stepSearch": "ค้นหาโครงการ",
+    "stepSubmit": "ส่งคำขอแปล",
+    "stepCopy": "คัดลอกไปยัง README ของโครงการ",
+    "stepView": "คลิกที่ Badge เพื่อดู",
+    "search": "ค้นหา",
+    "translationCompleted": "การแปล README ของโครงการเสร็จสิ้น",
+    "copyLinksToReadme": "กรุณาคัดลอกลิงค์ด้านล่างไปยัง README ของโครงการ"
   },
   "translate": {
     "title": "เครื่องมือแปล GitHub README",

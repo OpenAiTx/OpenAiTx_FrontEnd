@@ -13,6 +13,7 @@ import {
 } from '../components/ui/dialog';
 import { Button } from '../components/ui/button';
 import { getAppUrl } from '../lib/utils';
+import Stepper from '../components/ui/stepper';
 
 /* global URL, URLSearchParams */
 
@@ -71,6 +72,14 @@ const BadgeGenerator = () => {
     const [dialogOpen, setDialogOpen] = useState(false);
     const [dialogType, setDialogType] = useState(''); // 'success' 或 'error'
     const [dialogErrorMessage, setDialogErrorMessage] = useState('');
+
+    // Stepper 步驟定義
+    const steps = [
+        { id: 'search', title: t('badge.stepSearch') },
+        { id: 'submit', title: t('badge.stepSubmit') },
+        { id: 'copy', title: t('badge.stepCopy') },
+        { id: 'view', title: t('badge.stepView') }
+    ];
 
     const style1Languages = [
         { code: "en", name: "EN" },
@@ -340,6 +349,11 @@ const BadgeGenerator = () => {
                     </motion.h1>
                 </motion.div>
 
+                {/* Stepper */}
+                <motion.div className="mb-8" variants={itemVariants}>
+                    <Stepper steps={steps} />
+                </motion.div>
+
             {/* Hidden inputs for URL parameters */}
             <input type="hidden" value={userOrOrg} />
             <input type="hidden" value={project} />
@@ -367,7 +381,7 @@ const BadgeGenerator = () => {
                                 className="flex-1 px-3 py-2 bg-background border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
                             />
                             <motion.button onClick={handleUrlSubmit} className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 transition-colors" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                {t("badge.submit")}
+                                {t("badge.search")}
                             </motion.button>
                         </div>
                         {urlError && (
@@ -419,9 +433,19 @@ const BadgeGenerator = () => {
                 </motion.div>
             )}
 
-            {/* Style Option 1 (HTML Badges) */}
+            {/* Translation Completed Title */}
             {!repoNotFound && userOrOrg && project && !isCheckingProject && !showSubmitButton && (
                 <Fragment>
+                    <motion.div className="text-center my-8" variants={itemVariants}>
+                        <motion.h1 className="text-3xl font-bold text-foreground mb-2" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.5 }}>
+                            {t("badge.translationCompleted")}
+                        </motion.h1>
+                        <motion.h4 className="text-lg text-muted-foreground" initial={{ y: 10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.5, delay: 0.2 }}>
+                            {t("badge.copyLinksToReadme")}
+                        </motion.h4>
+                    </motion.div>
+
+            {/* Style Option 1 (HTML Badges) */}
                     <motion.div className="border border-border p-5 mb-5 rounded-md bg-muted/70" variants={itemVariants} whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
                         <h2 className="text-xl font-semibold text-card-foreground mb-4">{t("badge.style1")}</h2>
                         <div className="bg-muted/30 p-4 mb-3 rounded text-center">

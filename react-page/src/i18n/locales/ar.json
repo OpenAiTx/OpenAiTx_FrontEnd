@@ -49,7 +49,14 @@
     "dialogSubmissionFailed": "فشل الإرسال",
     "dialogSuccessContent": "الترجمة قيد التنفيذ، يرجى الانتظار حوالي ساعتين ثم العودة لنسخ الرابط ولصقه في Readme.md لمشروعك",
     "dialogFailedContent": "رمز الخطأ: {{errorMessage}}، تم الإبلاغ عن رسالة الخطأ",
-    "dialogConfirm": "تأكيد"
+    "dialogConfirm": "تأكيد",
+    "stepSearch": "البحث عن المشروع",
+    "stepSubmit": "إرسال طلب الترجمة",
+    "stepCopy": "نسخ إلى README المشروع",
+    "stepView": "انقر على الشارة للعرض",
+    "search": "بحث",
+    "translationCompleted": "تمت ترجمة README للمشروع",
+    "copyLinksToReadme": "يرجى نسخ الروابط أدناه إلى README مشروعك"
   },
   "translate": {
     "title": "مترجم GitHub README",

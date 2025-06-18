@@ -49,7 +49,14 @@
     "dialogSubmissionFailed": "Submission Failed",
     "dialogSuccessContent": "Translation in progress, please wait about 2 hours then come back to copy the link and paste it to your project's Readme.md",
     "dialogFailedContent": "Error code: {{errorMessage}}, error message has been reported",
-    "dialogConfirm": "Confirm"
+    "dialogConfirm": "Confirm",
+    "stepSearch": "Search Project",
+    "stepSubmit": "Submit Translation Request",
+    "stepCopy": "Copy to Project README",
+    "stepView": "Click Badge to View",
+    "search": "Search",
+    "translationCompleted": "Project README Translation Completed",
+    "copyLinksToReadme": "Please copy the links below to your project README"
   },
   "translate": {
     "title": "GitHub README Translator",

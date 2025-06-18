@@ -49,7 +49,14 @@
     "dialogSubmissionFailed": "Gönderim başarısız",
     "dialogSuccessContent": "Çeviri devam ediyor, yaklaşık 2 saat bekleyin ve sonra geri gelip bağlantıyı kopyalayıp projenizin Readme.md dosyasına yapıştırın",
     "dialogFailedContent": "Hata kodu: {{errorMessage}}, hata mesajı bildirildi",
-    "dialogConfirm": "Onayla"
+    "dialogConfirm": "Onayla",
+    "stepSearch": "Proje Ara",
+    "stepSubmit": "Çeviri Talebi Gönder",
+    "stepCopy": "Proje README'sine Kopyala",
+    "stepView": "Görüntülemek için Badge'e Tıkla",
+    "search": "Ara",
+    "translationCompleted": "Proje README Çevirisi Tamamlandı",
+    "copyLinksToReadme": "Lütfen aşağıdaki bağlantıları proje README'nize kopyalayın"
   },
   "translate": {
     "title": "GitHub README Çevirmen",

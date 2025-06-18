@@ -49,7 +49,14 @@
     "dialogSubmissionFailed": "Ошибка отправки",
     "dialogSuccessContent": "Перевод в процессе, подождите около 2 часов, затем вернитесь, чтобы скопировать ссылку и вставить её в Readme.md вашего проекта",
     "dialogFailedContent": "Код ошибки: {{errorMessage}}, сообщение об ошибке отправлено",
-    "dialogConfirm": "Подтвердить"
+    "dialogConfirm": "Подтвердить",
+    "stepSearch": "Поиск Проекта",
+    "stepSubmit": "Отправить Запрос на Перевод",
+    "stepCopy": "Скопировать в README Проекта",
+    "stepView": "Нажать на Значок для Просмотра",
+    "search": "Поиск",
+    "translationCompleted": "Перевод README Проекта Завершен",
+    "copyLinksToReadme": "Пожалуйста, скопируйте ссылки ниже в README вашего проекта"
   },
   "translate": {
     "title": "Переводчик GitHub README",
