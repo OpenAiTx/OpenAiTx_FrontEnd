@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
+import { getGitHubUrl } from '../lib/utils'
 
 const Navbar = ({ darkMode, setDarkMode }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -138,7 +139,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
 
                         {/* GitHub Badge */}
                         <motion.a
-                            href="https://github.com/OpenAiTx/OpenAiTx"
+                            href={getGitHubUrl()}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1.5 px-3 py-2 text-sm rounded-md text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors duration-200"
@@ -230,7 +231,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
 
                             {/* Mobile GitHub Link */}
                             <motion.a
-                                href="https://github.com/OpenAiTx/OpenAiTx"
+                                href={getGitHubUrl()}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-full text-left px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors flex items-center space-x-2"

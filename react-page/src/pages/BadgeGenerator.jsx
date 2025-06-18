@@ -12,6 +12,7 @@ import {
     DialogTitle 
 } from '../components/ui/dialog';
 import { Button } from '../components/ui/button';
+import { getAppUrl } from '../lib/utils';
 
 /* global URL, URLSearchParams */
 
@@ -158,7 +159,8 @@ const BadgeGenerator = () => {
     const generateStyle1Html = () => {
         if (!userOrOrg || !project) return "";
 
-        const badges = style1Languages.map((lang) => `<a href="https://openaitx.github.io/#/view?user=${userOrOrg}&project=${project}&lang=${lang.code}"><img src="https://img.shields.io/badge/${lang.name}-white" alt="version"></a>`).join("");
+        const appUrl = getAppUrl();
+        const badges = style1Languages.map((lang) => `<a href="${appUrl}/view?user=${userOrOrg}&project=${project}&lang=${lang.code}"><img src="https://img.shields.io/badge/${lang.name}-white" alt="version"></a>`).join("");
 
         return `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;">${badges}</div>`;
     };
@@ -166,7 +168,8 @@ const BadgeGenerator = () => {
     const generateStyle2Markdown = () => {
         if (!userOrOrg || !project) return "";
 
-        return style2Languages.map((lang) => `[${lang.name}](https://openaitx.github.io/#/view?user=${userOrOrg}&project=${project}&lang=${lang.code})`).join(" | ");
+        const appUrl = getAppUrl();
+        return style2Languages.map((lang) => `[${lang.name}](${appUrl}/view?user=${userOrOrg}&project=${project}&lang=${lang.code})`).join(" | ");
     };
 
     const copyToClipboard = async (text, itemId) => {
