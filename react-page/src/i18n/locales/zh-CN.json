@@ -16,9 +16,9 @@
     "copy": "复制",
     "copied": "已复制！",
     "repoNotFound": "找不到仓库",
-    "repoNotFoundDesc": "此 GitHub 仓库不存在。请检查仓库名称后重试。",
-    "docNotFound": "找不到项目文档",
-    "docNotFoundDesc": "此项目的文档尚未被索引。点击下方按钮提交索引。",
+    "repoNotFoundDesc": "此 GitHub 仓库不存在。请检查仓库名称并重试。",
+    "docNotFound": "此专案未完成翻译",
+    "docNotFoundDesc": "请点选提交来为这个专案进行翻译",
     "submit": "提交",
     "style1": "样式选项 1 (HTML 标章)",
     "style2": "样式选项 2 (Markdown 链接)",
@@ -44,7 +44,12 @@
     "invalidRepoUrl": "请输入完整的仓库网址（包含用户名和仓库名）",
     "invalidUrl": "请输入有效的网址",
     "changeRepo": "更换仓库",
-    "checking": "正在检查项目状态..."
+    "checking": "正在检查项目状态...",
+    "dialogSubmissionSuccess": "提交成功",
+    "dialogSubmissionFailed": "提交失败",
+    "dialogSuccessContent": "翻译进行中，请等待2-3小时后查看",
+    "dialogFailedContent": "错误代码：{{errorMessage}}，已回报错误讯息",
+    "dialogConfirm": "确认"
   },
   "translate": {
     "title": "GitHub README 翻译工具",

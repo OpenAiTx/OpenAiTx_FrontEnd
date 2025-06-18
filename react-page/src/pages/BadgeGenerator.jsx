@@ -1,9 +1,17 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
-import { Fragment } from "react";
+import { 
+    Dialog, 
+    DialogContent, 
+    DialogDescription, 
+    DialogFooter, 
+    DialogHeader, 
+    DialogTitle 
+} from '../components/ui/dialog';
+import { Button } from '../components/ui/button';
 
 /* global URL, URLSearchParams */
 
@@ -57,6 +65,11 @@ const BadgeGenerator = () => {
     const [repoUrl, setRepoUrl] = useState("");
     const [urlError, setUrlError] = useState("");
     const [isCheckingProject, setIsCheckingProject] = useState(false);
+    
+    // Dialog 狀態管理
+    const [dialogOpen, setDialogOpen] = useState(false);
+    const [dialogType, setDialogType] = useState(''); // 'success' 或 'error'
+    const [dialogErrorMessage, setDialogErrorMessage] = useState('');
 
     const style1Languages = [
         { code: "en", name: "EN" },
@@ -170,25 +183,31 @@ const BadgeGenerator = () => {
 
     const submitProject = async () => {
         try {
-            const response = await fetch("https://openaitx.com/api/submit-project", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    project: `https://github.com/${userOrOrg}/${project}`,
-                }),
-            });
+            // const response = await fetch("https://openaitx.com/api/submit-project", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify({
+            //         project: `https://github.com/${userOrOrg}/${project}`,
+            //     }),
+            // });
 
-            const data = await response.json();
+            // const data = await response.json();
 
-            if (!response.ok) {
-                throw new Error(data.error || `HTTP error! status: ${response.status}`);
-            }
+            // if (!response.ok) {
+            //     throw new Error(data.error || `HTTP error! status: ${response.status}`);
+            // }
 
-            alert(t("badge.alertSubmissionCompleted"));
+            // 顯示成功 dialog
+            setDialogType('success');
+            setDialogOpen(true);
+            
         } catch (error) {
-            alert(`${t("badge.alertSubmissionFailed")}${error.message}`);
+            // 顯示失敗 dialog
+            setDialogType('error');
+            setDialogErrorMessage(error.message);
+            setDialogOpen(true);
         }
     };
 
@@ -281,13 +300,42 @@ const BadgeGenerator = () => {
     };
 
     return (
-        <motion.div className="max-w-4xl mx-auto" variants={containerVariants} initial="hidden" animate="visible">
-            {/* Header */}
-            <motion.div className="text-center mb-10 mt-6" variants={itemVariants}>
-                <motion.h1 className="text-2xl font-bold text-foreground mb-4" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.5, delay: 0.3 }}>
-                    {t("badge.title")}
-                </motion.h1>
-            </motion.div>
+        <>
+            {/* Submission Dialog */}
+            <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                <DialogContent className="p-8 sm:max-w-md">
+                    <DialogHeader >
+                        <DialogTitle>
+                            {dialogType === 'success' 
+                                ? t("badge.dialogSubmissionSuccess")
+                                : t("badge.dialogSubmissionFailed")
+                            }
+                        </DialogTitle>
+                        <DialogDescription className="py-6">
+                            {dialogType === 'success' 
+                                ? t("badge.dialogSuccessContent")
+                                : t("badge.dialogFailedContent", { errorMessage: dialogErrorMessage })
+                            }
+                        </DialogDescription>
+                    </DialogHeader>
+                    <DialogFooter>
+                        <Button 
+                            onClick={() => setDialogOpen(false)}
+                            className="w-full"
+                        >
+                            {t("badge.dialogConfirm")}
+                        </Button>
+                    </DialogFooter>
+                </DialogContent>
+            </Dialog>
+
+            <motion.div className="max-w-4xl mx-auto" variants={containerVariants} initial="hidden" animate="visible">
+                {/* Header */}
+                <motion.div className="text-center mb-10 mt-6" variants={itemVariants}>
+                    <motion.h1 className="text-2xl font-bold text-foreground mb-4" initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.5, delay: 0.3 }}>
+                        {t("badge.title")}
+                    </motion.h1>
+                </motion.div>
 
             {/* Hidden inputs for URL parameters */}
             <input type="hidden" value={userOrOrg} />
@@ -411,6 +459,7 @@ const BadgeGenerator = () => {
                 </div>
             </motion.div>
         </motion.div>
+        </>
     );
 };
 
