@@ -60,8 +60,9 @@
   },
   "viewer": {
     "title": "Visualizzatore Markdown",
-    "description": "Visualizza file README tradotti in stile GitHub.",
+    "description": "Visualizza i file README tradotti in stile GitHub.",
     "loading": "Caricamento...",
+    "loadingLanguage": "Caricamento nuova versione linguistica...",
     "error": "Errore caricamento contenuto",
     "back": "Indietro",
     "githubRepo": "Repository GitHub:",

@@ -59,9 +59,10 @@
     "perPage": "Resultados por página"
   },
   "viewer": {
-    "title": "Visor Markdown",
-    "description": "Vea archivos README traducidos en estilo GitHub.",
+    "title": "Visor de Markdown",
+    "description": "Ver archivos README traducidos en estilo GitHub.",
     "loading": "Cargando...",
+    "loadingLanguage": "Cargando nueva versión de idioma...",
     "error": "Error cargando contenido",
     "back": "Atrás",
     "githubRepo": "Repositorio GitHub:",

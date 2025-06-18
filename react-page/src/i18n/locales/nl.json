@@ -59,9 +59,10 @@
     "perPage": "Resultaten per pagina"
   },
   "viewer": {
-    "title": "Markdown viewer",
+    "title": "Markdown Viewer",
     "description": "Bekijk vertaalde README bestanden in GitHub stijl.",
     "loading": "Laden...",
+    "loadingLanguage": "Nieuwe taalversie laden...",
     "error": "Fout bij laden van inhoud",
     "back": "Terug",
     "githubRepo": "GitHub repository:",

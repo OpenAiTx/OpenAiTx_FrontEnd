@@ -83,7 +83,8 @@
     "submit": "Prześlij",
     "submissionCompleted": "Przesyłanie zakończone",
     "submissionFailed": "Przesyłanie nie powiodło się: ",
-    "tableOfContents": "Spis treści"
+    "tableOfContents": "Spis treści",
+    "loadingLanguage": "Ładowanie nowej wersji językowej..."
   },
   "common": {
     "loading": "Ładowanie...",
@@ -92,4 +93,4 @@
     "cancel": "Anuluj",
     "confirm": "Potwierdź"
   }
-} 
+}

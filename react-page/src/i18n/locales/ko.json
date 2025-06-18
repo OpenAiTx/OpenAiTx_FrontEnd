@@ -59,9 +59,10 @@
     "perPage": "페이지당 결과 수"
   },
   "viewer": {
-    "title": "마크다운 뷰어",
+    "title": "Markdown 뷰어",
     "description": "GitHub 스타일로 번역된 README 파일을 봅니다.",
     "loading": "로딩 중...",
+    "loadingLanguage": "새로운 언어 버전을 로딩 중...",
     "error": "콘텐츠 로딩 오류",
     "back": "뒤로",
     "githubRepo": "GitHub 저장소:",

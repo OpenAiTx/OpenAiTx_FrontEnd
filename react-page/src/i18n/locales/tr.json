@@ -83,7 +83,8 @@
     "submit": "Gönder",
     "submissionCompleted": "Gönderim tamamlandı",
     "submissionFailed": "Gönderim başarısız: ",
-    "tableOfContents": "İçindekiler"
+    "tableOfContents": "İçindekiler",
+    "loadingLanguage": "Yeni dil sürümü yükleniyor..."
   },
   "common": {
     "loading": "Yükleniyor...",
@@ -92,4 +93,4 @@
     "cancel": "İptal",
     "confirm": "Onayla"
   }
-} 
+}

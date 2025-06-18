@@ -62,6 +62,7 @@
     "title": "Markdown Viewer",
     "description": "View translated README files in GitHub style.",
     "loading": "Loading...",
+    "loadingLanguage": "Loading new language version...",
     "error": "Error loading content",
     "back": "Back",
     "githubRepo": "GitHub Repository:",

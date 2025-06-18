@@ -83,7 +83,8 @@
     "submit": "ส่ง",
     "submissionCompleted": "การส่งเสร็จสมบูรณ์",
     "submissionFailed": "การส่งล้มเหลว: ",
-    "tableOfContents": "สารบัญ"
+    "tableOfContents": "สารบัญ",
+    "loadingLanguage": "กำลังโหลดเวอร์ชันภาษาใหม่..."
   },
   "common": {
     "loading": "กำลังโหลด...",
@@ -92,4 +93,4 @@
     "cancel": "ยกเลิก",
     "confirm": "ยืนยัน"
   }
-} 
+}

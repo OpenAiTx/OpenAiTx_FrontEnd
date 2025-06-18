@@ -62,6 +62,7 @@
     "title": "Visionneuse Markdown",
     "description": "Visualisez les fichiers README traduits dans le style GitHub.",
     "loading": "Chargement...",
+    "loadingLanguage": "Chargement de la nouvelle version linguistique...",
     "error": "Erreur de chargement du contenu",
     "back": "Retour",
     "githubRepo": "Dépôt GitHub :",

@@ -222,6 +222,108 @@
   box-sizing: content-box;
 }
 
+/* Logo 特殊樣式 - 針對常見的 logo 圖片 */
+.markdown-body img[alt*="logo" i],
+.markdown-body img[alt*="Logo" i],
+.markdown-body img[src*="logo" i],
+.markdown-body img[title*="logo" i],
+.markdown-body img[title*="Logo" i] {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-height: 120px;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+/* 第一個區塊中的圖片置中顯示 */
+.markdown-body > *:first-child img,
+.markdown-body > h1:first-child + p img,
+.markdown-body > h1:first-child + div img,
+.markdown-body > p:first-child img,
+.markdown-body > div:first-child img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 第一個區塊中包含圖片的段落也置中 */
+.markdown-body > p:first-child:has(img),
+.markdown-body > h1:first-child + p:has(img),
+.markdown-body > h1:first-child + div:has(img),
+.markdown-body > div:first-child:has(img) {
+  text-align: center;
+}
+
+/* 針對不支援 :has() 的瀏覽器的備用方案 */
+.markdown-body > p:first-child,
+.markdown-body > h1:first-child + p,
+.markdown-body > h1:first-child + div,
+.markdown-body > div:first-child {
+  text-align: center;
+}
+
+/* 如果段落中有文字，則恢復左對齊 */
+.markdown-body > p:first-child:not(:empty):not([data-img-only]),
+.markdown-body > h1:first-child + p:not(:empty):not([data-img-only]),
+.markdown-body > h1:first-child + div:not(:empty):not([data-img-only]),
+.markdown-body > div:first-child:not(:empty):not([data-img-only]) {
+  text-align: left;
+}
+
+/* 特殊處理：如果段落只包含圖片（可能還有換行），保持置中 */
+.markdown-body > p:first-child img:only-child,
+.markdown-body > h1:first-child + p img:only-child,
+.markdown-body > h1:first-child + div img:only-child,
+.markdown-body > div:first-child img:only-child {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 項目標題區域的圖片置中 */
+.markdown-body h1 + p img,
+.markdown-body h1 + div img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 響應式設計 - 移動端優化 */
+@media (max-width: 767px) {
+  .markdown-body img[alt*="logo" i],
+  .markdown-body img[alt*="Logo" i],
+  .markdown-body img[src*="logo" i],
+  .markdown-body img[title*="logo" i],
+  .markdown-body img[title*="Logo" i] {
+    max-height: 80px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+  
+  .markdown-body > *:first-child img,
+  .markdown-body > h1:first-child + p img,
+  .markdown-body > h1:first-child + div img,
+  .markdown-body > p:first-child img,
+  .markdown-body > div:first-child img {
+    max-width: 90%;
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+}
+
+/* 確保僅圖片的段落有適當的間距 */
+.markdown-body [data-img-only="true"] {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+/* 第一個區塊的特殊間距 */
+.markdown-body > *:first-child[data-img-only="true"],
+.markdown-body > h1:first-child + *[data-img-only="true"] {
+  margin-top: 0;
+}
+
 /* Horizontal rules */
 .markdown-body hr {
   height: 0.25em;

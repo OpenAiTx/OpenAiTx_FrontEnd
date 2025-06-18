@@ -60,8 +60,9 @@
   },
   "viewer": {
     "title": "Просмотрщик Markdown",
-    "description": "Просматривайте переведенные README файлы в стиле GitHub.",
+    "description": "Просмотр переведенных README файлов в стиле GitHub.",
     "loading": "Загрузка...",
+    "loadingLanguage": "Загрузка новой языковой версии...",
     "error": "Ошибка загрузки контента",
     "back": "Назад",
     "githubRepo": "GitHub репозиторий:",

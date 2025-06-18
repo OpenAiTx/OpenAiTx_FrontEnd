@@ -83,7 +83,8 @@
     "submit": "إرسال",
     "submissionCompleted": "تم الإرسال بنجاح",
     "submissionFailed": "فشل الإرسال: ",
-    "tableOfContents": "جدول المحتويات"
+    "tableOfContents": "جدول المحتويات",
+    "loadingLanguage": "تحميل إصدار اللغة الجديد..."
   },
   "common": {
     "loading": "جاري التحميل...",
@@ -92,4 +93,4 @@
     "cancel": "إلغاء",
     "confirm": "تأكيد"
   }
-} 
+}

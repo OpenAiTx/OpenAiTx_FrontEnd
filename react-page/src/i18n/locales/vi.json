@@ -83,7 +83,8 @@
     "submit": "Gửi",
     "submissionCompleted": "Gửi hoàn tất",
     "submissionFailed": "Gửi thất bại: ",
-    "tableOfContents": "Mục lục"
+    "tableOfContents": "Mục lục",
+    "loadingLanguage": "Đang tải phiên bản ngôn ngữ mới..."
   },
   "common": {
     "loading": "Đang tải...",
@@ -92,4 +93,4 @@
     "cancel": "Hủy",
     "confirm": "Xác nhận"
   }
-} 
+}

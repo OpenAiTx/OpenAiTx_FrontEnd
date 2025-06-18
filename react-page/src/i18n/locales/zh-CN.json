@@ -62,6 +62,7 @@
     "title": "Markdown 查看器",
     "description": "以 GitHub 风格查看翻译后的 README 文件。",
     "loading": "加载中...",
+    "loadingLanguage": "正在加载新语言版本...",
     "error": "加载内容时发生错误",
     "back": "返回",
     "githubRepo": "GitHub 仓库：",

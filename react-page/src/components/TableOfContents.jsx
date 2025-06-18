@@ -3,14 +3,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useTranslation } from 'react-i18next'
 
-const TableOfContents = ({ content, isOpen, setIsOpen }) => {
+const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }) => {
   const [headings, setHeadings] = useState([])
   const [activeId, setActiveId] = useState('')
+  const { t } = useTranslation()
 
   // 提取標題並添加anchor points
   useEffect(() => {
-    if (!content) return
+    if (!content || languageLoading) return
 
     const processHeadings = () => {
       const markdownBody = document.querySelector('.markdown-body')
@@ -57,11 +59,11 @@ const TableOfContents = ({ content, isOpen, setIsOpen }) => {
     requestAnimationFrame(() => {
       setTimeout(processHeadings, 100)
     })
-  }, [content])
+  }, [content, languageLoading])
 
   // 監聽滾動以高亮當前標題
   useEffect(() => {
-    if (typeof window === 'undefined' || !window.IntersectionObserver || headings.length === 0) return
+    if (typeof window === 'undefined' || !window.IntersectionObserver || headings.length === 0 || languageLoading) return
 
     const observer = new window.IntersectionObserver(
       (entries) => {
@@ -106,10 +108,12 @@ const TableOfContents = ({ content, isOpen, setIsOpen }) => {
     return () => {
       observer.disconnect()
     }
-  }, [headings])
+  }, [headings, languageLoading])
 
   // 點擊標題跳轉
   const scrollToHeading = (id) => {
+    if (languageLoading) return // 載入中時禁用跳轉
+    
     const performScroll = (element) => {
       const navbarHeight = 80
       const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
@@ -167,7 +171,69 @@ const TableOfContents = ({ content, isOpen, setIsOpen }) => {
     return indentMap[level] || 'pl-0'
   }
 
-  if (headings.length === 0) return null
+  // Loading 狀態的 placeholder
+  const renderLoadingPlaceholder = () => (
+    <motion.div 
+      className="space-y-3 p-4"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      {/* Loading 標題 */}
+      <div className="flex items-center gap-2 mb-4">
+        <motion.div 
+          className="w-3 h-3 border-2 border-primary border-t-transparent rounded-full"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+        />
+        <span className="text-sm text-muted-foreground font-medium">
+          {t('viewer.loadingLanguage') || '載入目錄中...'}
+        </span>
+      </div>
+
+      {/* 模擬目錄項目 */}
+      <div className="space-y-2">
+        {/* 主標題 */}
+        <div className="h-6 bg-muted rounded-md animate-pulse w-4/5" />
+        
+        {/* 二級標題 */}
+        <div className="pl-4 space-y-2">
+          <div className="h-5 bg-muted rounded-md animate-pulse w-3/4" />
+          <div className="h-5 bg-muted rounded-md animate-pulse w-2/3" />
+          
+          {/* 三級標題 */}
+          <div className="pl-4 space-y-1">
+            <div className="h-4 bg-muted rounded-md animate-pulse w-5/6" />
+            <div className="h-4 bg-muted rounded-md animate-pulse w-3/5" />
+            <div className="h-4 bg-muted rounded-md animate-pulse w-4/5" />
+          </div>
+        </div>
+
+        {/* 另一個主標題 */}
+        <div className="h-6 bg-muted rounded-md animate-pulse w-3/4 mt-4" />
+        
+        {/* 更多二級標題 */}
+        <div className="pl-4 space-y-2">
+          <div className="h-5 bg-muted rounded-md animate-pulse w-4/5" />
+          <div className="h-5 bg-muted rounded-md animate-pulse w-3/5" />
+          <div className="h-5 bg-muted rounded-md animate-pulse w-2/3" />
+        </div>
+
+        {/* 第三個主標題 */}
+        <div className="h-6 bg-muted rounded-md animate-pulse w-5/6 mt-4" />
+        
+        {/* 對應的子標題 */}
+        <div className="pl-4 space-y-1">
+          <div className="h-5 bg-muted rounded-md animate-pulse w-3/4" />
+          <div className="h-5 bg-muted rounded-md animate-pulse w-4/5" />
+        </div>
+      </div>
+    </motion.div>
+  )
+
+  // 如果沒有內容且不在載入中，不顯示組件
+  if (headings.length === 0 && !languageLoading) return null
 
   return (
     <>
@@ -218,26 +284,30 @@ const TableOfContents = ({ content, isOpen, setIsOpen }) => {
               <div className="flex flex-col h-full">
                 {/* 目錄內容 */}
                 <div className="flex-1 overflow-y-auto p-2">
-                  <nav className="space-y-1">
-                    {headings.map(({ id, text, level }) => (
-                      <motion.button
-                        key={id}
-                        onClick={() => scrollToHeading(id)}
-                        className={cn(
-                          "w-full text-left px-3 py-2 rounded-md text-sm transition-colors duration-200",
-                          "hover:bg-accent hover:text-accent-foreground",
-                          getIndentClass(level),
-                          activeId === id
-                            ? "bg-accent text-accent-foreground font-medium"
-                            : "text-muted-foreground"
-                        )}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <span className="block truncate">{text}</span>
-                      </motion.button>
-                    ))}
-                  </nav>
+                  {languageLoading ? (
+                    renderLoadingPlaceholder()
+                  ) : (
+                    <nav className="space-y-1">
+                      {headings.map(({ id, text, level }) => (
+                        <motion.button
+                          key={id}
+                          onClick={() => scrollToHeading(id)}
+                          className={cn(
+                            "w-full text-left px-3 py-2 rounded-md text-sm transition-colors duration-200",
+                            "hover:bg-accent hover:text-accent-foreground",
+                            getIndentClass(level),
+                            activeId === id
+                              ? "bg-accent text-accent-foreground font-medium"
+                              : "text-muted-foreground"
+                          )}
+                          whileHover={{ scale: 1.02 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          <span className="block truncate">{text}</span>
+                        </motion.button>
+                      ))}
+                    </nav>
+                  )}
                 </div>
               </div>
             </motion.aside>

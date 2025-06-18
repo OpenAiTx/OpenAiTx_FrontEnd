@@ -62,6 +62,7 @@
     "title": "Visualizador Markdown",
     "description": "Visualize arquivos README traduzidos no estilo GitHub.",
     "loading": "Carregando...",
+    "loadingLanguage": "Carregando nova versão do idioma...",
     "error": "Erro ao carregar conteúdo",
     "back": "Voltar",
     "githubRepo": "Repositório GitHub:",
