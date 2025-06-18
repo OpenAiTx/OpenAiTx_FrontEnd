@@ -47,7 +47,7 @@
     "checking": "Vérification du statut du projet...",
     "dialogSubmissionSuccess": "Soumission réussie",
     "dialogSubmissionFailed": "Échec de la soumission",
-    "dialogSuccessContent": "Traduction en cours, veuillez vérifier dans 2-3 heures",
+    "dialogSuccessContent": "Traduction en cours, veuillez attendre environ 2 heures puis revenir copier le lien et le coller dans le Readme.md de votre projet",
     "dialogFailedContent": "Code d'erreur : {{errorMessage}}, message d'erreur rapporté",
     "dialogConfirm": "Confirmer"
   },

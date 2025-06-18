@@ -42,9 +42,14 @@
     "githubUrlPlaceholder": "https://github.com/username/repository",
     "invalidGitHubUrl": "Пожалуйста, введите действительный GitHub URL",
     "invalidRepoUrl": "Пожалуйста, введите полный URL репозитория (включая имя пользователя и название репозитория)",
-    "invalidUrl": "Пожалуйста, введите действительный URL",
+    "invalidUrl": "Введите действительный URL",
     "changeRepo": "Изменить репозиторий",
-    "checking": "Проверка статуса проекта..."
+    "checking": "Проверка статуса проекта...",
+    "dialogSubmissionSuccess": "Отправка успешна",
+    "dialogSubmissionFailed": "Ошибка отправки",
+    "dialogSuccessContent": "Перевод в процессе, подождите около 2 часов, затем вернитесь, чтобы скопировать ссылку и вставить её в Readme.md вашего проекта",
+    "dialogFailedContent": "Код ошибки: {{errorMessage}}, сообщение об ошибке отправлено",
+    "dialogConfirm": "Подтвердить"
   },
   "translate": {
     "title": "Переводчик GitHub README",

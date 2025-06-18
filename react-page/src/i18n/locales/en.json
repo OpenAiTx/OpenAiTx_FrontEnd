@@ -47,7 +47,7 @@
     "checking": "Checking project status...",
     "dialogSubmissionSuccess": "Submission Successful",
     "dialogSubmissionFailed": "Submission Failed",
-    "dialogSuccessContent": "Translation in progress, please check back in 2-3 hours",
+    "dialogSuccessContent": "Translation in progress, please wait about 2 hours then come back to copy the link and paste it to your project's Readme.md",
     "dialogFailedContent": "Error code: {{errorMessage}}, error message has been reported",
     "dialogConfirm": "Confirm"
   },

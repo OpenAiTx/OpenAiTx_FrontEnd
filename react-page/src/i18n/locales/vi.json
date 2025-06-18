@@ -44,7 +44,12 @@
     "invalidRepoUrl": "Vui lòng nhập URL kho lưu trữ đầy đủ (bao gồm tên người dùng và tên kho lưu trữ)",
     "invalidUrl": "Vui lòng nhập URL hợp lệ",
     "changeRepo": "Thay đổi kho lưu trữ",
-    "checking": "Đang kiểm tra trạng thái dự án..."
+    "checking": "Đang kiểm tra trạng thái dự án...",
+    "dialogSubmissionSuccess": "Gửi thành công",
+    "dialogSubmissionFailed": "Gửi thất bại",
+    "dialogSuccessContent": "Dịch thuật đang tiến hành, vui lòng đợi khoảng 2 giờ sau đó quay lại để sao chép liên kết và dán vào Readme.md của dự án",
+    "dialogFailedContent": "Mã lỗi: {{errorMessage}}, thông báo lỗi đã được báo cáo",
+    "dialogConfirm": "Xác nhận"
   },
   "translate": {
     "title": "Trình dịch GitHub README",

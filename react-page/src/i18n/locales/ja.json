@@ -47,7 +47,7 @@
     "checking": "プロジェクトステータスを確認中...",
     "dialogSubmissionSuccess": "送信成功",
     "dialogSubmissionFailed": "送信失敗",
-    "dialogSuccessContent": "翻訳進行中、2-3時間後に確認してください",
+    "dialogSuccessContent": "翻訳進行中、約2時間後に戻ってリンクをコピーしてプロジェクトのReadme.mdに貼り付けてください",
     "dialogFailedContent": "エラーコード：{{errorMessage}}、エラーメッセージが報告されました",
     "dialogConfirm": "確認"
   },

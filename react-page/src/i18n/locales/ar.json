@@ -42,9 +42,14 @@
     "githubUrlPlaceholder": "https://github.com/username/repository",
     "invalidGitHubUrl": "يرجى إدخال رابط GitHub صحيح",
     "invalidRepoUrl": "يرجى إدخال رابط مستودع كامل (يتضمن اسم المستخدم واسم المستودع)",
-    "invalidUrl": "يرجى إدخال رابط صحيح",
+    "invalidUrl": "يرجى إدخال رابط صالح",
     "changeRepo": "تغيير المستودع",
-    "checking": "جاري فحص حالة المشروع..."
+    "checking": "فحص حالة المشروع...",
+    "dialogSubmissionSuccess": "تم الإرسال بنجاح",
+    "dialogSubmissionFailed": "فشل الإرسال",
+    "dialogSuccessContent": "الترجمة قيد التنفيذ، يرجى الانتظار حوالي ساعتين ثم العودة لنسخ الرابط ولصقه في Readme.md لمشروعك",
+    "dialogFailedContent": "رمز الخطأ: {{errorMessage}}، تم الإبلاغ عن رسالة الخطأ",
+    "dialogConfirm": "تأكيد"
   },
   "translate": {
     "title": "مترجم GitHub README",

@@ -47,7 +47,7 @@
     "checking": "檢查專案狀態中...",
     "dialogSubmissionSuccess": "提交成功",
     "dialogSubmissionFailed": "提交失敗",
-    "dialogSuccessContent": "翻譯進行中，請等待2-3小時後查看",
+    "dialogSuccessContent": "翻譯進行中，請等待約2小時後回來複製連結貼製專案Readme.md",
     "dialogFailedContent": "錯誤代碼：{{errorMessage}}，已回報錯誤訊息",
     "dialogConfirm": "確認"
   },

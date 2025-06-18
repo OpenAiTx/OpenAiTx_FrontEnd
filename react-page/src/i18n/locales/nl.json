@@ -44,7 +44,12 @@
     "invalidRepoUrl": "Voer een volledige repository URL in (inclusief gebruikersnaam en repository naam)",
     "invalidUrl": "Voer een geldige URL in",
     "changeRepo": "Repository wijzigen",
-    "checking": "Projectstatus controleren..."
+    "checking": "Projectstatus controleren...",
+    "dialogSubmissionSuccess": "Verzending succesvol",
+    "dialogSubmissionFailed": "Verzending mislukt",
+    "dialogSuccessContent": "Vertaling bezig, wacht ongeveer 2 uur en kom dan terug om de link te kopiëren en in de Readme.md van uw project te plakken",
+    "dialogFailedContent": "Foutcode: {{errorMessage}}, foutmelding gerapporteerd",
+    "dialogConfirm": "Bevestigen"
   },
   "translate": {
     "title": "GitHub README vertaler",

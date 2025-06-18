@@ -47,7 +47,7 @@
     "checking": "正在检查项目状态...",
     "dialogSubmissionSuccess": "提交成功",
     "dialogSubmissionFailed": "提交失败",
-    "dialogSuccessContent": "翻译进行中，请等待2-3小时后查看",
+    "dialogSuccessContent": "翻译进行中，请等待约2小时后回来复制链接贴制专案Readme.md",
     "dialogFailedContent": "错误代码：{{errorMessage}}，已回报错误讯息",
     "dialogConfirm": "确认"
   },

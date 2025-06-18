@@ -42,9 +42,14 @@
     "githubUrlPlaceholder": "https://github.com/username/repository",
     "invalidGitHubUrl": "Por favor, digite uma URL GitHub válida",
     "invalidRepoUrl": "Por favor, digite uma URL de repositório completa (incluindo nome de usuário e nome do repositório)",
-    "invalidUrl": "Por favor, digite uma URL válida",
+    "invalidUrl": "Insira uma URL válida",
     "changeRepo": "Alterar repositório",
-    "checking": "Verificando status do projeto..."
+    "checking": "Verificando status do projeto...",
+    "dialogSubmissionSuccess": "Envio bem-sucedido",
+    "dialogSubmissionFailed": "Falha no envio",
+    "dialogSuccessContent": "Tradução em andamento, aguarde cerca de 2 horas e depois volte para copiar o link e colar no Readme.md do seu projeto",
+    "dialogFailedContent": "Código de erro: {{errorMessage}}, mensagem de erro reportada",
+    "dialogConfirm": "Confirmar"
   },
   "translate": {
     "title": "Tradutor GitHub README",

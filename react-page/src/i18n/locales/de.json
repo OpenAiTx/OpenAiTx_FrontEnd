@@ -44,7 +44,12 @@
     "invalidRepoUrl": "Bitte geben Sie eine vollständige Repository-URL ein (einschließlich Benutzername und Repository-Name)",
     "invalidUrl": "Bitte geben Sie eine gültige URL ein",
     "changeRepo": "Repository ändern",
-    "checking": "Projektstatus wird überprüft..."
+    "checking": "Projektstatus wird überprüft...",
+    "dialogSubmissionSuccess": "Übermittlung erfolgreich",
+    "dialogSubmissionFailed": "Übermittlung fehlgeschlagen",
+    "dialogSuccessContent": "Übersetzung läuft, bitte warten Sie etwa 2 Stunden und kommen Sie dann zurück, um den Link zu kopieren und in die Readme.md Ihres Projekts einzufügen",
+    "dialogFailedContent": "Fehlercode: {{errorMessage}}, Fehlermeldung wurde gemeldet",
+    "dialogConfirm": "Bestätigen"
   },
   "translate": {
     "title": "GitHub README Übersetzer",

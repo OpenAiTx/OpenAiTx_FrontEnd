@@ -42,9 +42,14 @@
     "githubUrlPlaceholder": "https://github.com/username/repository",
     "invalidGitHubUrl": "Lütfen geçerli bir GitHub URL'si girin",
     "invalidRepoUrl": "Lütfen tam bir depo URL'si girin (kullanıcı adı ve depo adı dahil)",
-    "invalidUrl": "Lütfen geçerli bir URL girin",
-    "changeRepo": "Depo Değiştir",
-    "checking": "Proje durumu kontrol ediliyor..."
+    "invalidUrl": "Geçerli bir URL girin",
+    "changeRepo": "Depoyu değiştir",
+    "checking": "Proje durumu kontrol ediliyor...",
+    "dialogSubmissionSuccess": "Gönderim başarılı",
+    "dialogSubmissionFailed": "Gönderim başarısız",
+    "dialogSuccessContent": "Çeviri devam ediyor, yaklaşık 2 saat bekleyin ve sonra geri gelip bağlantıyı kopyalayıp projenizin Readme.md dosyasına yapıştırın",
+    "dialogFailedContent": "Hata kodu: {{errorMessage}}, hata mesajı bildirildi",
+    "dialogConfirm": "Onayla"
   },
   "translate": {
     "title": "GitHub README Çevirmen",

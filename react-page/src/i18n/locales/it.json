@@ -44,7 +44,12 @@
     "invalidRepoUrl": "Inserisci un URL repository completo (incluso nome utente e nome repository)",
     "invalidUrl": "Inserisci un URL valido",
     "changeRepo": "Cambia repository",
-    "checking": "Controllo stato progetto..."
+    "checking": "Controllo dello stato del progetto...",
+    "dialogSubmissionSuccess": "Invio riuscito",
+    "dialogSubmissionFailed": "Invio fallito",
+    "dialogSuccessContent": "Traduzione in corso, attendere circa 2 ore poi tornare per copiare il link e incollarlo nel Readme.md del progetto",
+    "dialogFailedContent": "Codice errore: {{errorMessage}}, messaggio di errore segnalato",
+    "dialogConfirm": "Conferma"
   },
   "translate": {
     "title": "Traduttore GitHub README",

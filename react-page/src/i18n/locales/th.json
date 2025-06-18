@@ -44,7 +44,12 @@
     "invalidRepoUrl": "กรุณาใส่ URL ที่เก็บข้อมูลแบบเต็ม (รวมชื่อผู้ใช้และชื่อที่เก็บข้อมูล)",
     "invalidUrl": "กรุณาใส่ URL ที่ถูกต้อง",
     "changeRepo": "เปลี่ยนที่เก็บข้อมูล",
-    "checking": "กำลังตรวจสอบสถานะโปรเจค..."
+    "checking": "กำลังตรวจสอบสถานะโครงการ...",
+    "dialogSubmissionSuccess": "ส่งสำเร็จ",
+    "dialogSubmissionFailed": "ส่งไม่สำเร็จ",
+    "dialogSuccessContent": "การแปลกำลังดำเนินการ กรุณารอประมาณ 2 ชั่วโมง แล้วกลับมาคัดลอกลิงค์และวางใน Readme.md ของโครงการของคุณ",
+    "dialogFailedContent": "รหัสข้อผิดพลาด: {{errorMessage}} ได้รายงานข้อความข้อผิดพลาดแล้ว",
+    "dialogConfirm": "ยืนยัน"
   },
   "translate": {
     "title": "เครื่องมือแปล GitHub README",
