@@ -59,7 +59,7 @@ http://localhost:3000/OpenAiTx.github.io/?userOrOrg=mini-software&project=MiniEx
 
 ### 2. Markdown Viewer 測試
 ```
-http://localhost:3000/OpenAiTx.github.io/view?user=mini-software&project=MiniExcel&lang=zh-TW
+http://localhost:3000/#/view?user=mini-software&project=MiniExcel&lang=zh-TW
 ```
 
 ### 3. 功能驗證清單

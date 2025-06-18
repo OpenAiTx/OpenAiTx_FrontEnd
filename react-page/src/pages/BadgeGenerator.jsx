@@ -102,15 +102,6 @@ const BadgeGenerator = () => {
     ];
 
     useEffect(() => {
-        // 修正URL路徑，確保以斜線結尾
-        const currentPath = window.location.pathname;
-        const basePath = "/OpenAiTx.github.io";
-
-        if (currentPath === basePath) {
-            const newPath = `${basePath}/`;
-            window.history.replaceState({}, "", newPath + window.location.search);
-        }
-
         // Get URL parameters on load
         const userParam = searchParams.get("userOrOrg");
         const projectParam = searchParams.get("project");
@@ -154,7 +145,7 @@ const BadgeGenerator = () => {
     const generateStyle1Html = () => {
         if (!userOrOrg || !project) return "";
 
-        const badges = style1Languages.map((lang) => `<a href="https://openaitx.github.io/view?user=${userOrOrg}&project=${project}&lang=${lang.code}"><img src="https://img.shields.io/badge/${lang.name}-white" alt="version"></a>`).join("");
+        const badges = style1Languages.map((lang) => `<a href="https://openaitx.github.io/#/view?user=${userOrOrg}&project=${project}&lang=${lang.code}"><img src="https://img.shields.io/badge/${lang.name}-white" alt="version"></a>`).join("");
 
         return `<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;">${badges}</div>`;
     };
@@ -162,7 +153,7 @@ const BadgeGenerator = () => {
     const generateStyle2Markdown = () => {
         if (!userOrOrg || !project) return "";
 
-        return style2Languages.map((lang) => `[${lang.name}](https://openaitx.github.io/view?user=${userOrOrg}&project=${project}&lang=${lang.code})`).join(" | ");
+        return style2Languages.map((lang) => `[${lang.name}](https://openaitx.github.io/#/view?user=${userOrOrg}&project=${project}&lang=${lang.code})`).join(" | ");
     };
 
     const copyToClipboard = async (text, itemId) => {
@@ -233,16 +224,13 @@ const BadgeGenerator = () => {
             return;
         }
 
-        // 更新URL參數，確保路徑正確
+        // 更新URL參數
         const newParams = new URLSearchParams();
         newParams.set("userOrOrg", result.userOrOrg);
         newParams.set("project", result.project);
 
-        // 使用當前路徑，確保包含斜線
-        const currentPath = window.location.pathname.endsWith("/") ? window.location.pathname : `${window.location.pathname}/`;
-
-        // 更新URL，保持當前路徑並添加參數
-        window.history.pushState({}, "", `${currentPath}?${newParams.toString()}`);
+        // 更新URL，使用 hash router 格式
+        window.history.pushState({}, "", `#/?${newParams.toString()}`);
 
         // 更新狀態
         setUserOrOrg(result.userOrOrg);
@@ -263,11 +251,8 @@ const BadgeGenerator = () => {
         setUrlError("");
         setIsCheckingProject(false);
         
-        // 清除URL參數
-        const currentPath = window.location.pathname.endsWith("/") 
-            ? window.location.pathname 
-            : `${window.location.pathname}/`;
-        window.history.pushState({}, "", currentPath);
+        // 清除URL參數，回到首頁
+        window.history.pushState({}, "", "#/");
     };
 
     // 動畫配置

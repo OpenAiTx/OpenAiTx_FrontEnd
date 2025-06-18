@@ -38,6 +38,50 @@ function App() {
   })
   const location = useLocation()
 
+  // 處理舊版本 URL 重定向（非 hash 的直接訪問）
+  useEffect(() => {
+    const handleLegacyUrls = () => {
+      const fullUrl = window.location.href
+      // eslint-disable-next-line no-undef
+      const urlObj = new URL(fullUrl)
+      
+      // 檢查是否是直接訪問舊格式的 URL（沒有 hash）
+      if (!urlObj.hash && urlObj.pathname.includes('view.html')) {
+        // 提取查詢參數
+        const searchParams = urlObj.search
+        // 重定向到 hash router 格式
+        window.location.replace(`${urlObj.origin}${urlObj.pathname.replace('view.html', '')}#/view${searchParams}`)
+        return
+      }
+      
+      // 檢查是否是直接訪問舊格式的 index.html
+      if (!urlObj.hash && urlObj.pathname.includes('index.html')) {
+        const searchParams = urlObj.search
+        window.location.replace(`${urlObj.origin}${urlObj.pathname.replace('index.html', '')}#/${searchParams}`)
+        return
+      }
+      
+      // 處理可能存在的基礎路徑，如 /OpenAiTx.github.io/view.html
+      if (!urlObj.hash && urlObj.pathname.endsWith('/view.html')) {
+        const searchParams = urlObj.search
+        const basePath = urlObj.pathname.replace('/view.html', '')
+        window.location.replace(`${urlObj.origin}${basePath}/#/view${searchParams}`)
+        return
+      }
+      
+      // 處理 /OpenAiTx.github.io/index.html
+      if (!urlObj.hash && urlObj.pathname.endsWith('/index.html')) {
+        const searchParams = urlObj.search
+        const basePath = urlObj.pathname.replace('/index.html', '')
+        window.location.replace(`${urlObj.origin}${basePath}/#/${searchParams}`)
+        return
+      }
+    }
+
+    // 只在初始加載時執行一次
+    handleLegacyUrls()
+  }, [])
+
   // 初始化主題
   useEffect(() => {
     // 立即應用主題，避免閃爍

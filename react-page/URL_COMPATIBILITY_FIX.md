@@ -58,7 +58,7 @@ const project = searchParams.get('project') // ✅ 正確
 
 **修正後**：
 ```javascript
-`<a href="https://openaitx.github.io/view?user=${userOrOrg}&project=${project}&lang=${lang.code}">...`
+`<a href="https://openaitx.github.io/#/view?user=${userOrOrg}&project=${project}&lang=${lang.code}">...`
 ```
 
 ### 4. GitHub Pages SPA路由支持
@@ -119,7 +119,7 @@ https://openaitx.github.io/view.html?user=microsoft&project=vscode&lang=zh-TW
 
 **React版本**：
 ```
-https://openaitx.github.io/view?user=microsoft&project=vscode&lang=zh-TW
+https://openaitx.github.io/#/view?user=microsoft&project=vscode&lang=zh-TW
 ```
 
 ## 🧪 測試驗證
@@ -143,7 +143,7 @@ http://localhost:5173/view?user=microsoft&project=vscode&lang=zh-TW
    - 需要手動將 `view.html` 改為 `view` 來測試React版本
 
 2. **React版本生成的標章**：
-   - 連結格式：`https://openaitx.github.io/view?user=xxx&project=xxx&lang=xxx`
+   - 連結格式：`https://openaitx.github.io/#/view?user=xxx&project=xxx&lang=xxx`
    - 直接兼容原始HTML版本的參數格式
 
 ## 📋 修正檔案清單

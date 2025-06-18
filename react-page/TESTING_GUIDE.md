@@ -120,7 +120,7 @@ http://localhost:5173/view?user=microsoft&project=vscode&lang=zh-TW
 
 3. **生成的連結測試**：
    - 複製生成的HTML或Markdown代碼
-   - 檢查連結格式是否為：`https://openaitx.github.io/view?user=xxx&project=xxx&lang=xxx`
+   - 檢查連結格式是否為：`https://openaitx.github.io/#/view?user=xxx&project=xxx&lang=xxx`
    - 點擊生成的連結應能正確跳轉到viewer頁面
 
 4. **複製功能測試**：
@@ -176,7 +176,7 @@ http://localhost:5173/view?user=microsoft&project=vscode&lang=zh-TW
 3. 測試舊格式連結在React版本中的重定向：
    ```
    原始舊格式: https://openaitx.github.io/view.html?user=microsoft&project=vscode&lang=zh-TW
-   React自動重定向: https://openaitx.github.io/view?user=microsoft&project=vscode&lang=zh-TW
+   React自動重定向: https://openaitx.github.io/#/view?user=microsoft&project=vscode&lang=zh-TW
    ```
 
 ## ⚠️ 重要注意事項
