@@ -198,21 +198,21 @@ const BadgeGenerator = () => {
 
     const submitProject = async () => {
         try {
-            // const response = await fetch("https://openaitx.com/api/submit-project", {
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify({
-            //         project: `https://github.com/${userOrOrg}/${project}`,
-            //     }),
-            // });
+            const response = await fetch("https://openaitx.com/api/submit-project", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    project: `https://github.com/${userOrOrg}/${project}`,
+                }),
+            });
 
-            // const data = await response.json();
+            const data = await response.json();
 
-            // if (!response.ok) {
-            //     throw new Error(data.error || `HTTP error! status: ${response.status}`);
-            // }
+            if (!response.ok) {
+                throw new Error(data.error || `HTTP error! status: ${response.status}`);
+            }
 
             // 顯示成功 dialog
             setDialogType('success');
