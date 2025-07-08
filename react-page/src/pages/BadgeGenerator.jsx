@@ -1,8 +1,9 @@
 import { useState, useEffect, Fragment } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "sonner";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { 
     Dialog, 
     DialogContent, 
@@ -68,6 +69,7 @@ const BadgeGenerator = () => {
     const [repoUrl, setRepoUrl] = useState("");
     const [urlError, setUrlError] = useState("");
     const [isCheckingProject, setIsCheckingProject] = useState(false);
+    const [isStyle2Expanded, setIsStyle2Expanded] = useState(false);
     
     // Dialog 狀態管理
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -463,9 +465,51 @@ const BadgeGenerator = () => {
 
                     {/* Style Option 2 (Markdown Links) */}
                     <motion.div className="border border-border p-5 mb-5 rounded-md bg-muted/70" variants={itemVariants} whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
-                        <h2 className="text-xl font-semibold text-card-foreground mb-4">{t("badge.style2")}</h2>
+                        <div className="flex items-center justify-between mb-4">
+                            <h2 className="text-xl font-semibold text-card-foreground">{t("badge.style2")}</h2>
+                            <motion.button
+                                onClick={() => setIsStyle2Expanded(!isStyle2Expanded)}
+                                className="p-1 hover:bg-muted/50 rounded transition-colors"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                {isStyle2Expanded ? (
+                                    <ChevronUp className="h-5 w-5 text-muted-foreground" />
+                                ) : (
+                                    <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                                )}
+                            </motion.button>
+                        </div>
                         <LanguageLinks />
-                        <div className="bg-muted/30 p-4 mb-3 rounded whitespace-pre-wrap break-all text-sm text-muted-foreground">{generateStyle2Markdown()}</div>
+                        <AnimatePresence mode="wait">
+                            {isStyle2Expanded && (
+                                <motion.div
+                                    key="style2-content"
+                                    initial={{ opacity: 0, height: 0, marginBottom: 0 }}
+                                    animate={{ 
+                                        opacity: 1, 
+                                        height: "auto", 
+                                        marginBottom: 12,
+                                        transition: { 
+                                            duration: 0.3,
+                                            ease: "easeInOut"
+                                        }
+                                    }}
+                                    exit={{ 
+                                        opacity: 0, 
+                                        height: 0, 
+                                        marginBottom: 0,
+                                        transition: { 
+                                            duration: 0.3,
+                                            ease: "easeInOut"
+                                        }
+                                    }}
+                                    style={{ overflow: "hidden" }}
+                                >
+                                    <div className="bg-muted/30 p-4 rounded whitespace-pre-wrap break-all text-sm text-muted-foreground">{generateStyle2Markdown()}</div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                         <motion.button
                             onClick={() => copyToClipboard(generateStyle2Markdown(), "style2")}
                             className="bg-primary text-primary-foreground px-4 py-2 rounded hover:bg-primary/90 transition-colors"
@@ -477,10 +521,13 @@ const BadgeGenerator = () => {
                 </Fragment>
             )}
             {/* Projects Showcase Section */}
-            <motion.div className="mt-16" variants={itemVariants}>
-                <ProjectsShowcase />
-            </motion.div>
+            {!(!repoNotFound && userOrOrg && project && !isCheckingProject && !showSubmitButton) && (
+                <motion.div className="mt-16" variants={itemVariants}>
+                    <ProjectsShowcase />
+                </motion.div>
+            )}
         </motion.div>
+        
         </>
     );
 };
