@@ -82,15 +82,15 @@ const MarkdownViewer = () => {
     >
       {user && project && (
         <motion.div 
-          className="my-4 flex gap-8 justify-center" 
+          className="my-4 flex flex-col md:flex-row gap-4 md:gap-8 justify-center items-center" 
           initial={{ opacity: 0, y: 10 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ delay: 0.2 }}
         >
-          <div className="text-muted-foreground text-2xl">
+          <div className="text-muted-foreground text-2xl text-center md:text-left">
             {contextT('badge.githubUser')}: <span className="text-foreground font-medium">{user}</span>
           </div>
-          <div className="text-muted-foreground text-2xl">
+          <div className="text-muted-foreground text-2xl text-center md:text-left">
             {contextT('badge.projectName')}: <span className="text-foreground font-medium">{project}</span>
           </div>
         </motion.div>
@@ -422,8 +422,28 @@ const MarkdownViewer = () => {
         const markdownBody = document.querySelector('.markdown-body')
         if (!markdownBody) return
 
-        // 找到第一個段落或div
-        const firstElement = markdownBody.querySelector('> p:first-child, > div:first-child, > h1:first-child + p, > h1:first-child + div')
+        // 找到第一個段落或div - 使用更安全的方法
+        let firstElement = null
+        
+        // 嘗試不同的選擇器
+        const selectors = [
+          'p:first-child',
+          'div:first-child',
+          'h1:first-child + p',
+          'h1:first-child + div'
+        ]
+        
+        for (const selector of selectors) {
+          try {
+            const element = markdownBody.querySelector(selector)
+            if (element) {
+              firstElement = element
+              break
+            }
+          } catch (e) {
+            console.warn(`Selector "${selector}" failed:`, e)
+          }
+        }
         
         if (firstElement) {
           const images = firstElement.querySelectorAll('img')
@@ -443,24 +463,28 @@ const MarkdownViewer = () => {
         }
 
         // 處理緊跟在 h1 後面的圖片段落
-        const h1Element = markdownBody.querySelector('> h1:first-child')
-        if (h1Element) {
-          const nextElement = h1Element.nextElementSibling
-          if (nextElement && (nextElement.tagName === 'P' || nextElement.tagName === 'DIV')) {
-            const images = nextElement.querySelectorAll('img')
-            const textContent = nextElement.textContent?.trim()
-            
-            if (images.length > 0 && (!textContent || textContent.length < 10)) {
-              nextElement.setAttribute('data-img-only', 'true')
-              nextElement.style.textAlign = 'center'
+        try {
+          const h1Element = markdownBody.querySelector('h1:first-child')
+          if (h1Element) {
+            const nextElement = h1Element.nextElementSibling
+            if (nextElement && (nextElement.tagName === 'P' || nextElement.tagName === 'DIV')) {
+              const images = nextElement.querySelectorAll('img')
+              const textContent = nextElement.textContent?.trim()
               
-              images.forEach(img => {
-                img.style.display = 'block'
-                img.style.marginLeft = 'auto'
-                img.style.marginRight = 'auto'
-              })
+              if (images.length > 0 && (!textContent || textContent.length < 10)) {
+                nextElement.setAttribute('data-img-only', 'true')
+                nextElement.style.textAlign = 'center'
+                
+                images.forEach(img => {
+                  img.style.display = 'block'
+                  img.style.marginLeft = 'auto'
+                  img.style.marginRight = 'auto'
+                })
+              }
             }
           }
+        } catch (e) {
+          console.warn('Error processing h1 + element:', e)
         }
       }
 
