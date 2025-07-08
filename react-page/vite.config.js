@@ -1,9 +1,30 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
+import fs from 'fs'
+
+// 自定義插件：從模板創建 view.html 文件
+const createViewHtml = () => {
+  return {
+    name: 'create-view-html',
+    writeBundle() {
+      const distViewHtmlPath = path.resolve(__dirname, 'dist/view.html');
+      const publicViewHtmlPath = path.resolve(__dirname, 'public/view.html');
+      
+      // 從 public 目錄的模板創建 view.html
+      if (fs.existsSync(publicViewHtmlPath)) {
+        const templateContent = fs.readFileSync(publicViewHtmlPath, 'utf-8');
+        fs.writeFileSync(distViewHtmlPath, templateContent);
+        console.log('✅ view.html 已從模板創建');
+      } else {
+        console.warn('⚠️ 找不到 public/view.html 模板文件');
+      }
+    }
+  };
+};
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), createViewHtml()],
   // GitHub Pages 部署配置
   base: './', // 使用相對路徑，適用於任何部署環境
   resolve: {
