@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation, useSearchParams } from 'react-router-dom'
-import { Moon, Sun, Menu, X, Globe, ChevronDown } from 'lucide-react'
+import { Moon, Sun, Menu, X, Globe, ChevronDown, ChevronUp } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import {
@@ -11,6 +11,59 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { getGitHubUrl } from '../lib/utils'
+
+// Mobile Language Selector Component
+const MobileLanguageSelector = ({ availableLanguages, currentLanguage, onLanguageChange, onClose, t }) => {
+    const [isExpanded, setIsExpanded] = useState(true)
+    
+    return (
+        <div className="px-0 py-0">
+            <motion.button
+                onClick={() => setIsExpanded(!isExpanded)}
+                className="w-full flex items-center justify-between px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+            >
+                <div className="flex items-center space-x-2">
+                    <Globe className="h-5 w-5" />
+                    <span>{t('nav.language')}</span>
+                </div>
+                {isExpanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+            </motion.button>
+            
+            {isExpanded && (
+                <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-2 px-3 grid grid-cols-2 gap-2"
+                >
+                    {availableLanguages.map((lang) => (
+                        <motion.button
+                            key={lang.code}
+                            onClick={() => {
+                                onLanguageChange(lang.code)
+                                onClose()
+                            }}
+                            className={`text-left px-3 py-2 text-sm rounded-md transition-colors flex items-center justify-between ${
+                                lang.code === currentLanguage 
+                                    ? 'bg-primary/10 text-primary' 
+                                    : 'text-foreground hover:bg-muted/50'
+                            }`}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                        >
+                            <span className="truncate">{lang.name}</span>
+                            {lang.code === currentLanguage && (
+                                <span className="text-primary">✓</span>
+                            )}
+                        </motion.button>
+                    ))}
+                </motion.div>
+            )}
+        </div>
+    )
+}
 
 const Navbar = ({ darkMode, setDarkMode }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -184,51 +237,9 @@ const Navbar = ({ darkMode, setDarkMode }) => {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden border-t border-border"
+                        className="md:hidden border-t border-border z-50"
                     >
-                        <div className="px-2 pt-2 pb-3 space-y-1">
-                            <Link 
-                                to="/" 
-                                className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-                                    location.pathname === '/' 
-                                        ? 'text-primary bg-primary/10' 
-                                        : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                                }`}
-                                onClick={closeMenu}
-                            >
-                                {t('nav.home')}
-                            </Link>
-
-                            {/* Mobile Language Selector */}
-                            <div className="px-3 py-2">
-                                <div className="text-sm font-medium text-muted-foreground mb-2">
-                                    {t('nav.language')}
-                                </div>
-                                <div className="grid grid-cols-2 gap-2">
-                                    {availableLanguages.map((lang) => (
-                                        <motion.button
-                                            key={lang.code}
-                                            onClick={() => {
-                                                handleLanguageChange(lang.code)
-                                                closeMenu()
-                                            }}
-                                            className={`text-left px-3 py-2 text-sm rounded-md transition-colors flex items-center justify-between ${
-                                                i18n.language === lang.code 
-                                                    ? 'bg-primary/10 text-primary' 
-                                                    : 'text-foreground hover:bg-muted/50'
-                                            }`}
-                                            whileHover={{ scale: 1.02 }}
-                                            whileTap={{ scale: 0.98 }}
-                                        >
-                                            <span className="truncate">{lang.name}</span>
-                                            {lang.code === i18n.language && (
-                                                <span className="text-primary">✓</span>
-                                            )}
-                                        </motion.button>
-                                    ))}
-                                </div>
-                            </div>
-
+                        <div className="px-2 pt-2 pb-3 space-y-1 min-h-[calc(100vh-4rem)]">
                             {/* Mobile GitHub Link */}
                             <motion.a
                                 href={getGitHubUrl()}
@@ -258,6 +269,15 @@ const Navbar = ({ darkMode, setDarkMode }) => {
                                 {darkMode ? <Sun size={20} /> : <Moon size={20} />}
                                 <span>{darkMode ? t('nav.lightMode') : t('nav.darkMode')}</span>
                             </motion.button>
+
+                            {/* Mobile Language Selector */}
+                            <MobileLanguageSelector 
+                                availableLanguages={availableLanguages}
+                                currentLanguage={i18n.language}
+                                onLanguageChange={handleLanguageChange}
+                                onClose={closeMenu}
+                                t={t}
+                            />
                         </div>
                     </motion.div>
                 )}

@@ -3,7 +3,9 @@
     "home": "Trình tạo huy hiệu",
     "translate": "Trình dịch",
     "view": "Trình xem",
-    "darkMode": "Chế độ tối"
+    "darkMode": "Chế độ tối",
+    "lightMode": "Chế độ sáng",
+    "language": "Ngôn ngữ"
   },
   "badge": {
     "title": "OpenAITx - Trình tạo huy hiệu dịch tự động AI",

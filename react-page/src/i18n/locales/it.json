@@ -3,7 +3,9 @@
     "home": "Generatore di badge",
     "translate": "Traduttore",
     "view": "Visualizzatore",
-    "darkMode": "Modalità scura"
+    "darkMode": "Modalità scura",
+    "lightMode": "Modalità chiara",
+    "language": "Lingua"
   },
   "badge": {
     "title": "OpenAITx - Generatore di badge di traduzione automatica AI",

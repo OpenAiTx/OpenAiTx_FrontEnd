@@ -3,7 +3,9 @@
     "home": "배지 생성기",
     "translate": "번역 도구",
     "view": "뷰어",
-    "darkMode": "다크 모드"
+    "darkMode": "다크 모드",
+    "lightMode": "라이트 모드",
+    "language": "언어"
   },
   "badge": {
     "title": "OpenAITx - 언어 자동 AI 번역 배지 생성기",

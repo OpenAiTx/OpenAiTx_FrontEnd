@@ -3,7 +3,9 @@
     "home": "Badge Generator",
     "translate": "Vertaler",
     "view": "Viewer",
-    "darkMode": "Donkere modus"
+    "darkMode": "Donkere modus",
+    "lightMode": "Lichte modus",
+    "language": "Taal"
   },
   "badge": {
     "title": "OpenAITx - Taal automatische AI vertaal badge generator",

@@ -3,7 +3,9 @@
     "home": "Badge Generator",
     "translate": "Translator",
     "view": "Viewer",
-    "darkMode": "Dark Mode"
+    "darkMode": "Dark Mode",
+    "lightMode": "Light Mode",
+    "language": "Language"
   },
   "badge": {
     "title": "OpenAITx - Language Auto AI Translate Badge Generator",

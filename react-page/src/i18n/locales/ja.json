@@ -3,7 +3,9 @@
     "home": "バッジジェネレーター",
     "translate": "翻訳ツール",
     "view": "ビューアー",
-    "darkMode": "ダークモード"
+    "darkMode": "ダークモード",
+    "lightMode": "ライトモード",
+    "language": "言語"
   },
   "badge": {
     "title": "OpenAITx - 言語自動AI翻訳バッジジェネレーター",

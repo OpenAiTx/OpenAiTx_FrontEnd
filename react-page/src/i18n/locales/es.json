@@ -3,7 +3,9 @@
     "home": "Generador de insignias",
     "translate": "Traductor",
     "view": "Visor",
-    "darkMode": "Modo oscuro"
+    "darkMode": "Modo oscuro",
+    "lightMode": "Modo claro",
+    "language": "Idioma"
   },
   "badge": {
     "title": "OpenAITx - Generador de insignias de traducción automática AI",

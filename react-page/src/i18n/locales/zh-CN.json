@@ -3,7 +3,9 @@
     "home": "标章生成器",
     "translate": "翻译工具",
     "view": "查看器",
-    "darkMode": "深色模式"
+    "darkMode": "深色模式",
+    "lightMode": "浅色模式",
+    "language": "语言"
   },
   "badge": {
     "title": "OpenAITx - 语言自动 AI 翻译标章生成器",

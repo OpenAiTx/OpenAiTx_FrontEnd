@@ -3,7 +3,9 @@
     "home": "Badge-Generator",
     "translate": "Übersetzer",
     "view": "Betrachter",
-    "darkMode": "Dunkler Modus"
+    "darkMode": "Dunkler Modus",
+    "lightMode": "Heller Modus",
+    "language": "Sprache"
   },
   "badge": {
     "title": "OpenAITx - Sprach-Auto-AI-Übersetzungs-Badge-Generator",

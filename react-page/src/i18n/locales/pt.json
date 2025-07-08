@@ -3,7 +3,9 @@
     "home": "Gerador de emblemas",
     "translate": "Tradutor",
     "view": "Visualizador",
-    "darkMode": "Modo escuro"
+    "darkMode": "Modo escuro",
+    "lightMode": "Modo claro",
+    "language": "Idioma"
   },
   "badge": {
     "title": "OpenAITx - Gerador de emblemas de tradução automática AI",

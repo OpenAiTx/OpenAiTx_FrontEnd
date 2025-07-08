@@ -3,7 +3,9 @@
     "home": "Generator odznak",
     "translate": "Tłumacz",
     "view": "Przeglądarka",
-    "darkMode": "Tryb ciemny"
+    "darkMode": "Tryb ciemny",
+    "lightMode": "Tryb jasny",
+    "language": "Język"
   },
   "badge": {
     "title": "OpenAITx - Generator odznak automatycznego tłumaczenia AI",

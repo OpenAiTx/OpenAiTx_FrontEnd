@@ -19,8 +19,7 @@ export function getAppUrl() {
   return `${baseUrl}/#`
 }
 
-// 獲取 GitHub 專案 URL - 統一使用當前 domain
+// 獲取 GitHub 專案 URL
 export function getGitHubUrl() {
-  const baseUrl = getBaseUrl()
-  return baseUrl // 直接返回當前 domain
+  return 'https://github.com/OpenAiTx/OpenAiTx'
 }

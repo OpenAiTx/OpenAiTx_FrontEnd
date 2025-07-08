@@ -3,7 +3,9 @@
     "home": "Rozet Oluşturucu",
     "translate": "Çevirmen",
     "view": "Görüntüleyici",
-    "darkMode": "Karanlık Mod"
+    "darkMode": "Karanlık Mod",
+    "lightMode": "Açık Mod",
+    "language": "Dil"
   },
   "badge": {
     "title": "OpenAITx - Dil Otomatik AI Çeviri Rozet Oluşturucu",

@@ -239,7 +239,7 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
     <>
       {/* 統一的切換按鈕 - 固定在sidebar右側外邊 */}
       <motion.div
-        className="fixed top-24 z-50"
+        className="fixed top-24 z-30"
         animate={{ 
           left: isOpen ? 320 : 0 
         }}
@@ -265,7 +265,7 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
           <>
             {/* 移動端背景遮罩 */}
             <motion.div
-              className="md:hidden fixed inset-0 bg-black/20 z-30"
+              className="md:hidden fixed inset-0 bg-black/20 z-20"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -275,7 +275,7 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
             
             {/* 側邊欄主體 */}
             <motion.aside
-              className="fixed top-16 bottom-0 left-0 z-40 w-80 bg-background/95 backdrop-blur-sm border-r border-border shadow-xl"
+              className="fixed top-16 bottom-0 left-0 z-20 w-full md:w-80 bg-background/95 backdrop-blur-sm border-r border-border shadow-xl"
               initial={{ x: -320 }}
               animate={{ x: 0 }}
               exit={{ x: -320 }}
