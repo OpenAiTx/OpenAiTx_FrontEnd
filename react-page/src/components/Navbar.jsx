@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { Moon, Sun, Menu, X, Globe, ChevronDown, ChevronUp } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
@@ -68,7 +68,6 @@ const MobileLanguageSelector = ({ availableLanguages, currentLanguage, onLanguag
 const Navbar = ({ darkMode, setDarkMode }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const { t, i18n } = useTranslation()
-    const location = useLocation()
     const [searchParams, setSearchParams] = useSearchParams()
 
     // 全站語言與 URL 同步（方案二）
