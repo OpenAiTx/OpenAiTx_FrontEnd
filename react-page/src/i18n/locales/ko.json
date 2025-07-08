@@ -100,6 +100,17 @@
     "submissionFailed": "제출에 실패했습니다: ",
     "tableOfContents": "목차"
   },
+  "projects": {
+    "title": "OpenAiTx를 사용하는 프로젝트",
+    "description": "다국어 README 번역을 위해 OpenAiTx를 채택한 프로젝트 발견",
+    "loading": "프로젝트 로딩 중...",
+    "loadError": "프로젝트 로딩에 실패했습니다. 다시 시도해주세요.",
+    "retry": "재시도",
+    "updated": "업데이트됨",
+    "noProjects": "프로젝트를 찾을 수 없습니다",
+    "loadMore": "더 로드하기",
+    "loadingMore": "더 로딩 중..."
+  },
   "common": {
     "loading": "로딩 중...",
     "error": "오류",

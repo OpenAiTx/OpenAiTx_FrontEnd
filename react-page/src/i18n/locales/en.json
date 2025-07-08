@@ -100,6 +100,17 @@
     "submissionFailed": "Submission failed: ",
     "tableOfContents": "Table of Contents"
   },
+  "projects": {
+    "title": "Projects Using OpenAiTx",
+    "description": "Discover projects that have adopted OpenAiTx for multi-language README translation",
+    "loading": "Loading projects...",
+    "loadError": "Failed to load projects. Please try again.",
+    "retry": "Retry",
+    "updated": "Updated",
+    "noProjects": "No projects found",
+    "loadMore": "Load More",
+    "loadingMore": "Loading more..."
+  },
   "common": {
     "loading": "Loading...",
     "error": "Error",

@@ -100,6 +100,17 @@
     "submissionFailed": "Invio fallito: ",
     "tableOfContents": "Indice"
   },
+  "projects": {
+    "title": "Progetti che usano OpenAiTx",
+    "description": "Scopri i progetti che hanno adottato OpenAiTx per la traduzione README multilingue",
+    "loading": "Caricamento progetti...",
+    "loadError": "Errore nel caricamento dei progetti. Riprova.",
+    "retry": "Riprova",
+    "updated": "Aggiornato",
+    "noProjects": "Nessun progetto trovato",
+    "loadMore": "Carica di più",
+    "loadingMore": "Caricamento in corso..."
+  },
   "common": {
     "loading": "Caricamento...",
     "error": "Errore",

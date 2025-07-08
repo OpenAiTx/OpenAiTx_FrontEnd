@@ -100,6 +100,17 @@
     "submissionFailed": "送信に失敗しました：",
     "tableOfContents": "目次"
   },
+  "projects": {
+    "title": "OpenAiTx を使用するプロジェクト",
+    "description": "多言語 README 翻訳のために OpenAiTx を採用したプロジェクトを発見",
+    "loading": "プロジェクトを読み込み中...",
+    "loadError": "プロジェクトの読み込みに失敗しました。再試行してください。",
+    "retry": "再試行",
+    "updated": "更新日",
+    "noProjects": "プロジェクトが見つかりません",
+    "loadMore": "さらに読み込む",
+    "loadingMore": "さらに読み込み中..."
+  },
   "common": {
     "loading": "読み込み中...",
     "error": "エラー",

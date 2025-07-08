@@ -100,6 +100,17 @@
     "tableOfContents": "İçindekiler",
     "loadingLanguage": "Yeni dil sürümü yükleniyor..."
   },
+  "projects": {
+    "title": "OpenAiTx Kullanan Projeler",
+    "description": "Çok dilli README çevirisi için OpenAiTx'i benimseyen projeleri keşfedin",
+    "loading": "Projeler yükleniyor...",
+    "loadError": "Projeler yüklenemedi. Lütfen tekrar deneyin.",
+    "retry": "Tekrar dene",
+    "updated": "Güncellendi",
+    "noProjects": "Proje bulunamadı",
+    "loadMore": "Daha fazla yükle",
+    "loadingMore": "Daha fazla yükleniyor..."
+  },
   "common": {
     "loading": "Yükleniyor...",
     "error": "Hata",

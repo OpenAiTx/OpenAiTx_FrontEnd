@@ -100,6 +100,17 @@
     "submissionFailed": "Indiening mislukt: ",
     "tableOfContents": "Inhoudsopgave"
   },
+  "projects": {
+    "title": "Projecten die OpenAiTx gebruiken",
+    "description": "Ontdek projecten die OpenAiTx hebben geadopteerd voor meertalige README-vertaling",
+    "loading": "Projecten laden...",
+    "loadError": "Fout bij laden van projecten. Probeer opnieuw.",
+    "retry": "Opnieuw proberen",
+    "updated": "Bijgewerkt",
+    "noProjects": "Geen projecten gevonden",
+    "loadMore": "Meer laden",
+    "loadingMore": "Meer laden..."
+  },
   "common": {
     "loading": "Laden...",
     "error": "Fout",

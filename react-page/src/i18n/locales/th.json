@@ -100,6 +100,17 @@
     "tableOfContents": "สารบัญ",
     "loadingLanguage": "กำลังโหลดเวอร์ชันภาษาใหม่..."
   },
+  "projects": {
+    "title": "โครงการที่ใช้ OpenAiTx",
+    "description": "ค้นพบโครงการที่นำ OpenAiTx มาใช้สำหรับการแปล README หลายภาษา",
+    "loading": "กำลังโหลดโครงการ...",
+    "loadError": "โหลดโครงการไม่สำเร็จ กรุณาลองใหม่อีกครั้ง",
+    "retry": "ลองใหม่",
+    "updated": "อัปเดตแล้ว",
+    "noProjects": "ไม่พบโครงการ",
+    "loadMore": "โหลดเพิ่มเติม",
+    "loadingMore": "กำลังโหลดเพิ่มเติม..."
+  },
   "common": {
     "loading": "กำลังโหลด...",
     "error": "ข้อผิดพลาด",

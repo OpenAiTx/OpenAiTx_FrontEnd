@@ -100,6 +100,17 @@
     "tableOfContents": "Spis treści",
     "loadingLanguage": "Ładowanie nowej wersji językowej..."
   },
+  "projects": {
+    "title": "Projekty używające OpenAiTx",
+    "description": "Odkryj projekty, które przyjęły OpenAiTx do wielojęzycznego tłumaczenia README",
+    "loading": "Ładowanie projektów...",
+    "loadError": "Nie udało się załadować projektów. Spróbuj ponownie.",
+    "retry": "Spróbuj ponownie",
+    "updated": "Zaktualizowano",
+    "noProjects": "Nie znaleziono projektów",
+    "loadMore": "Załaduj więcej",
+    "loadingMore": "Ładowanie więcej..."
+  },
   "common": {
     "loading": "Ładowanie...",
     "error": "Błąd",

@@ -413,7 +413,7 @@ const MarkdownViewer = () => {
       // 等待DOM更新後再高亮，使用多個時間點確保高亮成功
       const timeouts = [50, 100, 200].map(delay =>
         window.setTimeout(() => {
-          rehighlightCode()
+        rehighlightCode()
         }, delay)
       )
 
@@ -501,21 +501,21 @@ const MarkdownViewer = () => {
   useEffect(() => {
     if (!content) return
 
-    let lastTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-    
-    const checkThemeChange = () => {
-      const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-      if (currentTheme !== lastTheme) {
-        lastTheme = currentTheme
-        // 主題變化了，重新高亮代碼
-        rehighlightCode()
+      let lastTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+      
+      const checkThemeChange = () => {
+        const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
+        if (currentTheme !== lastTheme) {
+          lastTheme = currentTheme
+          // 主題變化了，重新高亮代碼
+            rehighlightCode()
       }
     }
 
     // 清理之前的 observer
     if (mutationObserverRef.current) {
       mutationObserverRef.current.disconnect()
-    }
+      }
 
     // 使用 MutationObserver 來監聽主題變化（更高效）
     mutationObserverRef.current = new MutationObserver((mutations) => {
@@ -544,7 +544,7 @@ const MarkdownViewer = () => {
 
   // 清理函數
   useEffect(() => {
-    return () => {
+      return () => {
       if (rehighlightTimeoutRef.current) {
         window.clearTimeout(rehighlightTimeoutRef.current)
       }
@@ -751,22 +751,22 @@ const MarkdownViewer = () => {
     )
   }
 
-  return (
-    <>
-      {/* Table of Contents */}
+      return (
+      <>
+        {/* Table of Contents */}
       <TableOfContents content={content} isOpen={tocOpen} setIsOpen={setTocOpen} languageLoading={languageLoading} />
-      
-      {/* 主要內容區域 - 整個頁面 */}
-      <motion.div 
-        initial={false}
-        animate={{ 
-          marginLeft: tocOpen ? (window.innerWidth >= 768 ? 320 : 0) : 0 
-        }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-      >
-        <PageContainer>
-          <PageHeader user={user} project={project} />
-          <ContentWrapper>
+        
+        {/* 主要內容區域 - 整個頁面 */}
+        <motion.div 
+          initial={false}
+          animate={{ 
+            marginLeft: tocOpen ? (window.innerWidth >= 768 ? 320 : 0) : 0 
+          }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
+        >
+          <PageContainer>
+            <PageHeader user={user} project={project} />
+            <ContentWrapper>
             {languageLoading ? (
               renderLanguageLoading()
             ) : (
@@ -778,10 +778,10 @@ const MarkdownViewer = () => {
                 transition={{ duration: 0.2 }}
               />
             )}
-          </ContentWrapper>
-        </PageContainer>
-      </motion.div>
-    </>
+            </ContentWrapper>
+          </PageContainer>
+        </motion.div>
+      </>
   )
 }
 

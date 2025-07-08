@@ -287,26 +287,26 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
                   {languageLoading ? (
                     renderLoadingPlaceholder()
                   ) : (
-                    <nav className="space-y-1">
-                      {headings.map(({ id, text, level }) => (
-                        <motion.button
-                          key={id}
-                          onClick={() => scrollToHeading(id)}
-                          className={cn(
-                            "w-full text-left px-3 py-2 rounded-md text-sm transition-colors duration-200",
-                            "hover:bg-accent hover:text-accent-foreground",
-                            getIndentClass(level),
-                            activeId === id
-                              ? "bg-accent text-accent-foreground font-medium"
-                              : "text-muted-foreground"
-                          )}
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <span className="block truncate">{text}</span>
-                        </motion.button>
-                      ))}
-                    </nav>
+                  <nav className="space-y-1">
+                    {headings.map(({ id, text, level }) => (
+                      <motion.button
+                        key={id}
+                        onClick={() => scrollToHeading(id)}
+                        className={cn(
+                          "w-full text-left px-3 py-2 rounded-md text-sm transition-colors duration-200",
+                          "hover:bg-accent hover:text-accent-foreground",
+                          getIndentClass(level),
+                          activeId === id
+                            ? "bg-accent text-accent-foreground font-medium"
+                            : "text-muted-foreground"
+                        )}
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <span className="block truncate">{text}</span>
+                      </motion.button>
+                    ))}
+                  </nav>
                   )}
                 </div>
               </div>

@@ -100,6 +100,17 @@
     "submissionFailed": "提交失败：",
     "tableOfContents": "目录"
   },
+  "projects": {
+    "title": "使用 OpenAiTx 的项目",
+    "description": "探索已采用 OpenAiTx 进行多语言 README 翻译的项目",
+    "loading": "加载项目中...",
+    "loadError": "加载项目失败，请重试。",
+    "retry": "重试",
+    "updated": "更新于",
+    "noProjects": "未找到项目",
+    "loadMore": "加载更多",
+    "loadingMore": "加载更多中..."
+  },
   "common": {
     "loading": "加载中...",
     "error": "错误",

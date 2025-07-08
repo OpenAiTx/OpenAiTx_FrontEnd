@@ -100,6 +100,17 @@
     "tableOfContents": "Mục lục",
     "loadingLanguage": "Đang tải phiên bản ngôn ngữ mới..."
   },
+  "projects": {
+    "title": "Dự án sử dụng OpenAiTx",
+    "description": "Khám phá các dự án đã áp dụng OpenAiTx để dịch README đa ngôn ngữ",
+    "loading": "Đang tải dự án...",
+    "loadError": "Không thể tải dự án. Vui lòng thử lại.",
+    "retry": "Thử lại",
+    "updated": "Đã cập nhật",
+    "noProjects": "Không tìm thấy dự án",
+    "loadMore": "Tải thêm",
+    "loadingMore": "Đang tải thêm..."
+  },
   "common": {
     "loading": "Đang tải...",
     "error": "Lỗi",

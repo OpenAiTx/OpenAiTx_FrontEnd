@@ -14,6 +14,7 @@ import {
 import { Button } from '../components/ui/button';
 import { getAppUrl } from '../lib/utils';
 import Stepper from '../components/ui/stepper';
+import ProjectsShowcase from '../components/ProjectsShowcase';
 
 /* global URL, URLSearchParams */
 
@@ -475,15 +476,9 @@ const BadgeGenerator = () => {
                     </motion.div>
                 </Fragment>
             )}
-
-            {/* Support/Contribution Section */}
-            <motion.div className="bg-muted/70 rounded-lg p-5 mb-5 border border-border" variants={itemVariants} whileHover={{ scale: 1.01 }}>
-                <h2 className="text-lg font-semibold text-foreground mb-4">{t("badge.support")}</h2>
-                <p className="text-muted-foreground mb-3 leading-relaxed">{t("badge.supportDesc")}</p>
-                <p className="text-muted-foreground mb-4 leading-relaxed">{t("badge.supportSteps")}</p>
-                <div className="bg-red-50 dark:bg-red-900 border border-border rounded p-3 text-muted-foreground">
-                    <strong className="text-foreground">{t("badge.supportNote")}</strong>
-                </div>
+            {/* Projects Showcase Section */}
+            <motion.div className="mt-16" variants={itemVariants}>
+                <ProjectsShowcase />
             </motion.div>
         </motion.div>
         </>
