@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "build:secure": "node scripts/build-with-csp.js",
     "preview": "vite preview",
-    "lint": "eslint . --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --ext js,jsx,ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "security:test": "node -e \"import('./src/utils/cspValidator.js').then(m => m.generateCSPReport())\""
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.14",

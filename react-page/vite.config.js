@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import fs from 'fs'
+import { generateCSP, getSecurityHeaders } from './src/config/csp.js'
 
 // 自定義插件：從模板創建 view.html 文件
 const createViewHtml = () => {
@@ -51,6 +52,11 @@ export default defineConfig({
   },
   server: {
     port: 3000,
-    open: true
+    open: true,
+    // 配置安全標頭
+    headers: {
+      'Content-Security-Policy': generateCSP('development'),
+      ...getSecurityHeaders(false) // 開發環境不是 GitHub Pages
+    }
   }
 }) 

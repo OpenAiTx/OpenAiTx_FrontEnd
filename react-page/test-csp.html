@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CSP 測試頁面</title>
+
+        <!-- 應用與生產環境相同的 CSP 配置 -->
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' https://openaitx.github.io https://*.github.io;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://openaitx.github.io;
+        font-src 'self' https://fonts.gstatic.com https://openaitx.github.io;
+        img-src 'self' data: https: https://img.shields.io https://raw.githubusercontent.com https://openaitx.github.io https://*.github.io https://github.com;
+        connect-src 'self' https://api.github.com https://raw.githubusercontent.com https://openaitx.com https://img.shields.io https://openaitx.github.io https://*.github.io;
+        media-src 'self' data: https:;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self' https://openaitx.com;
+        frame-ancestors 'none';
+        upgrade-insecure-requests;
+    " />
+
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                max-width: 800px;
+                margin: 0 auto;
+                padding: 20px;
+                background-color: #f5f5f5;
+            }
+            .test-section {
+                background: white;
+                padding: 20px;
+                margin: 20px 0;
+                border-radius: 8px;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .success {
+                color: #22c55e;
+            }
+            .error {
+                color: #ef4444;
+            }
+            .warning {
+                color: #f59e0b;
+            }
+            .test-result {
+                margin: 10px 0;
+                padding: 10px;
+                border-radius: 4px;
+                font-weight: bold;
+            }
+            .test-result.success {
+                background-color: #dcfce7;
+            }
+            .test-result.error {
+                background-color: #fef2f2;
+            }
+            .test-result.warning {
+                background-color: #fef3c7;
+            }
+            button {
+                background-color: #3b82f6;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 4px;
+                cursor: pointer;
+                margin: 5px;
+            }
+            button:hover {
+                background-color: #2563eb;
+            }
+            #results {
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>🔒 CSP 配置測試頁面</h1>
+
+        <div class="test-section">
+            <h2>📋 測試說明</h2>
+            <p>此頁面用於測試 Content Security Policy 配置是否正常工作。</p>
+            <p>點擊下方按鈕進行各種測試，結果會顯示在下方。</p>
+            <p><strong>注意：</strong>某些測試預期會失敗，這表示 CSP 正在正常工作。</p>
+        </div>
+
+        <div class="test-section">
+            <h2>🧪 CSP 測試項目</h2>
+
+            <button onclick="testAllowedScript()">測試允許的腳本</button>
+            <button onclick="testBlockedScript()">測試被阻止的腳本</button>
+            <button onclick="testAllowedStyle()">測試允許的樣式</button>
+            <button onclick="testAllowedImage()">測試允許的圖片</button>
+            <button onclick="testBlockedImage()">測試被阻止的圖片</button>
+            <button onclick="testAllowedAPI()">測試允許的 API</button>
+            <button onclick="testBlockedAPI()">測試被阻止的 API</button>
+            <button onclick="runAllTests()">運行所有測試</button>
+
+            <div id="results"></div>
+        </div>
+
+        <div class="test-section">
+            <h2>📊 當前 CSP 配置</h2>
+            <div id="csp-policy"></div>
+        </div>
+
+        <script>
+            const results = document.getElementById("results");
+            const cspPolicy = document.getElementById("csp-policy");
+
+            // 顯示當前 CSP 配置
+            function showCSPPolicy() {
+                const metaCSP = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
+                if (metaCSP) {
+                    const policy = metaCSP.getAttribute("content");
+                    cspPolicy.innerHTML = `<pre style="background:#f8f9fa;padding:10px;border-radius:4px;overflow-x:auto;">${policy}</pre>`;
+                } else {
+                    cspPolicy.innerHTML = '<p class="error">未找到 CSP 配置</p>';
+                }
+            }
+
+            // 添加測試結果
+            function addResult(test, status, message) {
+                const result = document.createElement("div");
+                result.className = `test-result ${status}`;
+                result.innerHTML = `<strong>${test}:</strong> ${message}`;
+                results.appendChild(result);
+            }
+
+            // 清除結果
+            function clearResults() {
+                results.innerHTML = "";
+            }
+
+            // 測試允許的腳本（內聯腳本）
+            function testAllowedScript() {
+                try {
+                    eval('console.log("內聯腳本測試")');
+                    addResult("內聯腳本", "success", "✅ 允許執行（預期結果）");
+                } catch (e) {
+                    addResult("內聯腳本", "error", "❌ 被阻止：" + e.message);
+                }
+            }
+
+            // 測試被阻止的腳本（外部惡意腳本）
+            function testBlockedScript() {
+                const script = document.createElement("script");
+                script.src = "https://evil.example.com/malicious.js";
+                script.onload = () => {
+                    addResult("外部惡意腳本", "error", "❌ 意外允許載入");
+                };
+                script.onerror = () => {
+                    addResult("外部惡意腳本", "success", "✅ 成功阻止（預期結果）");
+                };
+
+                // 監聽 CSP 違規
+                const violationHandler = (e) => {
+                    if (e.blockedURI && e.blockedURI.includes("evil.example.com")) {
+                        addResult("外部惡意腳本", "success", "✅ CSP 成功阻止（預期結果）");
+                        document.removeEventListener("securitypolicyviolation", violationHandler);
+                    }
+                };
+                document.addEventListener("securitypolicyviolation", violationHandler);
+
+                document.head.appendChild(script);
+
+                // 2秒後移除監聽器
+                setTimeout(() => {
+                    document.removeEventListener("securitypolicyviolation", violationHandler);
+                }, 2000);
+            }
+
+            // 測試允許的樣式
+            function testAllowedStyle() {
+                try {
+                    const style = document.createElement("style");
+                    style.textContent = ".test-style { color: green; }";
+                    document.head.appendChild(style);
+                    addResult("內聯樣式", "success", "✅ 允許載入（預期結果）");
+                } catch (e) {
+                    addResult("內聯樣式", "error", "❌ 被阻止：" + e.message);
+                }
+            }
+
+            // 測試允許的圖片
+            function testAllowedImage() {
+                const img = document.createElement("img");
+                img.src = "https://img.shields.io/badge/test-badge-blue";
+                img.style.display = "none";
+                img.onload = () => {
+                    addResult("Shields.io 圖片", "success", "✅ 允許載入（預期結果）");
+                };
+                img.onerror = () => {
+                    addResult("Shields.io 圖片", "error", "❌ 載入失敗");
+                };
+                document.body.appendChild(img);
+            }
+
+            // 測試被阻止的圖片
+            function testBlockedImage() {
+                const img = document.createElement("img");
+                img.src = "https://evil.example.com/malicious.png";
+                img.style.display = "none";
+                img.onload = () => {
+                    addResult("外部惡意圖片", "error", "❌ 意外允許載入");
+                };
+                img.onerror = () => {
+                    addResult("外部惡意圖片", "success", "✅ 成功阻止（預期結果）");
+                };
+                document.body.appendChild(img);
+            }
+
+            // 測試允許的 API
+            function testAllowedAPI() {
+                fetch("https://api.github.com/repos/OpenAiTx/OpenAiTx")
+                    .then((response) => {
+                        if (response.ok) {
+                            addResult("GitHub API", "success", "✅ 允許連接（預期結果）");
+                        } else {
+                            addResult("GitHub API", "warning", "⚠️ 連接但返回錯誤");
+                        }
+                    })
+                    .catch((error) => {
+                        addResult("GitHub API", "error", "❌ 連接失敗：" + error.message);
+                    });
+            }
+
+            // 測試被阻止的 API
+            function testBlockedAPI() {
+                fetch("https://evil.example.com/api/malicious")
+                    .then((response) => {
+                        addResult("外部惡意 API", "error", "❌ 意外允許連接");
+                    })
+                    .catch((error) => {
+                        if (error.message.includes("Failed to fetch")) {
+                            addResult("外部惡意 API", "success", "✅ 成功阻止（預期結果）");
+                        } else {
+                            addResult("外部惡意 API", "warning", "⚠️ 其他錯誤：" + error.message);
+                        }
+                    });
+            }
+
+            // 運行所有測試
+            function runAllTests() {
+                clearResults();
+                addResult("測試開始", "warning", "🚀 開始運行所有 CSP 測試...");
+
+                setTimeout(() => testAllowedScript(), 100);
+                setTimeout(() => testBlockedScript(), 200);
+                setTimeout(() => testAllowedStyle(), 300);
+                setTimeout(() => testAllowedImage(), 400);
+                setTimeout(() => testBlockedImage(), 500);
+                setTimeout(() => testAllowedAPI(), 600);
+                setTimeout(() => testBlockedAPI(), 700);
+
+                setTimeout(() => {
+                    addResult("測試完成", "success", "✅ 所有測試已完成");
+                }, 3000);
+            }
+
+            // 監聽 CSP 違規事件
+            document.addEventListener("securitypolicyviolation", (e) => {
+                console.group("🚨 CSP 違規檢測");
+                console.log("被阻止的 URI:", e.blockedURI);
+                console.log("違規指令:", e.violatedDirective);
+                console.log("原始政策:", e.originalPolicy);
+                console.groupEnd();
+            });
+
+            // 頁面載入時顯示 CSP 配置
+            window.addEventListener("load", showCSPPolicy);
+        </script>
+    </body>
+</html>
