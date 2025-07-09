@@ -247,19 +247,23 @@ export const isGitHubPages = () => {
  * @returns {string} Appropriate environment type
  */
 export const getEnvironmentType = () => {
-  if (import.meta.env.DEV) {
-    return 'development';
+  // Check if we're in a browser environment first
+  if (typeof window !== 'undefined') {
+    if (isGitHubPages()) {
+      return 'github-pages';
+    }
   }
   
-  if (isGitHubPages()) {
-    return 'github-pages';
+  // Check if import.meta.env is available and has DEV property
+  if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV) {
+    return 'development';
   }
   
   return 'production';
 };
 
 // Set up CSP violation listener in development environment
-if (import.meta.env.DEV) {
+if (typeof document !== 'undefined' && typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV) {
   document.addEventListener('securitypolicyviolation', logCSPViolation);
 }
 

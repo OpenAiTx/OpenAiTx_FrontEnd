@@ -8,6 +8,11 @@
  * @returns {boolean} CSP 是否已啟用
  */
 export const isCSPEnabled = () => {
+  // 檢查是否在瀏覽器環境中
+  if (typeof document === 'undefined') {
+    return false;
+  }
+  
   // 檢查 meta 標籤中的 CSP
   const metaCSP = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
   
@@ -22,6 +27,10 @@ export const isCSPEnabled = () => {
  * @returns {string|null} 當前的 CSP 字符串
  */
 export const getCurrentCSP = () => {
+  if (typeof document === 'undefined') {
+    return null;
+  }
+  
   const metaCSP = document.querySelector('meta[http-equiv="Content-Security-Policy"]');
   return metaCSP ? metaCSP.getAttribute('content') : null;
 };
@@ -210,6 +219,17 @@ export const validateAllowedSources = async () => {
 export const generateCSPReport = async () => {
   console.log('🔒 開始執行 CSP 安全性測試...');
   
+  // 檢查是否在瀏覽器環境中
+  if (typeof document === 'undefined') {
+    console.log('⚠️ 此測試需要在瀏覽器環境中運行');
+    return {
+      timestamp: new Date().toISOString(),
+      environment: 'node',
+      message: '此測試需要在瀏覽器環境中運行，請在開發模式下訪問應用程序查看 CSP 測試結果',
+      recommendations: ['在瀏覽器中運行應用程序以執行完整的 CSP 測試']
+    };
+  }
+  
   const complianceResults = await runCSPComplianceTest();
   const allowedSourcesResults = await validateAllowedSources();
   
@@ -242,7 +262,7 @@ export const generateCSPReport = async () => {
 };
 
 // 在開發環境中自動運行測試
-if (import.meta.env.DEV) {
+if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.DEV) {
   // 延遲執行以確保頁面完全載入
   setTimeout(() => {
     generateCSPReport().then(report => {
