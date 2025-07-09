@@ -5,7 +5,9 @@
         <link rel="icon" type="image/jpeg" href="/icon.jpg" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <!-- Content Security Policy - GitHub Pages 優化 -->
+        <!-- Content Security Policy - GitHub Pages Optimization -->
+        <!-- Note: frame-ancestors and X-Frame-Options cannot be used in meta tags -->
+        <!-- These security headers can only be set in HTTP response headers, GitHub Pages doesn't support custom response headers -->
         <meta
             http-equiv="Content-Security-Policy"
             content="
@@ -19,7 +21,6 @@
             object-src 'none';
             base-uri 'self';
             form-action 'self' https://openaitx.com;
-            frame-ancestors 'none';
             upgrade-insecure-requests;
         " />
 

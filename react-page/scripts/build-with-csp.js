@@ -14,6 +14,7 @@ const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
 
 // GitHub Pages production environment CSP configuration
+// Note: frame-ancestors directive cannot be used in meta tags, use X-Frame-Options header instead
 const PRODUCTION_CSP = `
 default-src 'self';
 script-src 'self' 'unsafe-inline' https://openaitx.github.io https://*.github.io;
@@ -25,7 +26,6 @@ media-src 'self' data: https:;
 object-src 'none';
 base-uri 'self';
 form-action 'self' https://openaitx.com;
-frame-ancestors 'none';
 upgrade-insecure-requests;
 `.replace(/\s+/g, ' ').trim();
 

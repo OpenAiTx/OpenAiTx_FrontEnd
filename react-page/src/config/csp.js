@@ -46,7 +46,9 @@ const CSP_CONFIG = {
     'object-src': ["'none'"],
     'base-uri': ["'self'"],
     'form-action': ["'self'", "https://openaitx.com"],
-    'frame-ancestors': ["'none'"],
+    // Note: frame-ancestors and X-Frame-Options cannot be used in meta tags
+    // These security headers can only be set in HTTP response headers, GitHub Pages doesn't support custom response headers
+    // Therefore, clickjacking attacks cannot be completely prevented on GitHub Pages
     'upgrade-insecure-requests': []
   },
 
@@ -88,7 +90,9 @@ const CSP_CONFIG = {
     'object-src': ["'none'"],
     'base-uri': ["'self'"],
     'form-action': ["'self'", "https://openaitx.com"],
-    'frame-ancestors': ["'none'"],
+    // Note: frame-ancestors and X-Frame-Options cannot be used in meta tags
+    // These security headers can only be set in HTTP response headers, GitHub Pages doesn't support custom response headers
+    // Therefore, clickjacking attacks cannot be completely prevented on GitHub Pages
     'upgrade-insecure-requests': []
   },
 
@@ -135,7 +139,9 @@ const CSP_CONFIG = {
     'object-src': ["'none'"],
     'base-uri': ["'self'"],
     'form-action': ["'self'", "https://openaitx.com"],
-    'frame-ancestors': ["'none'"],
+    // Note: frame-ancestors and X-Frame-Options cannot be used in meta tags
+    // These security headers can only be set in HTTP response headers, GitHub Pages doesn't support custom response headers
+    // Therefore, clickjacking attacks cannot be completely prevented on GitHub Pages
     'upgrade-insecure-requests': []
   }
 };
@@ -160,13 +166,14 @@ export const generateCSP = (env = 'development') => {
 
 /**
  * Get additional security headers
+ * Note: These headers are only effective in development environment Vite server, GitHub Pages doesn't support custom response headers
  * @param {boolean} isGitHubPages - Whether it's a GitHub Pages deployment
  * @returns {Object} Security headers object
  */
 export const getSecurityHeaders = (isGitHubPages = false) => {
   const baseHeaders = {
     'X-Content-Type-Options': 'nosniff',
-    'X-Frame-Options': 'DENY',
+    'X-Frame-Options': 'DENY', // Only effective in development environment, GitHub Pages doesn't support
     'X-XSS-Protection': '1; mode=block',
     'Referrer-Policy': 'strict-origin-when-cross-origin'
   };

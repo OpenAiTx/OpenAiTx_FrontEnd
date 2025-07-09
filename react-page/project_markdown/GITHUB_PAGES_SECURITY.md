@@ -23,10 +23,18 @@ Although GitHub Pages is a static hosting service, CSP (Content Security Policy)
 **Cannot Set HTTP Headers**:
 - GitHub Pages doesn't support custom HTTP headers
 - Can only set CSP through HTML `<meta>` tags
+- ⚠️ **Important Limitation**: `frame-ancestors` and `X-Frame-Options` cannot be used in `<meta>` tags
+- These security headers can only be set in HTTP response headers, GitHub Pages cannot support them
 
 **Requires `unsafe-inline`**:
 - Cannot use nonce or hash as they change with each build
 - React and Tailwind CSS require inline style support
+
+**Security Limitations Explanation**:
+- `frame-ancestors` directive: Can only be used in HTTP response headers, ignored in `<meta>` tags
+- `X-Frame-Options` header: Similarly can only be used in HTTP response headers, invalid in `<meta>` tags
+- For GitHub Pages, we cannot completely prevent clickjacking attacks, this is a platform limitation
+- Recommendation: If stricter security control is needed, consider using Netlify, Vercel, or other platforms that support custom response headers
 
 ### Domain Configuration
 
@@ -87,6 +95,8 @@ npm run build:secure
 ## 📋 Complete GitHub Pages CSP Configuration
 
 ```html
+<!-- Note: frame-ancestors and X-Frame-Options cannot be used in meta tags -->
+<!-- These security headers can only be set in HTTP response headers, GitHub Pages doesn't support custom response headers -->
 <meta http-equiv="Content-Security-Policy" content="
     default-src 'self';
     script-src 'self' 'unsafe-inline' https://openaitx.github.io https://*.github.io;
@@ -98,10 +108,28 @@ npm run build:secure
     object-src 'none';
     base-uri 'self';
     form-action 'self' https://openaitx.com;
-    frame-ancestors 'none';
     upgrade-insecure-requests;
 ">
 ```
+
+### ⚠️ GitHub Pages Security Limitations
+
+Since GitHub Pages is a pure static hosting service, it has the following security limitations:
+
+1. **Cannot Set HTTP Response Headers**:
+   - `frame-ancestors` directive cannot be used
+   - `X-Frame-Options` header cannot be set
+   - Cannot completely prevent clickjacking attacks
+
+2. **Recommended Alternative Solutions**:
+   - Use `default-src 'self'` to restrict resource loading
+   - Use `object-src 'none'` to disable plugins
+   - Implement additional security checks at application level
+
+3. **For Stricter Security Control**:
+   - Consider using platforms like Netlify, Vercel, etc.
+   - These platforms support custom HTTP response headers
+   - Can properly set `frame-ancestors` and `X-Frame-Options`
 
 ## 🚀 Deployment Recommendations
 
