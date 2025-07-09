@@ -10,7 +10,7 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
   const [activeId, setActiveId] = useState('')
   const { t } = useTranslation()
 
-  // 提取標題並添加anchor points
+  // Extract headings and add anchor points
   useEffect(() => {
     if (!content || languageLoading) return
 
@@ -27,7 +27,7 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
         return
       }
 
-      // 先清除所有現有的ID
+      // Clear all existing IDs first
       headingElements.forEach(heading => {
         heading.removeAttribute('id')
       })
@@ -35,14 +35,14 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
       const extractedHeadings = Array.from(headingElements).map((heading, index) => {
         const level = parseInt(heading.tagName.charAt(1))
         const text = heading.textContent.trim()
-        // 創建更簡潔的ID
+        // Create more concise ID
         const id = `heading-${index}-${text.toLowerCase()
-          .replace(/[^\w\u4e00-\u9fff\s-]/g, '') // 移除特殊字符，保留中文、英文、數字、空格、連字符
-          .replace(/\s+/g, '-') // 將空格替換為連字符
-          .replace(/-+/g, '-') // 合併多個連字符
-          .replace(/^-|-$/g, '')}`  // 移除開頭和結尾的連字符
+          .replace(/[^\w\u4e00-\u9fff\s-]/g, '') // Remove special characters, keep Chinese, English, numbers, spaces, hyphens
+          .replace(/\s+/g, '-') // Replace spaces with hyphens
+          .replace(/-+/g, '-') // Merge multiple hyphens
+          .replace(/^-|-$/g, '')}`  // Remove leading and trailing hyphens
         
-        // 直接為實際DOM元素添加ID
+        // Add ID directly to actual DOM element
         heading.setAttribute('id', id)
         
         return {
@@ -55,22 +55,22 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
       setHeadings(extractedHeadings)
     }
 
-    // 使用requestAnimationFrame來優化性能
+    // Use requestAnimationFrame to optimize performance
     requestAnimationFrame(() => {
       setTimeout(processHeadings, 100)
     })
   }, [content, languageLoading])
 
-  // 監聽滾動以高亮當前標題
+  // Monitor scrolling to highlight current heading
   useEffect(() => {
     if (typeof window === 'undefined' || !window.IntersectionObserver || headings.length === 0 || languageLoading) return
 
     const observer = new window.IntersectionObserver(
       (entries) => {
-        // 找到最靠近頂部的可見標題
+        // Find the visible heading closest to the top
         const visibleEntries = entries.filter(entry => entry.isIntersecting)
         if (visibleEntries.length > 0) {
-          // 按照在頁面中的位置排序，選擇最靠近頂部的
+          // Sort by position on page, select the one closest to top
           const sortedEntries = visibleEntries.sort((a, b) => 
             a.boundingClientRect.top - b.boundingClientRect.top
           )
@@ -78,13 +78,13 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
         }
       },
       {
-        // 考慮navbar高度的rootMargin設置
+        // rootMargin setting considering navbar height
         rootMargin: '-80px 0% -50% 0%',
         threshold: [0, 0.1, 0.5, 1]
       }
     )
 
-    // 延遲觀察，確保DOM元素已經設置好ID
+    // Delay observation to ensure DOM elements have IDs set
     const setupObserver = () => {
       let observedCount = 0
       headings.forEach(({ id }) => {
@@ -95,7 +95,7 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
         }
       })
       
-      // 如果沒有觀察到任何元素，稍後重試
+      // If no elements observed, retry later
       if (observedCount === 0 && headings.length > 0) {
         setTimeout(setupObserver, 200)
       }
@@ -110,9 +110,9 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
     }
   }, [headings, languageLoading])
 
-  // 點擊標題跳轉
+  // Click heading to jump
   const scrollToHeading = (id) => {
-    if (languageLoading) return // 載入中時禁用跳轉
+    if (languageLoading) return // Disable jumping during loading
     
     const performScroll = (element) => {
       const navbarHeight = 80
@@ -124,17 +124,17 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
       })
     }
     
-    // 立即嘗試通過ID查找
+    // Immediately try to find by ID
     let element = document.getElementById(id)
     if (element) {
       performScroll(element)
       return
     }
     
-    // 如果沒找到，嘗試重新設置ID並查找
+    // If not found, try to reset ID and find again
     const targetHeading = headings.find(h => h.id === id)
     if (targetHeading) {
-      // 重新查找並設置ID
+      // Re-find and set ID
       const allHeadings = document.querySelectorAll('.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6')
       const headingByText = Array.from(allHeadings).find(h => h.textContent.trim() === targetHeading.text)
       
@@ -145,7 +145,7 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
       }
     }
     
-    // 最後的重試機制
+    // Final retry mechanism
     const attemptScroll = (retries = 3) => {
       element = document.getElementById(id)
       if (element) {
@@ -158,7 +158,7 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
     attemptScroll()
   }
 
-  // 獲取標題的縮進層級
+  // Get heading indent level
   const getIndentClass = (level) => {
     const indentMap = {
       1: 'pl-0',
@@ -171,7 +171,7 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
     return indentMap[level] || 'pl-0'
   }
 
-  // Loading 狀態的 placeholder
+  // Loading state placeholder
   const renderLoadingPlaceholder = () => (
     <motion.div 
       className="space-y-3 p-4"
@@ -180,7 +180,7 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Loading 標題 */}
+      {/* Loading title */}
       <div className="flex items-center gap-2 mb-4">
         <motion.div 
           className="w-3 h-3 border-2 border-primary border-t-transparent rounded-full"
@@ -192,17 +192,17 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
         </span>
       </div>
 
-      {/* 模擬目錄項目 */}
+      {/* Simulate table of contents items */}
       <div className="space-y-2">
-        {/* 主標題 */}
+        {/* Main title */}
         <div className="h-6 bg-muted rounded-md animate-pulse w-4/5" />
         
-        {/* 二級標題 */}
+        {/* Secondary title */}
         <div className="pl-4 space-y-2">
           <div className="h-5 bg-muted rounded-md animate-pulse w-3/4" />
           <div className="h-5 bg-muted rounded-md animate-pulse w-2/3" />
           
-          {/* 三級標題 */}
+          {/* Third-level title */}
           <div className="pl-4 space-y-1">
             <div className="h-4 bg-muted rounded-md animate-pulse w-5/6" />
             <div className="h-4 bg-muted rounded-md animate-pulse w-3/5" />
@@ -210,20 +210,20 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
           </div>
         </div>
 
-        {/* 另一個主標題 */}
+        {/* Another main title */}
         <div className="h-6 bg-muted rounded-md animate-pulse w-3/4 mt-4" />
         
-        {/* 更多二級標題 */}
+        {/* More secondary titles */}
         <div className="pl-4 space-y-2">
           <div className="h-5 bg-muted rounded-md animate-pulse w-4/5" />
           <div className="h-5 bg-muted rounded-md animate-pulse w-3/5" />
           <div className="h-5 bg-muted rounded-md animate-pulse w-2/3" />
         </div>
 
-        {/* 第三個主標題 */}
+        {/* Third main title */}
         <div className="h-6 bg-muted rounded-md animate-pulse w-5/6 mt-4" />
         
-        {/* 對應的子標題 */}
+        {/* Corresponding subtitles */}
         <div className="pl-4 space-y-1">
           <div className="h-5 bg-muted rounded-md animate-pulse w-3/4" />
           <div className="h-5 bg-muted rounded-md animate-pulse w-4/5" />
@@ -232,12 +232,12 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
     </motion.div>
   )
 
-  // 如果沒有內容且不在載入中，不顯示組件
+  // If no content and not loading, don't display component
   if (headings.length === 0 && !languageLoading) return null
 
   return (
     <>
-      {/* 統一的切換按鈕 - 固定在sidebar右側外邊 */}
+      {/* Unified toggle button - fixed on the right side outside of sidebar */}
       <motion.div
         className="fixed top-24 z-30"
         animate={{ 
@@ -259,31 +259,31 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
         </Button>
       </motion.div>
 
-      {/* 側邊欄 */}
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            {/* 移動端背景遮罩 */}
-            <motion.div
-              className="md:hidden fixed inset-0 bg-black/20 z-20"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              onClick={() => setIsOpen(false)}
-            />
-            
-            {/* 側邊欄主體 */}
-            <motion.aside
-              className="fixed top-16 bottom-0 left-0 z-20 w-full md:w-80 bg-background/95 backdrop-blur-sm border-r border-border shadow-xl"
-              initial={{ x: -320 }}
-              animate={{ x: 0 }}
-              exit={{ x: -320 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-            >
-              <div className="flex flex-col h-full">
-                {/* 目錄內容 */}
-                <div className="flex-1 overflow-y-auto p-2">
+              {/* Sidebar */}
+        <AnimatePresence>
+          {isOpen && (
+            <>
+              {/* Mobile background overlay */}
+              <motion.div
+                className="md:hidden fixed inset-0 bg-black/20 z-20"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+                onClick={() => setIsOpen(false)}
+              />
+              
+              {/* Sidebar main body */}
+              <motion.aside
+                className="fixed top-16 bottom-0 left-0 z-20 w-full md:w-80 bg-background/95 backdrop-blur-sm border-r border-border shadow-xl"
+                initial={{ x: -320 }}
+                animate={{ x: 0 }}
+                exit={{ x: -320 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <div className="flex flex-col h-full">
+                  {/* Table of contents content */}
+                  <div className="flex-1 overflow-y-auto p-2">
                   {languageLoading ? (
                     renderLoadingPlaceholder()
                   ) : (

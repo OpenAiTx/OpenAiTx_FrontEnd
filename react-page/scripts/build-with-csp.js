@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * 構建腳本：自動應用 CSP 配置到生產環境
+ * Build script: Automatically apply CSP configuration to production environment
  */
 
 import { execSync } from 'child_process';
@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
 
-// GitHub Pages 生產環境 CSP 配置
+// GitHub Pages production environment CSP configuration
 const PRODUCTION_CSP = `
 default-src 'self';
 script-src 'self' 'unsafe-inline' https://openaitx.github.io https://*.github.io;
@@ -30,32 +30,32 @@ upgrade-insecure-requests;
 `.replace(/\s+/g, ' ').trim();
 
 /**
- * 更新 index.html 中的 CSP 配置
+ * Update CSP configuration in index.html
  */
 function updateIndexHtmlCSP() {
   const indexPath = path.join(projectRoot, 'dist', 'index.html');
   
   if (!fs.existsSync(indexPath)) {
-    throw new Error('找不到 dist/index.html 文件，請先執行構建');
+    throw new Error('Cannot find dist/index.html file, please run build first');
   }
 
   let content = fs.readFileSync(indexPath, 'utf-8');
   
-  // 查找並替換 CSP meta 標籤
+  // Find and replace CSP meta tag
   const cspRegex = /<meta\s+http-equiv="Content-Security-Policy"\s+content="[^"]*"\s*>/i;
   const newCSPTag = `<meta http-equiv="Content-Security-Policy" content="${PRODUCTION_CSP}">`;
   
   if (cspRegex.test(content)) {
     content = content.replace(cspRegex, newCSPTag);
-    console.log('✅ 已更新 index.html 中的 CSP 配置');
+    console.log('✅ Updated CSP configuration in index.html');
   } else {
-    // 如果沒有找到 CSP 標籤，在 head 中添加
+    // If CSP tag not found, add it to head
     const headRegex = /<head>/i;
     if (headRegex.test(content)) {
       content = content.replace(headRegex, `<head>\n    ${newCSPTag}`);
-      console.log('✅ 已在 index.html 中添加 CSP 配置');
+      console.log('✅ Added CSP configuration to index.html');
     } else {
-      console.warn('⚠️ 無法在 index.html 中找到 <head> 標籤');
+      console.warn('⚠️ Cannot find <head> tag in index.html');
     }
   }
   
@@ -63,18 +63,18 @@ function updateIndexHtmlCSP() {
 }
 
 /**
- * 創建 .htaccess 文件（用於 Apache 服務器）
+ * Create .htaccess file (for Apache server)
  */
 function createHtaccess() {
   const htaccessPath = path.join(projectRoot, 'dist', '.htaccess');
   
   const htaccessContent = `
-# 安全標頭配置
+# Security headers configuration
 <IfModule mod_headers.c>
     # Content Security Policy
     Header always set Content-Security-Policy "${PRODUCTION_CSP}"
     
-    # 其他安全標頭
+    # Other security headers
     Header always set X-Content-Type-Options "nosniff"
     Header always set X-Frame-Options "DENY"
     Header always set X-XSS-Protection "1; mode=block"
@@ -83,7 +83,7 @@ function createHtaccess() {
     Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
 </IfModule>
 
-# 緩存配置
+# Cache configuration
 <IfModule mod_expires.c>
     ExpiresActive on
     ExpiresByType text/css "access plus 1 year"
@@ -95,7 +95,7 @@ function createHtaccess() {
     ExpiresByType image/svg+xml "access plus 1 year"
 </IfModule>
 
-# GZIP 壓縮
+# GZIP compression
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
@@ -108,7 +108,7 @@ function createHtaccess() {
     AddOutputFilterByType DEFLATE application/x-javascript
 </IfModule>
 
-# 單頁應用路由支持
+# Single page application routing support
 <IfModule mod_rewrite.c>
     RewriteEngine On
     RewriteBase /
@@ -120,11 +120,11 @@ function createHtaccess() {
 `.trim();
 
   fs.writeFileSync(htaccessPath, htaccessContent);
-  console.log('✅ 已創建 .htaccess 文件');
+  console.log('✅ Created .htaccess file');
 }
 
 /**
- * 創建 _headers 文件（用於 Netlify）
+ * Create _headers file (for Netlify)
  */
 function createNetlifyHeaders() {
   const headersPath = path.join(projectRoot, 'dist', '_headers');
@@ -144,11 +144,11 @@ function createNetlifyHeaders() {
 `.trim();
 
   fs.writeFileSync(headersPath, headersContent);
-  console.log('✅ 已創建 _headers 文件（Netlify）');
+  console.log('✅ Created _headers file (Netlify)');
 }
 
 /**
- * 創建 vercel.json 文件（用於 Vercel）
+ * Create vercel.json file (for Vercel)
  */
 function createVercelConfig() {
   const vercelPath = path.join(projectRoot, 'dist', 'vercel.json');
@@ -198,80 +198,80 @@ function createVercelConfig() {
   };
 
   fs.writeFileSync(vercelPath, JSON.stringify(vercelConfig, null, 2));
-  console.log('✅ 已創建 vercel.json 文件');
+  console.log('✅ Created vercel.json file');
 }
 
 /**
- * 驗證構建結果
+ * Validate build results
  */
 function validateBuild() {
   const distPath = path.join(projectRoot, 'dist');
   const indexPath = path.join(distPath, 'index.html');
   
   if (!fs.existsSync(distPath)) {
-    throw new Error('構建目錄不存在');
+    throw new Error('Build directory does not exist');
   }
   
   if (!fs.existsSync(indexPath)) {
-    throw new Error('index.html 文件不存在');
+    throw new Error('index.html file does not exist');
   }
   
   const content = fs.readFileSync(indexPath, 'utf-8');
   
-  // 驗證 CSP 是否存在
+  // Validate CSP exists
   if (!content.includes('Content-Security-Policy')) {
-    throw new Error('CSP 配置未找到');
+    throw new Error('CSP configuration not found');
   }
   
-  // 驗證關鍵 CSP 指令
+  // Validate key CSP directives
   const requiredDirectives = ['default-src', 'script-src', 'style-src', 'object-src'];
   for (const directive of requiredDirectives) {
     if (!content.includes(directive)) {
-      throw new Error(`缺少必需的 CSP 指令: ${directive}`);
+      throw new Error(`Missing required CSP directive: ${directive}`);
     }
   }
   
-  console.log('✅ 構建驗證通過');
+  console.log('✅ Build validation passed');
 }
 
 /**
- * 主函數
+ * Main function
  */
 function main() {
   try {
-    console.log('🚀 開始構建生產環境版本...');
+    console.log('🚀 Starting production build...');
     
-    // 執行 Vite 構建
-    console.log('📦 執行 Vite 構建...');
+    // Execute Vite build
+    console.log('📦 Running Vite build...');
     execSync('npm run build', { 
       cwd: projectRoot,
       stdio: 'inherit'
     });
     
-    // 更新 CSP 配置
-    console.log('🔒 配置安全標頭...');
+    // Update CSP configuration
+    console.log('🔒 Configuring security headers...');
     updateIndexHtmlCSP();
     
-    // 創建不同平台的配置文件
-    console.log('📄 創建平台配置文件...');
+    // Create platform-specific configuration files
+    console.log('📄 Creating platform configuration files...');
     createHtaccess();
     createNetlifyHeaders();
     createVercelConfig();
     
-    // 驗證構建結果
-    console.log('✅ 驗證構建結果...');
+    // Validate build results
+    console.log('✅ Validating build results...');
     validateBuild();
     
-    console.log('🎉 構建完成！已應用生產環境 CSP 配置');
-    console.log('📁 構建文件位於 dist/ 目錄');
+    console.log('🎉 Build completed! Production CSP configuration applied');
+    console.log('📁 Build files located in dist/ directory');
     
   } catch (error) {
-    console.error('❌ 構建失敗:', error.message);
+    console.error('❌ Build failed:', error.message);
     process.exit(1);
   }
 }
 
-// 如果直接運行此腳本
+// If running this script directly
 if (import.meta.url === `file://${process.argv[1]}`) {
   main();
 }

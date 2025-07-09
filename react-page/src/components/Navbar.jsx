@@ -52,10 +52,10 @@ const Navbar = ({ darkMode, setDarkMode }) => {
     const { t, i18n } = useTranslation();
     const [searchParams, setSearchParams] = useSearchParams();
 
-    // 全站語言與 URL 同步（方案二）
+    // Site-wide language and URL synchronization (Solution 2)
     useEffect(() => {
         const handleLanguageChange = (lng) => {
-            // 如果當前頁面有 lang 參數，則更新它
+            // If current page has lang parameter, update it
             if (searchParams.has("lang") && lng !== searchParams.get("lang")) {
                 const params = {};
                 searchParams.forEach((value, key) => {
@@ -75,7 +75,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         return () => i18n.off("languageChanged", handleLanguageChange);
     }, [searchParams, setSearchParams, i18n]);
 
-    // 從 URL 同步語言到系統（方案二）
+    // Synchronize language from URL to system (Solution 2)
     useEffect(() => {
         const urlLang = searchParams.get("lang");
         if (urlLang && urlLang !== i18n.language) {
@@ -130,7 +130,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-6">
-                        {/* Language Selector - 使用原來的樣式 */}
+                        {/* Language Selector - using original style */}
                         <DropdownMenu modal={false}>
                             <DropdownMenuTrigger asChild>
                                 <Button variant="ghost" size="sm" className="flex items-center gap-1 text-muted-foreground hover:text-foreground focus:ring-0 focus:ring-offset-0 focus-visible:ring-0 focus-visible:ring-offset-0">

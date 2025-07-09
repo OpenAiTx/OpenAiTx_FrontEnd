@@ -16,7 +16,7 @@ const ProjectsShowcase = () => {
     const [isMobile, setIsMobile] = useState(false);
     const loadMoreRef = useRef(null);
 
-    // 動畫變體
+    // Animation variants
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -62,17 +62,17 @@ const ProjectsShowcase = () => {
         },
     };
 
-    // 檢測是否為移動設備
+    // Check if device is mobile
     const checkIsMobile = useCallback(() => {
         setIsMobile(window.innerWidth < 768);
     }, []);
 
-    // 獲取每頁顯示數量
+    // Get items per page count
     const getItemsPerPage = useCallback(() => {
         return isMobile ? 6 : 12;
     }, [isMobile]);
 
-    // 載入更多專案
+    // Load more projects
     const loadMoreProjects = useCallback(() => {
         if (loadingMore || !hasMore) return;
 
@@ -85,10 +85,10 @@ const ProjectsShowcase = () => {
             setDisplayedProjects(prev => [...prev, ...nextItems]);
             setHasMore(currentLength + nextItems.length < allProjects.length);
             setLoadingMore(false);
-        }, 500); // 添加一點延遲以顯示載入效果
+        }, 500); // Add a slight delay to show loading effect
     }, [allProjects, displayedProjects.length, getItemsPerPage, hasMore, loadingMore]);
 
-    // 設置 Intersection Observer 來監聽滾動觸發載入更多
+    // Set up Intersection Observer to monitor scrolling and trigger load more
     useEffect(() => {
         if (!loadMoreRef.current || !hasMore || loadingMore) return;
 
@@ -113,13 +113,13 @@ const ProjectsShowcase = () => {
         };
     }, [hasMore, loadingMore, loadMoreProjects]);
 
-    // 載入專案數據
+    // Load project data
     const loadProjectsShowcase = useCallback(async () => {
         try {
             setLoading(true);
             setError(null);
 
-            // 獲取專案數據
+            // Get project data
             const response = await fetch(
                 "https://raw.githubusercontent.com/OpenAiTx/OpenAiTx/refs/heads/main/projects/openaitx_projects_sorted.json"
             );
@@ -130,14 +130,14 @@ const ProjectsShowcase = () => {
 
             const data = await response.json();
 
-            // 過濾使用 OpenAiTx 且星數大於 100 的專案
+            // Filter projects that use OpenAiTx and have more than 100 stars
             const filteredProjects = data.filter(
                 (project) => project.DoesContainOpenaitx && project.StargazersCount > 100
             );
 
             setAllProjects(filteredProjects);
             
-            // 初始載入第一頁
+            // Initial load of first page
             const itemsPerPage = getItemsPerPage();
             const initialProjects = filteredProjects.slice(0, itemsPerPage);
             setDisplayedProjects(initialProjects);
@@ -150,7 +150,7 @@ const ProjectsShowcase = () => {
         }
     }, [getItemsPerPage]);
 
-    // 初始載入和窗口大小監聽
+    // Initial load and window size monitoring
     useEffect(() => {
         checkIsMobile();
         loadProjectsShowcase();
@@ -163,7 +163,7 @@ const ProjectsShowcase = () => {
         return () => window.removeEventListener('resize', handleResize);
     }, [checkIsMobile, loadProjectsShowcase]);
 
-    // 格式化星數
+    // Format star count
     const formatStarCount = (count) => {
         if (count >= 1000) {
             return (count / 1000).toFixed(1) + "k";
@@ -171,7 +171,7 @@ const ProjectsShowcase = () => {
         return count.toString();
     };
 
-    // 格式化檔案大小
+    // Format file size
     const formatBytes = (bytes) => {
         if (bytes === 0) return "0 B";
         const k = 1024;
@@ -180,12 +180,12 @@ const ProjectsShowcase = () => {
         return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + " " + sizes[i];
     };
 
-    // 格式化日期
+    // Format date
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString();
     };
 
-    // 專案卡片組件
+    // Project card component
     const ProjectCard = ({ project }) => (
         <motion.div
             variants={cardVariants}
@@ -228,7 +228,7 @@ const ProjectsShowcase = () => {
         </motion.div>
     );
 
-    // 載入狀態
+    // Loading state
     if (loading) {
         return (
             <motion.div
@@ -249,7 +249,7 @@ const ProjectsShowcase = () => {
         );
     }
 
-    // 錯誤狀態
+    // Error state
     if (error) {
         return (
             <motion.div
@@ -286,7 +286,7 @@ const ProjectsShowcase = () => {
             initial="hidden"
             animate="visible"
         >
-            {/* 標題 */}
+            {/* Title */}
             <motion.div className="text-center mb-8" variants={itemVariants}>
                 <h2 className="text-2xl font-bold text-foreground mb-2">
                     {t("projects.title")} 
@@ -296,7 +296,7 @@ const ProjectsShowcase = () => {
                 </p>
             </motion.div>
 
-            {/* 專案網格 */}
+            {/* Project grid */}
             <motion.div
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
                 variants={containerVariants}
@@ -312,7 +312,7 @@ const ProjectsShowcase = () => {
                 ))}
             </motion.div>
 
-            {/* 載入更多觸發器 (隱藏的元素用於觸發滾動載入) */}
+            {/* Load more trigger (hidden element for triggering scroll loading) */}
             {hasMore && !loading && !error && (
                 <div
                     ref={loadMoreRef}
@@ -327,7 +327,7 @@ const ProjectsShowcase = () => {
                 </div>
             )}
 
-            {/* 空狀態 */}
+            {/* Empty state */}
             {displayedProjects.length === 0 && !loading && !error && (
                 <motion.div
                     className="text-center py-12"

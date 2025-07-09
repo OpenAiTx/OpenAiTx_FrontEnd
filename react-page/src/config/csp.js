@@ -1,46 +1,46 @@
 /**
- * Content Security Policy (CSP) 配置
- * 用於防止 XSS 攻擊和其他安全威脅
- * 專為 GitHub Pages 部署優化
+ * Content Security Policy (CSP) Configuration
+ * Used to prevent XSS attacks and other security threats
+ * Optimized for GitHub Pages deployment
  */
 
-// 開發環境和生產環境的 CSP 配置
+// CSP configuration for development and production environments
 const CSP_CONFIG = {
-  // 開發環境配置（較寬鬆，允許 unsafe-inline 和 unsafe-eval）
+  // Development environment configuration (more permissive, allows unsafe-inline and unsafe-eval)
   development: {
     'default-src': ["'self'"],
     'script-src': [
       "'self'", 
       "'unsafe-inline'", 
-      "'unsafe-eval'", // Vite 開發模式需要
-      "blob:" // 用於動態導入
+      "'unsafe-eval'", // Required for Vite development mode
+      "blob:" // For dynamic imports
     ],
     'style-src': [
       "'self'", 
-      "'unsafe-inline'", // React 和 CSS-in-JS 需要
+      "'unsafe-inline'", // Required for React and CSS-in-JS
       "https://fonts.googleapis.com"
     ],
     'font-src': [
       "'self'", 
       "https://fonts.gstatic.com",
-      "data:" // 用於內嵌字體
+      "data:" // For embedded fonts
     ],
     'img-src': [
       "'self'", 
       "data:", 
       "https:", 
       "blob:",
-      "https://img.shields.io", // Badge 圖片
-      "https://raw.githubusercontent.com" // GitHub 原始內容
+      "https://img.shields.io", // Badge images
+      "https://raw.githubusercontent.com" // GitHub raw content
     ],
     'connect-src': [
       "'self'",
       "https://api.github.com", // GitHub API
-      "https://raw.githubusercontent.com", // GitHub 原始內容
-      "https://openaitx.com", // 專案 API
-      "https://img.shields.io", // Badge 服務
+      "https://raw.githubusercontent.com", // GitHub raw content
+      "https://openaitx.com", // Project API
+      "https://img.shields.io", // Badge service
       "ws://localhost:*", // Vite HMR WebSocket
-      "wss://localhost:*" // 安全 WebSocket
+      "wss://localhost:*" // Secure WebSocket
     ],
     'media-src': ["'self'", "data:", "https:"],
     'object-src': ["'none'"],
@@ -50,17 +50,17 @@ const CSP_CONFIG = {
     'upgrade-insecure-requests': []
   },
 
-  // GitHub Pages 生產環境配置（針對靜態部署優化）
+  // GitHub Pages production environment configuration (optimized for static deployment)
   production: {
     'default-src': ["'self'"],
     'script-src': [
       "'self'",
-      "'unsafe-inline'", // GitHub Pages 需要，因為無法使用 nonce
-      // 移除 unsafe-eval 以提高安全性
+      "'unsafe-inline'", // Required for GitHub Pages since nonce cannot be used
+      // Remove unsafe-eval for improved security
     ],
     'style-src': [
       "'self'", 
-      "'unsafe-inline'", // CSS-in-JS 和 Tailwind 需要
+      "'unsafe-inline'", // Required for CSS-in-JS and Tailwind
       "https://fonts.googleapis.com"
     ],
     'font-src': [
@@ -71,18 +71,18 @@ const CSP_CONFIG = {
       "'self'", 
       "data:", 
       "https:",
-      "https://img.shields.io", // Badge 服務
-      "https://raw.githubusercontent.com", // GitHub 原始內容
-      "https://openaitx.github.io", // GitHub Pages 域名
-      "https://*.github.io" // 其他 GitHub Pages 域名（如果需要）
+      "https://img.shields.io", // Badge service
+      "https://raw.githubusercontent.com", // GitHub raw content
+      "https://openaitx.github.io", // GitHub Pages domain
+      "https://*.github.io" // Other GitHub Pages domains (if needed)
     ],
     'connect-src': [
       "'self'",
       "https://api.github.com", // GitHub API
-      "https://raw.githubusercontent.com", // GitHub 原始內容
-      "https://openaitx.com", // 專案 API
-      "https://img.shields.io", // Badge 服務
-      "https://openaitx.github.io" // GitHub Pages 域名
+      "https://raw.githubusercontent.com", // GitHub raw content
+      "https://openaitx.com", // Project API
+      "https://img.shields.io", // Badge service
+      "https://openaitx.github.io" // GitHub Pages domain
     ],
     'media-src': ["'self'", "data:", "https:"],
     'object-src': ["'none'"],
@@ -92,18 +92,18 @@ const CSP_CONFIG = {
     'upgrade-insecure-requests': []
   },
 
-  // GitHub Pages 特殊配置（如果需要更寬鬆的設定）
+  // GitHub Pages special configuration (if more permissive settings are needed)
   'github-pages': {
     'default-src': ["'self'"],
     'script-src': [
       "'self'",
-      "'unsafe-inline'", // GitHub Pages 靜態部署必需
-      "https://openaitx.github.io", // 明確允許自己的域名
-      "https://*.github.io" // 允許其他 GitHub Pages 域名
+      "'unsafe-inline'", // Required for GitHub Pages static deployment
+      "https://openaitx.github.io", // Explicitly allow own domain
+      "https://*.github.io" // Allow other GitHub Pages domains
     ],
     'style-src': [
       "'self'", 
-      "'unsafe-inline'", // 靜態 CSS 需要
+      "'unsafe-inline'", // Required for static CSS
       "https://fonts.googleapis.com",
       "https://openaitx.github.io"
     ],
@@ -120,7 +120,7 @@ const CSP_CONFIG = {
       "https://raw.githubusercontent.com",
       "https://openaitx.github.io",
       "https://*.github.io",
-      "https://github.com" // GitHub 圖片
+      "https://github.com" // GitHub images
     ],
     'connect-src': [
       "'self'",
@@ -141,9 +141,9 @@ const CSP_CONFIG = {
 };
 
 /**
- * 生成 CSP 字符串
- * @param {string} env - 環境類型 ('development' | 'production' | 'github-pages')
- * @returns {string} CSP 字符串
+ * Generate CSP string
+ * @param {string} env - Environment type ('development' | 'production' | 'github-pages')
+ * @returns {string} CSP string
  */
 export const generateCSP = (env = 'development') => {
   const config = CSP_CONFIG[env] || CSP_CONFIG.development;
@@ -159,9 +159,9 @@ export const generateCSP = (env = 'development') => {
 };
 
 /**
- * 獲取額外的安全標頭
- * @param {boolean} isGitHubPages - 是否為 GitHub Pages 部署
- * @returns {Object} 安全標頭對象
+ * Get additional security headers
+ * @param {boolean} isGitHubPages - Whether it's a GitHub Pages deployment
+ * @returns {Object} Security headers object
  */
 export const getSecurityHeaders = (isGitHubPages = false) => {
   const baseHeaders = {
@@ -172,11 +172,11 @@ export const getSecurityHeaders = (isGitHubPages = false) => {
   };
 
   if (isGitHubPages) {
-    // GitHub Pages 特定的標頭調整
+    // GitHub Pages specific header adjustments
     return {
       ...baseHeaders,
       'Permissions-Policy': 'camera=(), microphone=(), geolocation=(), payment=()',
-      // 不包含 HSTS，因為 GitHub Pages 已經處理
+      // Don't include HSTS as GitHub Pages already handles it
     };
   }
 
@@ -188,22 +188,22 @@ export const getSecurityHeaders = (isGitHubPages = false) => {
 };
 
 /**
- * 驗證 CSP 配置
- * @param {string} env - 環境類型
- * @returns {boolean} 配置是否有效
+ * Validate CSP configuration
+ * @param {string} env - Environment type
+ * @returns {boolean} Whether the configuration is valid
  */
 export const validateCSPConfig = (env = 'development') => {
   const config = CSP_CONFIG[env];
   if (!config) {
-    console.warn(`CSP 配置不存在於環境: ${env}`);
+    console.warn(`CSP configuration does not exist for environment: ${env}`);
     return false;
   }
 
-  // 檢查必需的指令
+  // Check required directives
   const requiredDirectives = ['default-src', 'script-src', 'style-src', 'object-src'];
   for (const directive of requiredDirectives) {
     if (!config[directive]) {
-      console.warn(`缺少必需的 CSP 指令: ${directive}`);
+      console.warn(`Missing required CSP directive: ${directive}`);
       return false;
     }
   }
@@ -212,21 +212,21 @@ export const validateCSPConfig = (env = 'development') => {
 };
 
 /**
- * 記錄 CSP 違規（用於開發調試）
+ * Log CSP violations (for development debugging)
  */
 export const logCSPViolation = (violationEvent) => {
-  console.group('🚨 CSP 違規報告');
-  console.log('被阻止的 URI:', violationEvent.blockedURI);
-  console.log('違規指令:', violationEvent.violatedDirective);
-  console.log('原始政策:', violationEvent.originalPolicy);
-  console.log('來源文件:', violationEvent.sourceFile);
-  console.log('行號:', violationEvent.lineNumber);
+  console.group('🚨 CSP Violation Report');
+  console.log('Blocked URI:', violationEvent.blockedURI);
+  console.log('Violated Directive:', violationEvent.violatedDirective);
+  console.log('Original Policy:', violationEvent.originalPolicy);
+  console.log('Source File:', violationEvent.sourceFile);
+  console.log('Line Number:', violationEvent.lineNumber);
   console.groupEnd();
 };
 
 /**
- * 檢測是否為 GitHub Pages 環境
- * @returns {boolean} 是否為 GitHub Pages
+ * Detect if running in GitHub Pages environment
+ * @returns {boolean} Whether it's GitHub Pages
  */
 export const isGitHubPages = () => {
   if (typeof window === 'undefined') return false;
@@ -236,8 +236,8 @@ export const isGitHubPages = () => {
 };
 
 /**
- * 獲取適合當前環境的 CSP 配置
- * @returns {string} 適合的環境類型
+ * Get appropriate CSP configuration for current environment
+ * @returns {string} Appropriate environment type
  */
 export const getEnvironmentType = () => {
   if (import.meta.env.DEV) {
@@ -251,7 +251,7 @@ export const getEnvironmentType = () => {
   return 'production';
 };
 
-// 在開發環境中設置 CSP 違規監聽器
+// Set up CSP violation listener in development environment
 if (import.meta.env.DEV) {
   document.addEventListener('securitypolicyviolation', logCSPViolation);
 }

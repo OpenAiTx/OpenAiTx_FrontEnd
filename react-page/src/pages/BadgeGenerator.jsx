@@ -19,7 +19,7 @@ import ProjectsShowcase from '../components/ProjectsShowcase';
 
 /* global URL, URLSearchParams */
 
-// LanguageLinks 組件 - 適應深色主題
+// LanguageLinks component - adapted for dark theme
 const LanguageLinks = () => {
     const languages = [
         "English",
@@ -71,12 +71,12 @@ const BadgeGenerator = () => {
     const [isCheckingProject, setIsCheckingProject] = useState(false);
     const [isStyle2Expanded, setIsStyle2Expanded] = useState(false);
     
-    // Dialog 狀態管理
+    // Dialog state management
     const [dialogOpen, setDialogOpen] = useState(false);
-    const [dialogType, setDialogType] = useState(''); // 'success' 或 'error'
+    const [dialogType, setDialogType] = useState(''); // 'success' or 'error'
     const [dialogErrorMessage, setDialogErrorMessage] = useState('');
 
-    // Stepper 步驟定義
+    // Stepper steps definition
     const steps = [
         { id: 'search', title: t('badge.stepSearch') },
         { id: 'submit', title: t('badge.stepSubmit') },
@@ -214,19 +214,19 @@ const BadgeGenerator = () => {
                 throw new Error(data.error || `HTTP error! status: ${response.status}`);
             }
 
-            // 顯示成功 dialog
+            // Show success dialog
             setDialogType('success');
             setDialogOpen(true);
             
         } catch (error) {
-            // 顯示失敗 dialog
+            // Show failure dialog
             setDialogType('error');
             setDialogErrorMessage(error.message);
             setDialogOpen(true);
         }
     };
 
-    // 解析GitHub URL
+    // Parse GitHub URL
     const parseGitHubUrl = (url) => {
         try {
             const urlObj = new URL(url);
@@ -248,7 +248,7 @@ const BadgeGenerator = () => {
         }
     };
 
-    // 處理URL提交
+    // Handle URL submission
     const handleUrlSubmit = async () => {
         setUrlError("");
         const result = parseGitHubUrl(repoUrl);
@@ -258,25 +258,25 @@ const BadgeGenerator = () => {
             return;
         }
 
-        // 更新URL參數
+        // Update URL parameters
         const newParams = new URLSearchParams();
         newParams.set("userOrOrg", result.userOrOrg);
         newParams.set("project", result.project);
 
-        // 更新URL，使用 hash router 格式
+        // Update URL using hash router format
         window.history.pushState({}, "", `#/?${newParams.toString()}`);
 
-        // 更新狀態
+        // Update state
         setUserOrOrg(result.userOrOrg);
         setProject(result.project);
 
-        // 檢查項目狀態
+        // Check project status
         await checkProjectStatus(result.userOrOrg, result.project);
     };
 
-    // 處理重置倉庫
+    // Handle repository reset
     const handleResetRepo = () => {
-        // 重置所有狀態
+        // Reset all states
         setRepoUrl("");
         setUserOrOrg("");
         setProject("");
@@ -285,11 +285,11 @@ const BadgeGenerator = () => {
         setUrlError("");
         setIsCheckingProject(false);
         
-        // 清除URL參數，回到首頁
+        // Clear URL parameters, return to homepage
         window.history.pushState({}, "", "#/");
     };
 
-    // 動畫配置
+    // Animation configuration
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {

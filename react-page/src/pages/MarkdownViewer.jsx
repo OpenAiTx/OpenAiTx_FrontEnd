@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { marked } from 'marked'
 import hljs from 'highlight.js'
-// import 'highlight.js/styles/github.css' // 移除預設樣式，使用自定義樣式
+// import 'highlight.js/styles/github.css' // Remove default styles, use custom styles
 import '../styles/markdown.css'
 import { useTranslation } from 'react-i18next'
 import TableOfContents from '../components/TableOfContents'
@@ -11,20 +11,20 @@ import { toast } from 'sonner'
 import { convertEmojis } from '../lib/emojiUtils'
 import DOMPurify from 'dompurify'
 
-// Markdown 內容緩存
+// Markdown content cache
 const markdownCache = new Map()
 
 const MarkdownViewer = () => {
   const [searchParams, setSearchParams] = useSearchParams()
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(true)
-  const [languageLoading, setLanguageLoading] = useState(false) // 語言切換時的 loading 狀態
+  const [languageLoading, setLanguageLoading] = useState(false) // Loading state during language switching
   const [error, setError] = useState(null)
   const [showSubmitButton, setShowSubmitButton] = useState(false)
   const [tocOpen, setTocOpen] = useState(false)
   const { t: contextT, i18n } = useTranslation()
   
-  // 用於追蹤重新高亮的 ref
+  // Ref for tracking re-highlighting
   const rehighlightTimeoutRef = useRef(null)
   const observerRef = useRef(null)
   const mutationObserverRef = useRef(null)
@@ -34,27 +34,27 @@ const MarkdownViewer = () => {
   const project = searchParams.get('project')
   const urlLang = searchParams.get('lang') || 'en'
 
-  // 同步 URL 參數中的 lang 與系統當前語言
+  // Synchronize lang parameter in URL with current system language
   useEffect(() => {
-    // 當 URL 中的 lang 參數與當前系統語言不同時，更新系統語言
+    // When URL lang parameter differs from current system language, update system language
     if (urlLang !== i18n.language) {
       i18n.changeLanguage(urlLang)
     }
   }, [urlLang, i18n])
 
-  // 監聽系統語言變化，同步到 URL
+  // Listen for system language changes, sync to URL
   useEffect(() => {
     const handleLanguageChange = (lng) => {
-      // 檢查當前語言是否與 URL 參數不同
+      // Check if current language differs from URL parameter
       if (lng !== searchParams.get('lang')) {
-        // 手動構建新的查詢字符串
+        // Manually build new query string
         const params = {}
         searchParams.forEach((value, key) => {
           params[key] = value
         })
         params.lang = lng
         
-        // 構建新的查詢字符串
+        // Build new query string
         const queryString = Object.entries(params)
           .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
           .join('&')
@@ -63,10 +63,10 @@ const MarkdownViewer = () => {
       }
     }
 
-    // 監聽 i18next 語言變化事件
+    // Listen for i18next language change events
     i18n.on('languageChanged', handleLanguageChange)
 
-    // 清理事件監聽器
+    // Cleanup event listener
     return () => {
       i18n.off('languageChanged', handleLanguageChange)
     }
@@ -136,9 +136,9 @@ const MarkdownViewer = () => {
     }
   }
 
-  // 強化的重新高亮代碼函數
+  // Enhanced code re-highlighting function
   const rehighlightCode = useCallback(() => {
-    // 清除之前的 timeout
+    // Clear previous timeout
     if (rehighlightTimeoutRef.current) {
       window.clearTimeout(rehighlightTimeoutRef.current)
     }
@@ -148,48 +148,48 @@ const MarkdownViewer = () => {
       
       codeBlocks.forEach((block) => {
         try {
-          // 保存原始內容
+          // Save original content
           const originalText = block.textContent || block.innerText
           
-          // 清除之前的高亮狀態和類名
+          // Clear previous highlight state and class names
           if (block.dataset.highlighted) {
             delete block.dataset.highlighted
           }
           
-          // 重置類名，保留語言類
+          // Reset class names, keep language class
           const languageClass = Array.from(block.classList).find(cls => cls.startsWith('language-'))
           block.className = languageClass || ''
           
-          // 重置內容為純文本
+          // Reset content to plain text
           block.textContent = originalText
           
-          // 重新高亮
+          // Re-highlight
           hljs.highlightElement(block)
           
-          // 強制重新應用樣式
+          // Force re-apply styles
           block.style.display = 'none'
-          block.offsetHeight // 觸發重排
+          block.offsetHeight // Trigger reflow
           block.style.display = ''
         } catch (e) {
           console.warn('Code highlighting failed for block:', e)
         }
       })
-    }, 50) // 減少延遲時間
+    }, 50) // Reduce delay time
   }, [])
 
-  // 設置 ResizeObserver 來監聽版面變化
+  // Setup ResizeObserver to monitor layout changes
   useEffect(() => {
     if (!content) return
 
-    // 清理之前的 observer
+    // Cleanup previous observer
     if (observerRef.current) {
       observerRef.current.disconnect()
     }
 
-    // 創建新的 ResizeObserver
+    // Create new ResizeObserver
     if (window.ResizeObserver) {
       observerRef.current = new window.ResizeObserver(() => {
-        // 防抖處理
+        // Debounce handling
         if (rehighlightTimeoutRef.current) {
           window.clearTimeout(rehighlightTimeoutRef.current)
         }
@@ -199,13 +199,13 @@ const MarkdownViewer = () => {
         }, 100)
       })
 
-      // 觀察主要內容區域
+      // Observe main content area
       const mainContent = document.querySelector('.markdown-body')
       if (mainContent) {
         observerRef.current.observe(mainContent)
       }
 
-      // 觀察整個文檔
+      // Observe entire document
       observerRef.current.observe(document.body)
     }
 
@@ -216,14 +216,14 @@ const MarkdownViewer = () => {
     }
   }, [content, rehighlightCode])
 
-  // 強化的 sidebar 狀態變化監聽
+  // Enhanced sidebar state change monitoring
   useEffect(() => {
     if (content) {
-      // 立即重新高亮一次
+      // Re-highlight immediately once
       rehighlightCode()
       
-      // 在動畫期間持續重新高亮
-      const intervals = [50, 100, 200, 300, 400] // 多個時間點
+      // Continue re-highlighting during animation
+      const intervals = [50, 100, 200, 300, 400] // Multiple time points
       const timeouts = intervals.map(delay => 
         window.setTimeout(() => {
           rehighlightCode()
@@ -236,7 +236,7 @@ const MarkdownViewer = () => {
     }
   }, [tocOpen, content, rehighlightCode])
 
-  // 監聽語言變化並顯示 loading
+  // Listen for language changes and show loading
   useEffect(() => {
     if (previousLangRef.current && previousLangRef.current !== urlLang && content) {
       setLanguageLoading(true)
@@ -245,7 +245,7 @@ const MarkdownViewer = () => {
   }, [urlLang, content])
 
   useEffect(() => {
-    // 配置 marked 選項，增加安全性
+    // Configure marked options, increase security
     marked.setOptions({
       highlight: function(code, lang) {
         if (lang && hljs.getLanguage(lang)) {
@@ -259,8 +259,8 @@ const MarkdownViewer = () => {
       },
       breaks: true,
       gfm: true,
-      sanitize: false, // 我們將使用 DOMPurify 來清理
-      silent: true // 靜默錯誤以避免控制台警告
+      sanitize: false, // We will use DOMPurify for sanitization
+      silent: true // Silent errors to avoid console warnings
     })
 
     // Validate required parameters
@@ -277,17 +277,17 @@ const MarkdownViewer = () => {
 
     const fetchContent = async () => {
       try {
-        // 生成緩存鍵
+        // Generate cache key
         const cacheKey = `${user}/${project}/${urlLang}`
         
-        // 檢查緩存
+        // Check cache
         if (markdownCache.has(cacheKey)) {
           const cachedContent = markdownCache.get(cacheKey)
           setContent(cachedContent)
           setLoading(false)
           setLanguageLoading(false)
           
-          // 更新頁面標題
+          // Update page title
           const tempDiv = document.createElement('div')
           tempDiv.innerHTML = cachedContent
           const firstH1 = tempDiv.querySelector('h1')
@@ -340,13 +340,13 @@ const MarkdownViewer = () => {
 
         const markdown = await response.text()
         
-        // 轉換 emoji
+        // Convert emojis
         const markdownWithEmojis = convertEmojis(markdown)
         
         // Render the markdown
         let renderedContent = marked.parse(markdownWithEmojis)
         
-        // 使用 DOMPurify 清理 HTML 內容以提高安全性
+        // Use DOMPurify to sanitize HTML content for improved security
         renderedContent = DOMPurify.sanitize(renderedContent, {
           ALLOWED_TAGS: [
             'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
@@ -370,10 +370,10 @@ const MarkdownViewer = () => {
           ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|cid|xmpp|data):|[^a-z]|[a-z+.-]+(?:[^a-z+.-:]|$))/i
         })
         
-        // 存入緩存
+        // Store in cache
         markdownCache.set(cacheKey, renderedContent)
         
-        // 限制緩存大小（最多保存 20 個項目）
+        // Limit cache size (store maximum 20 items)
         if (markdownCache.size > 20) {
           const firstKey = markdownCache.keys().next().value
           markdownCache.delete(firstKey)
@@ -410,22 +410,22 @@ const MarkdownViewer = () => {
   // Apply syntax highlighting after content is rendered
   useEffect(() => {
     if (content) {
-      // 等待DOM更新後再高亮，使用多個時間點確保高亮成功
+      // Wait for DOM update before highlighting, use multiple time points to ensure highlighting succeeds
       const timeouts = [50, 100, 200].map(delay =>
         window.setTimeout(() => {
         rehighlightCode()
         }, delay)
       )
 
-      // 處理第一個區塊中的圖片置中
+      // Process image centering in first block
       const processFirstBlockImages = () => {
         const markdownBody = document.querySelector('.markdown-body')
         if (!markdownBody) return
 
-        // 找到第一個段落或div - 使用更安全的方法
+        // Find first paragraph or div - use safer method
         let firstElement = null
         
-        // 嘗試不同的選擇器
+        // Try different selectors
         const selectors = [
           'p:first-child',
           'div:first-child',
@@ -449,7 +449,7 @@ const MarkdownViewer = () => {
           const images = firstElement.querySelectorAll('img')
           const textContent = firstElement.textContent?.trim()
           
-          // 如果段落只包含圖片（沒有實質文字內容），標記為僅圖片段落
+          // If paragraph contains only images (no substantial text content), mark as image-only paragraph
           if (images.length > 0 && (!textContent || textContent.length < 10)) {
             firstElement.setAttribute('data-img-only', 'true')
             firstElement.style.textAlign = 'center'
@@ -462,7 +462,7 @@ const MarkdownViewer = () => {
           }
         }
 
-        // 處理緊跟在 h1 後面的圖片段落
+        // Process image paragraphs immediately following h1
         try {
           const h1Element = markdownBody.querySelector('h1:first-child')
           if (h1Element) {
@@ -488,7 +488,7 @@ const MarkdownViewer = () => {
         }
       }
 
-      // 延遲執行圖片處理，確保DOM完全載入
+      // Delay image processing to ensure DOM is fully loaded
       window.setTimeout(processFirstBlockImages, 100)
 
       return () => {
@@ -497,7 +497,7 @@ const MarkdownViewer = () => {
     }
   }, [content, rehighlightCode])
 
-  // 監聽主題變化並重新高亮代碼（優化版本）
+  // Listen for theme changes and re-highlight code (optimized version)
   useEffect(() => {
     if (!content) return
 
@@ -507,17 +507,17 @@ const MarkdownViewer = () => {
         const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light'
         if (currentTheme !== lastTheme) {
           lastTheme = currentTheme
-          // 主題變化了，重新高亮代碼
+          // Theme changed, re-highlight code
             rehighlightCode()
       }
     }
 
-    // 清理之前的 observer
+    // Cleanup previous observer
     if (mutationObserverRef.current) {
       mutationObserverRef.current.disconnect()
       }
 
-    // 使用 MutationObserver 來監聽主題變化（更高效）
+    // Use MutationObserver to monitor theme changes (more efficient)
     mutationObserverRef.current = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
@@ -531,7 +531,7 @@ const MarkdownViewer = () => {
       attributeFilter: ['class']
     })
 
-    // 備用方案：定期檢查
+    // Fallback: periodic check
     const themeCheckInterval = setInterval(checkThemeChange, 500)
 
     return () => {
@@ -542,7 +542,7 @@ const MarkdownViewer = () => {
     }
   }, [content, rehighlightCode])
 
-  // 清理函數
+  // Cleanup function
   useEffect(() => {
       return () => {
       if (rehighlightTimeoutRef.current) {
@@ -624,7 +624,7 @@ const MarkdownViewer = () => {
     )
   }
 
-  // 語言切換時的 Loading 組件
+  // Language switching loading component
   const renderLanguageLoading = () => (
     <motion.div 
       className="w-full max-w-4xl mx-auto p-6 space-y-6"
@@ -633,7 +633,7 @@ const MarkdownViewer = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
-      {/* Loading 標題 */}
+      {/* Loading title */}
       <div className="flex items-center justify-center gap-3 mb-8">
         <motion.div 
           className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full"
@@ -641,26 +641,26 @@ const MarkdownViewer = () => {
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
         />
         <span className="text-foreground font-medium text-lg">
-          {contextT('viewer.loadingLanguage') || '正在載入新語言版本...'}
+          {contextT('viewer.loadingLanguage') || 'Loading new language version...'}
         </span>
       </div>
 
-      {/* Placeholder 內容 */}
+      {/* Placeholder content */}
       <div className="space-y-6">
-        {/* 模擬標題 */}
+        {/* Simulate title */}
         <div className="space-y-3">
           <div className="h-8 bg-muted rounded-md animate-pulse w-3/4" />
           <div className="h-4 bg-muted rounded-md animate-pulse w-1/2" />
         </div>
 
-        {/* 模擬段落 */}
+        {/* Simulate paragraph */}
         <div className="space-y-3">
           <div className="h-4 bg-muted rounded-md animate-pulse w-full" />
           <div className="h-4 bg-muted rounded-md animate-pulse w-5/6" />
           <div className="h-4 bg-muted rounded-md animate-pulse w-4/5" />
         </div>
 
-        {/* 模擬程式碼區塊 */}
+        {/* Simulate code block */}
         <div className="space-y-2">
           <div className="h-6 bg-muted rounded-md animate-pulse w-1/3" />
           <div className="bg-muted/50 rounded-lg p-4 space-y-2">
@@ -671,7 +671,7 @@ const MarkdownViewer = () => {
           </div>
         </div>
 
-        {/* 模擬列表 */}
+        {/* Simulate list */}
         <div className="space-y-2">
           <div className="h-4 bg-muted rounded-md animate-pulse w-2/3" />
           <div className="ml-4 space-y-2">
@@ -681,7 +681,7 @@ const MarkdownViewer = () => {
           </div>
         </div>
 
-        {/* 模擬另一個段落 */}
+        {/* Simulate another paragraph */}
         <div className="space-y-3">
           <div className="h-6 bg-muted rounded-md animate-pulse w-1/2" />
           <div className="h-4 bg-muted rounded-md animate-pulse w-full" />
@@ -689,7 +689,7 @@ const MarkdownViewer = () => {
           <div className="h-4 bg-muted rounded-md animate-pulse w-5/6" />
         </div>
 
-        {/* 模擬表格 */}
+        {/* Simulate table */}
         <div className="space-y-2">
           <div className="h-4 bg-muted rounded-md animate-pulse w-1/3" />
           <div className="border border-border rounded-lg overflow-hidden">
@@ -756,7 +756,7 @@ const MarkdownViewer = () => {
         {/* Table of Contents */}
       <TableOfContents content={content} isOpen={tocOpen} setIsOpen={setTocOpen} languageLoading={languageLoading} />
         
-        {/* 主要內容區域 - 整個頁面 */}
+        {/* Main content area - entire page */}
         <motion.div 
           initial={false}
           animate={{ 

@@ -6,21 +6,21 @@ import BadgeGenerator from './pages/BadgeGenerator'
 import MarkdownViewer from './pages/MarkdownViewer'
 import { Toaster } from './components/ui/sonner'
 
-// 重定向組件處理 view.html 到 view 的重定向
+// Redirect component handling view.html to view redirection
 const ViewHtmlRedirect = () => {
   const location = useLocation()
   
-  // 保持所有查詢參數
+  // Keep all query parameters
   const searchParams = location.search
   
   return <Navigate to={`/view${searchParams}`} replace />
 }
 
-// 重定向組件處理 index.html 到根路徑的重定向
+// Redirect component handling index.html to root path redirection
 const IndexHtmlRedirect = () => {
   const location = useLocation()
   
-  // 保持所有查詢參數
+  // Keep all query parameters
   const searchParams = location.search
   
   return <Navigate to={`/${searchParams}`} replace />
@@ -28,40 +28,40 @@ const IndexHtmlRedirect = () => {
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
-    // 從localStorage獲取保存的主題設置
+    // Get saved theme setting from localStorage
     const savedTheme = localStorage.getItem('theme')
     if (savedTheme) {
       return savedTheme === 'dark'
     }
-    // 如果沒有保存的設置，使用系統偏好設置
+    // If no saved setting, use system preference
     return window.matchMedia('(prefers-color-scheme: dark)').matches
   })
   const location = useLocation()
 
-  // 處理舊版本 URL 重定向（非 hash 的直接訪問）
+  // Handle legacy URL redirection (direct access without hash)
   useEffect(() => {
     const handleLegacyUrls = () => {
       const fullUrl = window.location.href
       // eslint-disable-next-line no-undef
       const urlObj = new URL(fullUrl)
       
-      // 檢查是否是直接訪問舊格式的 URL（沒有 hash）
+      // Check if it's direct access to legacy format URL (without hash)
       if (!urlObj.hash && urlObj.pathname.includes('view.html')) {
-        // 提取查詢參數
+        // Extract query parameters
         const searchParams = urlObj.search
-        // 重定向到 hash router 格式
+        // Redirect to hash router format
         window.location.replace(`${urlObj.origin}${urlObj.pathname.replace('view.html', '')}#/view${searchParams}`)
         return
       }
       
-      // 檢查是否是直接訪問舊格式的 index.html
+      // Check if it's direct access to legacy format index.html
       if (!urlObj.hash && urlObj.pathname.includes('index.html')) {
         const searchParams = urlObj.search
         window.location.replace(`${urlObj.origin}${urlObj.pathname.replace('index.html', '')}#/${searchParams}`)
         return
       }
       
-      // 處理可能存在的基礎路徑，如 /OpenAiTx.github.io/view.html
+      // Handle possible base path, like /OpenAiTx.github.io/view.html
       if (!urlObj.hash && urlObj.pathname.endsWith('/view.html')) {
         const searchParams = urlObj.search
         const basePath = urlObj.pathname.replace('/view.html', '')
@@ -69,7 +69,7 @@ function App() {
         return
       }
       
-      // 處理 /OpenAiTx.github.io/index.html
+      // Handle /OpenAiTx.github.io/index.html
       if (!urlObj.hash && urlObj.pathname.endsWith('/index.html')) {
         const searchParams = urlObj.search
         const basePath = urlObj.pathname.replace('/index.html', '')
@@ -78,13 +78,13 @@ function App() {
       }
     }
 
-    // 只在初始加載時執行一次
+    // Execute only once on initial load
     handleLegacyUrls()
   }, [])
 
-  // 初始化主題
+  // Initialize theme
   useEffect(() => {
-    // 立即應用主題，避免閃爍
+    // Apply theme immediately to avoid flickering
     const savedTheme = localStorage.getItem('theme')
     if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark')
@@ -103,11 +103,11 @@ function App() {
     }
   }, [darkMode])
 
-  // 監聽系統主題變化
+  // Listen for system theme changes
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
     const handleChange = (e) => {
-      // 只有在沒有手動設置主題時才跟隨系統主題
+      // Only follow system theme when no manual theme setting exists
       if (!localStorage.getItem('theme')) {
         setDarkMode(e.matches)
       }
@@ -117,7 +117,7 @@ function App() {
     return () => mediaQuery.removeEventListener('change', handleChange)
   }, [])
 
-  // 頁面轉場動畫配置
+  // Page transition animation configuration
   const pageVariants = {
     initial: {
       opacity: 0,
@@ -170,7 +170,7 @@ function App() {
             <Routes location={location}>
               <Route path="/" element={<BadgeGenerator />} />
               <Route path="/view" element={<MarkdownViewer />} />
-              {/* 向後兼容性：重定向舊的 HTML 路徑 */}
+              {/* Backward compatibility: redirect legacy HTML paths */}
               <Route path="/view.html" element={<ViewHtmlRedirect />} />
               <Route path="/index.html" element={<IndexHtmlRedirect />} />
             </Routes>
