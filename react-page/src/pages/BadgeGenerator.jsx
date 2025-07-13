@@ -70,6 +70,7 @@ const BadgeGenerator = () => {
     const [urlError, setUrlError] = useState("");
     const [isCheckingProject, setIsCheckingProject] = useState(false);
     const [isStyle2Expanded, setIsStyle2Expanded] = useState(false);
+    const [isStyle3Expanded, setIsStyle3Expanded] = useState(false);
     
     // Dialog state management
     const [dialogOpen, setDialogOpen] = useState(false);
@@ -182,6 +183,20 @@ const BadgeGenerator = () => {
 
         const appUrl = getAppUrl();
         return style2Languages.map((lang) => `[${lang.name}](${appUrl}/view?user=${userOrOrg}&project=${project}&lang=${lang.code})`).join(" | ");
+    };
+
+    const generateStyle3Dropdown = () => {
+        if (!userOrOrg || !project) return "";
+
+        const appUrl = getAppUrl();
+        const languageLinks = style2Languages.map((lang) => `[${lang.name}](${appUrl}/view?user=${userOrOrg}&project=${project}&lang=${lang.code})`).join(" | ");
+        
+        return `<details>
+<summary>🌐 Language</summary>
+
+${languageLinks}
+
+</details>`;
     };
 
     const copyToClipboard = async (text, itemId) => {
@@ -516,6 +531,67 @@ const BadgeGenerator = () => {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}>
                             {copiedItem === "style2" ? t("badge.copied") : t("badge.copyMarkdown")}
+                        </motion.button>
+                    </motion.div>
+
+                    {/* Style Option 3 (Dropdown Menu) */}
+                    <motion.div className="border border-border p-5 mb-5 rounded-md bg-muted/70" variants={itemVariants} whileHover={{ scale: 1.02 }} transition={{ type: "spring", stiffness: 300 }}>
+                        <h2 className="text-xl font-semibold text-card-foreground mb-4">{t("badge.style3")}</h2>
+                        <div className="bg-muted/30 p-4 mb-3 rounded">
+                            <div className="flex items-center space-x-2">
+                                <span className="text-2xl">🌐</span>
+                                <motion.button
+                                    onClick={() => setIsStyle3Expanded(!isStyle3Expanded)}
+                                    className="flex items-center space-x-1 text-lg font-medium text-foreground hover:text-primary transition-colors cursor-pointer"
+                                    whileHover={{ scale: 1.02 }}
+                                    whileTap={{ scale: 0.98 }}
+                                >
+                                    <span>Language</span>
+                                    {isStyle3Expanded ? (
+                                        <ChevronUp className="h-4 w-4 text-muted-foreground" />
+                                    ) : (
+                                        <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                                    )}
+                                </motion.button>
+                            </div>
+                            <AnimatePresence mode="wait">
+                                {isStyle3Expanded && (
+                                    <motion.div
+                                        key="style3-content"
+                                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                                        animate={{ 
+                                            opacity: 1, 
+                                            height: "auto", 
+                                            marginTop: 16,
+                                            transition: { 
+                                                duration: 0.3,
+                                                ease: "easeInOut"
+                                            }
+                                        }}
+                                        exit={{ 
+                                            opacity: 0, 
+                                            height: 0, 
+                                            marginTop: 0,
+                                            transition: { 
+                                                duration: 0.3,
+                                                ease: "easeInOut"
+                                            }
+                                        }}
+                                        style={{ overflow: "hidden" }}
+                                    >
+                                        <div className="pt-4 border-t border-border">
+                                            <LanguageLinks />
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
+                        <motion.button
+                            onClick={() => copyToClipboard(generateStyle3Dropdown(), "style3")}
+                            className="bg-primary text-primary-foreground px-4 py-2 rounded hover:bg-primary/90 transition-colors"
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}>
+                            {copiedItem === "style3" ? t("badge.copied") : t("badge.copyDropdown")}
                         </motion.button>
                     </motion.div>
                 </Fragment>
