@@ -24,6 +24,11 @@ const MarkdownViewer = () => {
   const [tocOpen, setTocOpen] = useState(false)
   const { t: contextT, i18n } = useTranslation()
   
+  // Ensure page starts at top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+  
   // Ref for tracking re-highlighting
   const rehighlightTimeoutRef = useRef(null)
   const observerRef = useRef(null)
@@ -410,6 +415,9 @@ const MarkdownViewer = () => {
   // Apply syntax highlighting after content is rendered
   useEffect(() => {
     if (content) {
+      // Ensure page starts at top when content loads
+      window.scrollTo(0, 0)
+      
       // Wait for DOM update before highlighting, use multiple time points to ensure highlighting succeeds
       const timeouts = [50, 100, 200].map(delay =>
         window.setTimeout(() => {

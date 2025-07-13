@@ -32,28 +32,40 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
         heading.removeAttribute('id')
       })
 
-      const extractedHeadings = Array.from(headingElements).map((heading, index) => {
-        const level = parseInt(heading.tagName.charAt(1))
-        const text = heading.textContent.trim()
-        // Create more concise ID
-        const id = `heading-${index}-${text.toLowerCase()
-          .replace(/[^\w\u4e00-\u9fff\s-]/g, '') // Remove special characters, keep Chinese, English, numbers, spaces, hyphens
-          .replace(/\s+/g, '-') // Replace spaces with hyphens
-          .replace(/-+/g, '-') // Merge multiple hyphens
-          .replace(/^-|-$/g, '')}`  // Remove leading and trailing hyphens
-        
-        // Add ID directly to actual DOM element
-        heading.setAttribute('id', id)
-        
-        return {
-          id,
-          text,
-          level
-        }
-      })
+      const extractedHeadings = Array.from(headingElements)
+        .map((heading, index) => {
+          const level = parseInt(heading.tagName.charAt(1))
+          const text = heading.textContent.trim()
+          
+          // Skip headings that only contain images (no text content)
+          const textWithoutImages = text.replace(/\s*\[.*?\]\(.*?\)\s*/g, '').trim()
+          if (!textWithoutImages) {
+            return null
+          }
+          
+          // Create more concise ID
+          const id = `heading-${index}-${text.toLowerCase()
+            .replace(/[^\w\u4e00-\u9fff\s-]/g, '') // Remove special characters, keep Chinese, English, numbers, spaces, hyphens
+            .replace(/\s+/g, '-') // Replace spaces with hyphens
+            .replace(/-+/g, '-') // Merge multiple hyphens
+            .replace(/^-|-$/g, '')}`  // Remove leading and trailing hyphens
+          
+          // Add ID directly to actual DOM element
+          heading.setAttribute('id', id)
+          
+          return {
+            id,
+            text,
+            level
+          }
+        })
+        .filter(Boolean) // Remove null entries
       
       setHeadings(extractedHeadings)
     }
+
+    // Reset activeId when content changes
+    setActiveId('')
 
     // Use requestAnimationFrame to optimize performance
     requestAnimationFrame(() => {
@@ -75,6 +87,9 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
             a.boundingClientRect.top - b.boundingClientRect.top
           )
           setActiveId(sortedEntries[0].target.id)
+        } else {
+          // No headings are visible, clear active state
+          setActiveId('')
         }
       },
       {
@@ -105,14 +120,27 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
       setTimeout(setupObserver, 50)
     })
 
+    // Additional scroll listener to handle top of page
+    const handleScroll = () => {
+      if (window.scrollY < 100) {
+        setActiveId('')
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+
     return () => {
       observer.disconnect()
+      window.removeEventListener('scroll', handleScroll)
     }
   }, [headings, languageLoading])
 
   // Click heading to jump
   const scrollToHeading = (id) => {
     if (languageLoading) return // Disable jumping during loading
+    
+    // Immediately set active state for better UX
+    setActiveId(id)
     
     const performScroll = (element) => {
       const navbarHeight = 80
@@ -161,14 +189,14 @@ const TableOfContents = ({ content, isOpen, setIsOpen, languageLoading = false }
   // Get heading indent level
   const getIndentClass = (level) => {
     const indentMap = {
-      1: 'pl-0',
-      2: 'pl-4',
-      3: 'pl-8',
-      4: 'pl-12',
-      5: 'pl-16',
-      6: 'pl-20'
+      1: 'pl-4',
+      2: 'pl-8',
+      3: 'pl-12',
+      4: 'pl-16',
+      5: 'pl-20',
+      6: 'pl-24'
     }
-    return indentMap[level] || 'pl-0'
+    return indentMap[level] || 'pl-4'
   }
 
   // Loading state placeholder
