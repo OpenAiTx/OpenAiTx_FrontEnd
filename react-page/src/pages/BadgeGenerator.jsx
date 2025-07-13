@@ -74,8 +74,6 @@ const BadgeGenerator = () => {
     
     // Dialog state management
     const [dialogOpen, setDialogOpen] = useState(false);
-    const [dialogType, setDialogType] = useState(''); // 'success' or 'error'
-    const [dialogErrorMessage, setDialogErrorMessage] = useState('');
 
     // Stepper steps definition
     const steps = [
@@ -211,34 +209,33 @@ ${languageLinks}
         }
     };
 
-    const submitProject = async () => {
-        try {
-            const response = await fetch("https://openaitx.com/api/submit-project", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    project: `https://github.com/${userOrOrg}/${project}`,
-                }),
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.error || `HTTP error! status: ${response.status}`);
-            }
-
-            // Show success dialog
-            setDialogType('success');
-            setDialogOpen(true);
-            
-        } catch (error) {
-            // Show failure dialog
-            setDialogType('error');
-            setDialogErrorMessage(error.message);
-            setDialogOpen(true);
-        }
+    const submitProject = () => {
+        const projectUrl = `https://github.com/${userOrOrg}/${project}`;
+        
+        // Create GitHub issue URL with pre-filled content
+        const title = encodeURIComponent(`Submit Project: ${projectUrl}`);
+        const body = encodeURIComponent(
+            "I understand and agree to follow the guidelines of the open-source community.\n" +
+            "The system will automatically create a PR in the project using your information after the translation is completed.\n" +
+            "Click the button below to create once confirmed.\n\n" +
+            "### options\n" +
+            "- [ ] I would like to auto keep-update local markdown and PR to the project\n" +
+            "- [ ] Translate Wiki\n\n" +
+            "我理解并同意遵守开源社区的准则。\n" +
+            "翻译完成后，系统将使用您的信息在项目中自动创建一个 PR。\n" +
+            "确认后请点击下方按钮进行创建。\n\n" +
+            "### 选项\n" +
+            "- [ ] 我希望自动保持本地 Markdown 和 PR 的更新\n" +
+            "- [ ] 翻译 Wiki"
+        );
+        
+        const issueUrl = `https://github.com/openaitx/openaitx/issues/new?title=${title}&body=${body}`;
+        
+        // Open GitHub issue page in new tab
+        window.open(issueUrl, "_blank");
+        
+        // Show dialog to inform user
+        setDialogOpen(true);
     };
 
     // Parse GitHub URL
@@ -336,16 +333,10 @@ ${languageLinks}
                 <DialogContent className="p-8 sm:max-w-md">
                     <DialogHeader >
                         <DialogTitle>
-                            {dialogType === 'success' 
-                                ? t("badge.dialogSubmissionSuccess")
-                                : t("badge.dialogSubmissionFailed")
-                            }
+                            {t("badge.dialogSubmissionSuccess")}
                         </DialogTitle>
                         <DialogDescription className="py-6">
-                            {dialogType === 'success' 
-                                ? t("badge.dialogSuccessContent")
-                                : t("badge.dialogFailedContent", { errorMessage: dialogErrorMessage })
-                            }
+                            {t("badge.dialogGithubIssueContent")}
                         </DialogDescription>
                     </DialogHeader>
                     <DialogFooter>
