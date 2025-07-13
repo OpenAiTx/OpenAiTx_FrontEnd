@@ -17,12 +17,10 @@ const CSP_CONFIG = {
     ],
     'style-src': [
       "'self'", 
-      "'unsafe-inline'", // Required for React and CSS-in-JS
-      "https://fonts.googleapis.com"
+      "'unsafe-inline'" // Required for React and CSS-in-JS
     ],
     'font-src': [
       "'self'", 
-      "https://fonts.gstatic.com",
       "data:" // For embedded fonts
     ],
     'img-src': [
@@ -62,12 +60,10 @@ const CSP_CONFIG = {
     ],
     'style-src': [
       "'self'", 
-      "'unsafe-inline'", // Required for CSS-in-JS and Tailwind
-      "https://fonts.googleapis.com"
+      "'unsafe-inline'" // Required for CSS-in-JS and Tailwind
     ],
     'font-src': [
-      "'self'", 
-      "https://fonts.gstatic.com"
+      "'self'"
     ],
     'img-src': [
       "'self'", 
@@ -108,12 +104,10 @@ const CSP_CONFIG = {
     'style-src': [
       "'self'", 
       "'unsafe-inline'", // Required for static CSS
-      "https://fonts.googleapis.com",
       "https://openaitx.github.io"
     ],
     'font-src': [
       "'self'", 
-      "https://fonts.gstatic.com",
       "https://openaitx.github.io"
     ],
     'img-src': [
