@@ -96,7 +96,14 @@ const MarkdownViewer = () => {
             {contextT('badge.githubUser')}: <span className="text-foreground font-medium">{user}</span>
           </div>
           <div className="text-muted-foreground text-2xl text-center md:text-center">
-            {contextT('badge.projectName')}: <span className="text-foreground font-medium">{project}</span>
+            {contextT('badge.projectName')}: <a 
+              href={`https://github.com/${user}/${project}`} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:text-blue-800 font-medium transition-colors duration-200 cursor-pointer underline decoration-1 underline-offset-2"
+            >
+              {project}
+            </a>
           </div>
         </motion.div>
       )}
@@ -761,6 +768,24 @@ const MarkdownViewer = () => {
 
       return (
       <>
+        {/* DeepWiki Button */}
+        <div className="fixed top-[80px] right-[40px] z-50">
+          <button
+            onClick={() => window.open(`https://deepwiki.com/${user}/${project}`, '_blank')}
+            className="flex items-center gap-2 px-3 py-1.5 bg-background border border-border rounded-md shadow-sm hover:bg-accent hover:text-accent-foreground transition-colors duration-200 text-xs font-medium"
+          >
+            <img 
+              src="/icon_deepwiki.png" 
+              alt="DeepWiki" 
+              className="w-3 h-3 flex-shrink-0"
+              onError={(e) => {
+                e.target.style.display = 'none';
+              }}
+            />
+            <span className="text-[10px] whitespace-nowrap">Go to DeepWiki</span>
+          </button>
+        </div>
+
         {/* Table of Contents */}
       <TableOfContents content={content} isOpen={tocOpen} setIsOpen={setTocOpen} languageLoading={languageLoading} />
         
