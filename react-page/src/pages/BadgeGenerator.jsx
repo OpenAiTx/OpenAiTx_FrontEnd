@@ -398,11 +398,11 @@ ${languageLinks}
                 )}
             </motion.div>
             {!urlError && userOrOrg && project && (
-                <motion.div className="my-10 flex gap-8 text-sm" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
-                    <div className="text-muted-foreground text-xl">
+                <motion.div className="my-10 flex flex-col md:flex-row gap-4 md:gap-12 justify-center items-center" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}>
+                    <div className="text-muted-foreground text-xl text-center md:text-center">
                         {t("badge.githubUser")}: <span className="text-foreground font-medium">{userOrOrg}</span>
                     </div>
-                    <div className="text-muted-foreground text-xl">
+                    <div className="text-muted-foreground text-xl text-center md:text-center">
                         {t("badge.projectName")}: <span className="text-foreground font-medium">{project}</span>
                     </div>
                 </motion.div>

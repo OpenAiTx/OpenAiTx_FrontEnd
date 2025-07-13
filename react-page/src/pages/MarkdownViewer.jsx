@@ -87,15 +87,15 @@ const MarkdownViewer = () => {
     >
       {user && project && (
         <motion.div 
-          className="my-4 flex flex-col md:flex-row gap-4 md:gap-8 justify-center items-center" 
+          className="my-4 flex flex-col md:flex-row gap-4 md:gap-12 justify-center items-center" 
           initial={{ opacity: 0, y: 10 }} 
           animate={{ opacity: 1, y: 0 }} 
           transition={{ delay: 0.2 }}
         >
-          <div className="text-muted-foreground text-2xl text-center md:text-left">
+          <div className="text-muted-foreground text-2xl text-center md:text-center">
             {contextT('badge.githubUser')}: <span className="text-foreground font-medium">{user}</span>
           </div>
-          <div className="text-muted-foreground text-2xl text-center md:text-left">
+          <div className="text-muted-foreground text-2xl text-center md:text-center">
             {contextT('badge.projectName')}: <span className="text-foreground font-medium">{project}</span>
           </div>
         </motion.div>

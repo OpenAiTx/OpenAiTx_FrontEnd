@@ -1,12 +1,14 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Star, Calendar, HardDrive, ExternalLink, RefreshCw } from "lucide-react";
+import { Star, Calendar, HardDrive, RefreshCw } from "lucide-react";
 
 const ProjectsShowcase = () => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
     const [allProjects, setAllProjects] = useState([]);
     const [displayedProjects, setDisplayedProjects] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -182,47 +184,53 @@ const ProjectsShowcase = () => {
     };
 
     // Project card component
-    const ProjectCard = ({ project }) => (
-        <motion.div
-            variants={cardVariants}
-            whileHover="hover"
-            className="h-full"
-        >
-            <Card className="h-full flex flex-col transition-all duration-300 hover:shadow-lg border-border bg-card">
-                <CardHeader className="pb-3">
-                    <CardTitle className="text-base font-semibold flex items-start justify-between">
-                        <a
-                            href={project.HtmlUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-primary hover:underline flex items-center gap-1 flex-1 min-w-0"
-                        >
-                            <span className="truncate">{project.FullName}</span>
-                            <ExternalLink className="h-3 w-3 flex-shrink-0" />
-                        </a>
-                    </CardTitle>
-                </CardHeader>
-                <CardContent className="flex-1 flex flex-col justify-between">
-                    <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
-                        <div className="flex items-center gap-1">
-                            <Star className="h-4 w-4 fill-current" />
-                            <span>{formatStarCount(project.StargazersCount)}</span>
+    const ProjectCard = ({ project }) => {
+        const handleCardClick = () => {
+            // Extract user and project from FullName (format: "user/project")
+            const [user, projectName] = project.FullName.split('/');
+            // Navigate to view page with parameters
+            navigate(`/view?user=${user}&project=${projectName}&lang=en`);
+        };
+
+        return (
+            <motion.div
+                variants={cardVariants}
+                whileHover="hover"
+                className="h-full"
+            >
+                <Card 
+                    className="h-full flex flex-col transition-all duration-300 hover:shadow-lg border-border bg-card cursor-pointer"
+                    onClick={handleCardClick}
+                >
+                    <CardHeader className="pb-3">
+                        <CardTitle className="text-base font-semibold">
+                            <span className="text-primary hover:underline truncate">
+                                {project.FullName}
+                            </span>
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex-1 flex flex-col justify-between">
+                        <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
+                            <div className="flex items-center gap-1">
+                                <Star className="h-4 w-4 fill-current" />
+                                <span>{formatStarCount(project.StargazersCount)}</span>
+                            </div>
                         </div>
-                    </div>
-                    <div className="flex items-center justify-between text-xs text-muted-foreground pt-3 border-t border-border">
-                        <div className="flex items-center gap-1">
-                            <Calendar className="h-3 w-3" />
-                            <span>{t("projects.updated")}: {formatDate(project.IndexTime)}</span>
+                        <div className="flex items-center justify-between text-xs text-muted-foreground pt-3 border-t border-border">
+                            <div className="flex items-center gap-1">
+                                <Calendar className="h-3 w-3" />
+                                <span>{t("projects.updated")}: {formatDate(project.IndexTime)}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                                <HardDrive className="h-3 w-3" />
+                                <span>{formatBytes(project.Size)}</span>
+                            </div>
                         </div>
-                        <div className="flex items-center gap-1">
-                            <HardDrive className="h-3 w-3" />
-                            <span>{formatBytes(project.Size)}</span>
-                        </div>
-                    </div>
-                </CardContent>
-            </Card>
-        </motion.div>
-    );
+                    </CardContent>
+                </Card>
+            </motion.div>
+        );
+    };
 
     // Loading state
     if (loading) {
