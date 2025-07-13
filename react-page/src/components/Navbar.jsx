@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams, useLocation } from "react-router-dom";
 import { Moon, Sun, Menu, X, Globe, ChevronDown, ChevronUp } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
@@ -51,6 +51,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { t, i18n } = useTranslation();
     const [searchParams, setSearchParams] = useSearchParams();
+    const location = useLocation();
 
     // Site-wide language and URL synchronization (Solution 2)
     useEffect(() => {
@@ -122,11 +123,15 @@ const Navbar = ({ darkMode, setDarkMode }) => {
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between h-16">
                     {/* Logo */}
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                        <Link to="/" className="text-xl font-bold text-foreground hover:text-primary transition-colors" onClick={closeMenu}>
-                            OpenAITx
-                        </Link>
-                    </motion.div>
+                    <div className="flex-shrink-0">
+                        {location.pathname !== '/view' && (
+                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                <Link to="/" className="text-xl font-bold text-foreground hover:text-primary transition-colors" onClick={closeMenu}>
+                                    OpenAITx
+                                </Link>
+                            </motion.div>
+                        )}
+                    </div>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex items-center space-x-6">
