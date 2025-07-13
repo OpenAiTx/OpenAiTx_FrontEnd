@@ -53,6 +53,7 @@
     "dialogSubmissionFailed": "Verzending mislukt",
     "dialogSuccessContent": "Vertaling bezig, wacht ongeveer 2 uur en kom dan terug om de link te kopiëren en in de Readme.md van uw project te plakken",
     "dialogGithubIssueContent": "Ga naar de zojuist geopende GitHub Issue-pagina om uw projectverzoek in te dienen.",
+    "githubIssueBody": "Ik begrijp en ga akkoord met het volgen van de richtlijnen van de open-source gemeenschap.\nHet systeem zal automatisch een PR in het project aanmaken met uw informatie nadat de vertaling is voltooid.\nKlik op de knop hieronder om aan te maken zodra bevestigd.\n\n### Opties\n- [ ] Ik wil automatisch lokale markdown en PR updates naar het project behouden\n- [ ] Wiki vertalen",
     "dialogFailedContent": "Foutcode: {{errorMessage}}, foutmelding gerapporteerd",
     "dialogConfirm": "Bevestigen",
     "stepSearch": "Project Zoeken",

@@ -53,6 +53,7 @@
     "dialogSubmissionFailed": "Gönderim başarısız",
     "dialogSuccessContent": "Çeviri devam ediyor, yaklaşık 2 saat bekleyin ve sonra geri gelip bağlantıyı kopyalayıp projenizin Readme.md dosyasına yapıştırın",
     "dialogGithubIssueContent": "Proje talebinizi göndermek için az önce açılan GitHub Issue sayfasına gidin.",
+    "githubIssueBody": "Açık kaynak topluluğunun yönergelerini takip etmeyi anlıyor ve kabul ediyorum.\nSistem çeviri tamamlandıktan sonra bilgilerinizi kullanarak projede otomatik olarak bir PR oluşturacak.\nOnaylandıktan sonra oluşturmak için aşağıdaki düğmeye tıklayın.\n\n### Seçenekler\n- [ ] Yerel markdown ve PR güncellemelerini projeye otomatik olarak korumak istiyorum\n- [ ] Wiki'yi çevir",
     "dialogFailedContent": "Hata kodu: {{errorMessage}}, hata mesajı bildirildi",
     "dialogConfirm": "Onayla",
     "stepSearch": "Proje Ara",

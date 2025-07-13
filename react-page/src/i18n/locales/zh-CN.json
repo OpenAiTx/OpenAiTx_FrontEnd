@@ -53,6 +53,7 @@
     "dialogSubmissionFailed": "提交失败",
     "dialogSuccessContent": "翻译进行中，请等待约2小时后回来复制链接贴制专案Readme.md",
     "dialogGithubIssueContent": "请前往刚刚打开的GitHub问题页面提交您的项目请求。",
+    "githubIssueBody": "我理解并同意遵守开源社区的准则。\n翻译完成后，系统将使用您的信息在项目中自动创建一个 PR。\n确认后请点击下方按钮进行创建。\n\n### 选项\n- [ ] 我希望自动保持本地 Markdown 和 PR 的更新\n- [ ] 翻译 Wiki",
     "dialogFailedContent": "错误代码：{{errorMessage}}，已回报错误讯息",
     "dialogConfirm": "确认",
     "stepSearch": "查询项目",

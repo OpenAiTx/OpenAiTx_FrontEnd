@@ -53,6 +53,7 @@
     "dialogSubmissionFailed": "Falha no envio",
     "dialogSuccessContent": "Tradução em andamento, aguarde cerca de 2 horas e depois volte para copiar o link e colar no Readme.md do seu projeto",
     "dialogGithubIssueContent": "Por favor, vá para a página do GitHub Issue que acabou de abrir para enviar sua solicitação de projeto.",
+    "githubIssueBody": "Eu entendo e concordo em seguir as diretrizes da comunidade de código aberto.\nO sistema criará automaticamente um PR no projeto usando suas informações após a conclusão da tradução.\nClique no botão abaixo para criar uma vez confirmado.\n\n### Opções\n- [ ] Gostaria de manter automaticamente atualizados o markdown local e o PR para o projeto\n- [ ] Traduzir Wiki",
     "dialogFailedContent": "Código de erro: {{errorMessage}}, mensagem de erro reportada",
     "dialogConfirm": "Confirmar",
     "stepSearch": "Pesquisar Projeto",

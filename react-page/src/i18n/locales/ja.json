@@ -53,6 +53,7 @@
     "dialogSubmissionFailed": "送信失敗",
     "dialogSuccessContent": "翻訳進行中、約2時間後に戻ってリンクをコピーしてプロジェクトのReadme.mdに貼り付けてください",
     "dialogGithubIssueContent": "先ほど開いたGitHub Issueページでプロジェクトリクエストを送信してください。",
+    "githubIssueBody": "オープンソースコミュニティのガイドラインに従うことを理解し、同意します。\n翻訳完了後、システムはあなたの情報を使用してプロジェクトに自動的にPRを作成します。\n確認後、下のボタンをクリックして作成してください。\n\n### オプション\n- [ ] ローカルMarkdownとPRの自動更新を希望します\n- [ ] Wikiを翻訳",
     "dialogFailedContent": "エラーコード：{{errorMessage}}、エラーメッセージが報告されました",
     "dialogConfirm": "確認",
     "stepSearch": "プロジェクト検索",

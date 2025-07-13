@@ -53,6 +53,7 @@
     "dialogSubmissionFailed": "Submission Failed",
     "dialogSuccessContent": "Translation in progress, please wait about 2 hours then come back to copy the link and paste it to your project's Readme.md",
     "dialogGithubIssueContent": "Please go to the GitHub issue page that just opened to submit your project request.",
+    "githubIssueBody": "I understand and agree to follow the guidelines of the open-source community.\nThe system will automatically create a PR in the project using your information after the translation is completed.\nClick the button below to create once confirmed.\n\n### Options\n- [ ] I would like to auto keep-update local markdown and PR to the project\n- [ ] Translate Wiki",
     "dialogFailedContent": "Error code: {{errorMessage}}, error message has been reported",
     "dialogConfirm": "Confirm",
     "stepSearch": "Search Project",

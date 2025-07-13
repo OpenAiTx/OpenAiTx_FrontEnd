@@ -212,22 +212,9 @@ ${languageLinks}
     const submitProject = () => {
         const projectUrl = `https://github.com/${userOrOrg}/${project}`;
         
-        // Create GitHub issue URL with pre-filled content
+        // Create GitHub issue URL with pre-filled content using current language
         const title = encodeURIComponent(`Submit Project: ${projectUrl}`);
-        const body = encodeURIComponent(
-            "I understand and agree to follow the guidelines of the open-source community.\n" +
-            "The system will automatically create a PR in the project using your information after the translation is completed.\n" +
-            "Click the button below to create once confirmed.\n\n" +
-            "### options\n" +
-            "- [ ] I would like to auto keep-update local markdown and PR to the project\n" +
-            "- [ ] Translate Wiki\n\n" +
-            "我理解并同意遵守开源社区的准则。\n" +
-            "翻译完成后，系统将使用您的信息在项目中自动创建一个 PR。\n" +
-            "确认后请点击下方按钮进行创建。\n\n" +
-            "### 选项\n" +
-            "- [ ] 我希望自动保持本地 Markdown 和 PR 的更新\n" +
-            "- [ ] 翻译 Wiki"
-        );
+        const body = encodeURIComponent(t("badge.githubIssueBody"));
         
         const issueUrl = `https://github.com/openaitx/openaitx/issues/new?title=${title}&body=${body}`;
         

@@ -53,6 +53,7 @@
     "dialogSubmissionFailed": "Gửi thất bại",
     "dialogSuccessContent": "Dịch thuật đang tiến hành, vui lòng đợi khoảng 2 giờ sau đó quay lại để sao chép liên kết và dán vào Readme.md của dự án",
     "dialogGithubIssueContent": "Vui lòng đến trang GitHub Issue vừa mở để gửi yêu cầu dự án của bạn.",
+    "githubIssueBody": "Tôi hiểu và đồng ý tuân theo các hướng dẫn của cộng đồng mã nguồn mở.\nHệ thống sẽ tự động tạo PR trong dự án sử dụng thông tin của bạn sau khi hoàn thành dịch thuật.\nNhấp vào nút bên dưới để tạo sau khi xác nhận.\n\n### Tùy chọn\n- [ ] Tôi muốn tự động duy trì cập nhật markdown cục bộ và PR cho dự án\n- [ ] Dịch Wiki",
     "dialogFailedContent": "Mã lỗi: {{errorMessage}}, thông báo lỗi đã được báo cáo",
     "dialogConfirm": "Xác nhận",
     "stepSearch": "Tìm kiếm Dự án",

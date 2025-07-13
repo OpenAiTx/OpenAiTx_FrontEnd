@@ -53,6 +53,7 @@
     "dialogSubmissionFailed": "Übermittlung fehlgeschlagen",
     "dialogSuccessContent": "Übersetzung läuft, bitte warten Sie etwa 2 Stunden und kommen Sie dann zurück, um den Link zu kopieren und in die Readme.md Ihres Projekts einzufügen",
     "dialogGithubIssueContent": "Bitte gehen Sie zur soeben geöffneten GitHub Issue-Seite, um Ihre Projektanfrage zu übermitteln.",
+    "githubIssueBody": "Ich verstehe und stimme zu, den Richtlinien der Open-Source-Community zu folgen.\nDas System wird automatisch eine PR im Projekt mit Ihren Informationen erstellen, nachdem die Übersetzung abgeschlossen ist.\nKlicken Sie auf die Schaltfläche unten, um nach der Bestätigung zu erstellen.\n\n### Optionen\n- [ ] Ich möchte automatisch lokale Markdown- und PR-Updates zum Projekt beibehalten\n- [ ] Wiki übersetzen",
     "dialogFailedContent": "Fehlercode: {{errorMessage}}, Fehlermeldung wurde gemeldet",
     "dialogConfirm": "Bestätigen",
     "stepSearch": "Projekt Suchen",

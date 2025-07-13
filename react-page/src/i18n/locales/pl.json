@@ -53,6 +53,7 @@
     "dialogSubmissionFailed": "Wysłanie nieudane",
     "dialogSuccessContent": "Tłumaczenie w toku, poczekaj około 2 godzin, a następnie wróć, aby skopiować link i wkleić go do Readme.md swojego projektu",
     "dialogGithubIssueContent": "Przejdź do właśnie otwartej strony GitHub Issue, aby przesłać żądanie projektu.",
+    "githubIssueBody": "Rozumiem i zgadzam się przestrzegać wytycznych społeczności open-source.\nSystem automatycznie utworzy PR w projekcie używając Twoich informacji po zakończeniu tłumaczenia.\nKliknij przycisk poniżej, aby utworzyć po potwierdzeniu.\n\n### Opcje\n- [ ] Chciałbym automatycznie utrzymywać aktualizacje lokalnego markdown i PR do projektu\n- [ ] Przetłumacz Wiki",
     "dialogFailedContent": "Kod błędu: {{errorMessage}}, zgłoszono komunikat o błędzie",
     "dialogConfirm": "Potwierdź",
     "stepSearch": "Wyszukaj Projekt",

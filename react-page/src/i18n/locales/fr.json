@@ -53,6 +53,7 @@
     "dialogSubmissionFailed": "Échec de la soumission",
     "dialogSuccessContent": "Traduction en cours, veuillez attendre environ 2 heures puis revenir copier le lien et le coller dans le Readme.md de votre projet",
     "dialogGithubIssueContent": "Veuillez vous rendre sur la page GitHub Issue qui vient de s'ouvrir pour soumettre votre demande de projet.",
+    "githubIssueBody": "Je comprends et accepte de suivre les directives de la communauté open-source.\nLe système créera automatiquement une PR dans le projet en utilisant vos informations après la traduction terminée.\nCliquez sur le bouton ci-dessous pour créer une fois confirmé.\n\n### Options\n- [ ] Je souhaite maintenir automatiquement la mise à jour du markdown local et de la PR vers le projet\n- [ ] Traduire le Wiki",
     "dialogFailedContent": "Code d'erreur : {{errorMessage}}, message d'erreur rapporté",
     "dialogConfirm": "Confirmer",
     "stepSearch": "Rechercher le Projet",
