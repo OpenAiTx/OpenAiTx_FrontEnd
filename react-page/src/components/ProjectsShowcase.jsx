@@ -130,18 +130,14 @@ const ProjectsShowcase = () => {
 
             const data = await response.json();
 
-            // Filter projects that use OpenAiTx and have more than 100 stars
-            const filteredProjects = data.filter(
-                (project) => project.DoesContainOpenaitx && project.StargazersCount > 100
-            );
-
-            setAllProjects(filteredProjects);
+            // Use all projects returned from backend
+            setAllProjects(data);
             
             // Initial load of first page
             const itemsPerPage = getItemsPerPage();
-            const initialProjects = filteredProjects.slice(0, itemsPerPage);
+            const initialProjects = data.slice(0, itemsPerPage);
             setDisplayedProjects(initialProjects);
-            setHasMore(filteredProjects.length > itemsPerPage);
+            setHasMore(data.length > itemsPerPage);
         } catch (err) {
             console.error("Error loading projects:", err);
             setError(err.message);

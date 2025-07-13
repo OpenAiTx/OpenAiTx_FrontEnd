@@ -575,7 +575,7 @@ ${languageLinks}
                 </Fragment>
             )}
             {/* Projects Showcase Section */}
-            {!(!repoNotFound && userOrOrg && project && !isCheckingProject && !showSubmitButton) && (
+            {!userOrOrg && !project && (
                 <motion.div className="mt-16" variants={itemVariants}>
                     <ProjectsShowcase />
                 </motion.div>
