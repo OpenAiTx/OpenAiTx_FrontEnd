@@ -8,7 +8,7 @@
         <!-- Content Security Policy - GitHub Pages Optimization -->
         <!-- Note: frame-ancestors and X-Frame-Options cannot be used in meta tags -->
         <!-- These security headers can only be set in HTTP response headers, GitHub Pages doesn't support custom response headers -->
-        <meta
+        <!-- <meta
             http-equiv="Content-Security-Policy"
             content="
             default-src 'self';
@@ -22,7 +22,7 @@
             base-uri 'self';
             form-action 'self' https://openaitx.com;
             upgrade-insecure-requests;
-        " />
+        " /> -->
 
         <!-- Primary Meta Tags -->
         <title>Open AI Tx - Language Auto AI Translate Badge Generator</title>
@@ -41,13 +41,17 @@
 
         <!-- Favicon -->
         <link rel="apple-touch-icon" href="/icon.jpg" />
-    </head>
-    <body>
-        <div id="root"></div>
-        <script type="module" src="/src/main.jsx"></script>
 
-        <!-- Default Statcounter code for openaitx
-    https://openaitx.github.io/ -->
+        <!-- Bing Count -->
+        <script type="text/javascript">
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "sh95yd6uwt");
+        </script>        
+
+        <!-- Statcounter -->
         <script type="text/javascript">
             var sc_project = 13142514;
             var sc_invisible = 1;
@@ -58,7 +62,10 @@
             <div class="statcounter"><a title="Web Analytics" href="https://statcounter.com/" target="_blank"><img
                         class="statcounter" src="https://c.statcounter.com/13142514/0/d03a31d8/1/" alt="Web Analytics"
                         referrerPolicy="no-referrer-when-downgrade"></a></div>
-        </noscript>
-        <!-- End of Statcounter Code -->     
+        </noscript>           
+    </head>
+    <body>
+        <div id="root"></div>
+        <script type="module" src="/src/main.jsx"></script> 
     </body>
 </html>
