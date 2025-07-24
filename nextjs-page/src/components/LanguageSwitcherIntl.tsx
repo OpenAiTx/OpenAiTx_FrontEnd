@@ -22,7 +22,8 @@ const languageNames: Record<string, string> = {
   'vi': 'Tiếng Việt',
   'tr': 'Türkçe',
   'pl': 'Polski',
-  'nl': 'Nederlands'
+  'nl': 'Nederlands',
+  'as': 'অসমীয়া',
 };
 
 export function LanguageSwitcherIntl() {

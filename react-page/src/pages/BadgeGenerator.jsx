@@ -42,6 +42,7 @@ const LanguageLinks = () => {
         "Türkçe",
         "Tiếng Việt",
         "Bahasa Indonesia",
+        "অসমীয়া", // Assamese
     ];
 
     return (
@@ -101,6 +102,7 @@ const BadgeGenerator = () => {
         { code: "ar", name: "العربية" },
         { code: "tr", name: "Türkçe" },
         { code: "vi", name: "Tiếng Việt" },
+        { code: "as", name: "অসমীয়া" }, // Assamese
     ];
 
     const style2Languages = [
@@ -124,6 +126,7 @@ const BadgeGenerator = () => {
         { code: "tr", name: "Türkçe" },
         { code: "vi", name: "Tiếng Việt" },
         { code: "id", name: "Bahasa Indonesia" },
+        { code: "as", name: "অসমীয়া" }, // Assamese
     ];
 
     useEffect(() => {

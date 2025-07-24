@@ -102,6 +102,7 @@ const Navbar = ({ darkMode, setDarkMode }) => {
         { code: "ar", name: "العربية" },
         { code: "tr", name: "Türkçe" },
         { code: "vi", name: "Tiếng Việt" },
+        { code: "as", name: "অসমীয়া" }, 
     ];
 
     const currentLanguage = availableLanguages.find((lang) => lang.code === i18n.language) || availableLanguages[0];
