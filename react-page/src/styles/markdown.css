@@ -739,6 +739,36 @@
   margin: 2px 4px;
 }
 
+/* Math rendering styles */
+.markdown-body .katex {
+  font-size: 1.1em;
+}
+
+.markdown-body .katex-display {
+  margin: 1em 0;
+  text-align: center;
+}
+
+.markdown-body .katex-display > .katex {
+  display: inline-block;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100%;
+  text-align: initial;
+}
+
+.markdown-body .katex-display > .katex > .katex-html {
+  display: inline-block;
+}
+
+/* Ensure math expressions don't break layout on mobile */
+@media (max-width: 767px) {
+  .markdown-body .katex-display > .katex {
+    font-size: 0.9em;
+  }
+}
+
 /* General badge container styling */
 .markdown-body .badges,
 .markdown-body .badge-container {

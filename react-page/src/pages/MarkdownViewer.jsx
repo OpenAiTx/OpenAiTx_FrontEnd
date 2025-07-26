@@ -2,9 +2,11 @@ import { useState, useEffect, useCallback, useRef } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { marked } from 'marked'
+import markedKatex from 'marked-katex-extension'
 import hljs from 'highlight.js'
 // import 'highlight.js/styles/github.css' // Remove default styles, use custom styles
 import '../styles/markdown.css'
+import 'katex/dist/katex.min.css'
 import { useTranslation } from 'react-i18next'
 import TableOfContents from '../components/TableOfContents'
 import { toast } from 'sonner'
@@ -258,6 +260,12 @@ const MarkdownViewer = () => {
 
   useEffect(() => {
     // Configure marked options, increase security
+    marked.use(markedKatex({
+      throwOnError: false,
+      displayMode: false,
+      output: 'htmlAndMathml'
+    }))
+    
     marked.setOptions({
       highlight: function(code, lang) {
         if (lang && hljs.getLanguage(lang)) {
@@ -369,7 +377,13 @@ const MarkdownViewer = () => {
             'table', 'thead', 'tbody', 'tr', 'th', 'td',
             'div', 'span',
             'hr',
-            'details', 'summary'
+            'details', 'summary',
+            // KaTeX math elements
+            'math', 'mrow', 'mi', 'mn', 'mo', 'mfrac', 'msup', 'msub', 'msubsup',
+            'munder', 'mover', 'munderover', 'msqrt', 'mroot', 'mtext', 'mspace',
+            'annotation', 'semantics', 'mstyle', 'mtable', 'mtr', 'mtd', 'mlabeledtr',
+            'mphantom', 'menclose', 'mglyph', 'maligngroup', 'malignmark', 'mfenced',
+            'mpadded', 'maction', 'merror', 'mmultiscripts', 'mprescripts', 'none'
           ],
           ALLOWED_ATTR: [
             'href', 'title', 'alt', 'src', 'width', 'height',
@@ -377,7 +391,22 @@ const MarkdownViewer = () => {
             'target', 'rel',
             'controls', 'autoplay', 'loop', 'muted',
             'colspan', 'rowspan',
-            'open'
+            'open',
+            // KaTeX math attributes
+            'mathvariant', 'mathsize', 'mathcolor', 'mathbackground',
+            'displaystyle', 'scriptlevel', 'style', 'dir',
+            'xmlns', 'encoding', 'definitionURL', 'notation',
+            'separator', 'fence', 'stretchy', 'symmetric', 'maxsize', 'minsize',
+            'largeop', 'movablelimits', 'accent', 'lspace', 'rspace',
+            'columnalign', 'rowalign', 'columnlines', 'rowlines', 'frame',
+            'framespacing', 'equalrows', 'equalcolumns', 'side', 'minlabelspacing',
+            'rowspacing', 'columnspacing', 'groupalign', 'alignmentscope',
+            'columnwidth', 'rowspan', 'columnspan', 'edge', 'selection',
+            'bevelled', 'numalign', 'denomalign', 'linethickness',
+            'scriptsizemultiplier', 'scriptminsize', 'infixlinebreakstyle',
+            'decimalpoint', 'linebreak', 'indentalign', 'indentshift',
+            'indenttarget', 'indentalignfirst', 'indentshiftfirst',
+            'indentalignlast', 'indentshiftlast', 'depth', 'height'
           ],
           ALLOWED_URI_REGEXP: /^(?:(?:(?:f|ht)tps?|mailto|tel|callto|cid|xmpp|data):|[^a-z]|[a-z+.-]+(?:[^a-z+.-:]|$))/i
         })
