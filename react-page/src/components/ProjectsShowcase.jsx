@@ -186,8 +186,8 @@ const ProjectsShowcase = () => {
     // Project card component
     const ProjectCard = ({ project }) => {
         const handleCardClick = () => {
-            // Extract user and project from FullName (format: "user/project")
-            const [user, projectName] = project.FullName.split('/');
+            // Extract user and project from fullName (format: "user/project")
+            const [user, projectName] = project.fullName.split('/');
             // Navigate to view page with parameters
             navigate(`/view?user=${user}&project=${projectName}&lang=en`);
         };
@@ -205,7 +205,7 @@ const ProjectsShowcase = () => {
                     <CardHeader className="pb-3">
                         <CardTitle className="text-base font-semibold">
                             <span className="text-primary hover:underline truncate">
-                                {project.FullName}
+                                {project.fullName}
                             </span>
                         </CardTitle>
                     </CardHeader>
@@ -213,17 +213,17 @@ const ProjectsShowcase = () => {
                         <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
                             <div className="flex items-center gap-1">
                                 <Star className="h-4 w-4 fill-current" />
-                                <span>{formatStarCount(project.StargazersCount)}</span>
+                                <span>{formatStarCount(project.stargazersCount)}</span>
                             </div>
                         </div>
                         <div className="flex items-center justify-between text-xs text-muted-foreground pt-3 border-t border-border">
                             <div className="flex items-center gap-1">
                                 <Calendar className="h-3 w-3" />
-                                <span>{t("projects.updated")}: {formatDate(project.IndexTime)}</span>
+                                <span>{t("projects.updated")}: {formatDate(project.indexTime)}</span>
                             </div>
                             <div className="flex items-center gap-1">
                                 <HardDrive className="h-3 w-3" />
-                                <span>{formatBytes(project.Size)}</span>
+                                <span>{formatBytes(project.size)}</span>
                             </div>
                         </div>
                     </CardContent>
@@ -307,7 +307,7 @@ const ProjectsShowcase = () => {
             >
                 {displayedProjects.map((project, index) => (
                     <motion.div
-                        key={project.FullName}
+                        key={project.fullName}
                         variants={itemVariants}
                         custom={index}
                     >
